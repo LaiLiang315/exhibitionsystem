@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-7-18 14:08:42 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.exhibition.domain.production_info" table="PRODUCTION_INFO">
+        <id name="production_info_id" type="java.lang.String">
+            <column name="production_info_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="production_info_name" type="java.lang.String">
+            <column name="production_info_name" />
+        </property>
+        <property name="production_info_author" type="java.lang.String">
+            <column name="production_info_author" />
+        </property>
+        <property name="production_info_discription" type="java.lang.String">
+            <column name="production_info_discription" />
+        </property>
+        <property name="production_info_type" type="java.lang.String">
+            <column name="production_info_type" />
+        </property>
+        <property name="production_info_creationtime" type="java.lang.String">
+            <column name="production_info_creationtime" />
+        </property>
+        <property name="production_info_modifytime" type="java.lang.String">
+            <column name="production_info_modifytime" />
+        </property>
+        <property name="production_type_isdelete" type="int">
+            <column name="production_type_isdelete" />
+        </property>
+    </class>
+</hibernate-mapping>

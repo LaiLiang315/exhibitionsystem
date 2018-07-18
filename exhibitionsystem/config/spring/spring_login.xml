@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="adminLoginAction"
+		class=""
+		scope="prototype">
+		<property name="adminLoginService"
+			ref="adminLoginService"></property>
+	</bean>
+	<bean id="adminLoginService"
+		class="com.exhibition.login.service.impl.AdminLoginServiceImpl">
+		<property name="adminLoginDao" ref="adminLoginDao"></property>
+	</bean>
+	<bean id="adminLoginDao"
+		class="com.exhibition.login.dao.impl.AdminLoginDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+</beans>

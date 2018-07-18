@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-7-18 14:08:42 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.exhibition.domain.carousel" table="CAROUSEL">
+        <id name="carousel_id" type="java.lang.String">
+            <column name="carousel_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="carousel_belong" type="java.lang.String">
+            <column name="carousel_belong" />
+        </property>
+        <property name="carousel_isshow" type="int">
+            <column name="carousel_isshow" />
+        </property>
+        <property name="carousel_picture" type="java.lang.String">
+            <column name="carousel_picture" />
+        </property>
+        <property name="carousel_creationtime" type="java.lang.String">
+            <column name="carousel_creationtime" />
+        </property>
+        <property name="carousel_modifytime" type="java.lang.String">
+            <column name="carousel_modifytime" />
+        </property>
+        <property name="carousel_isdelete" type="int">
+            <column name="carousel_isdelete" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="productionTypeManagementAction"
+		class=""
+		scope="prototype">
+		<property name="productionTypeManagementService"
+			ref="productionTypeManagementService"></property>
+	</bean>
+	<bean id="productionTypeManagementService"
+		class="com.exhibition.productiontype.service.impl.productionTypeManagementServiceImpl">
+		<property name="productionTypeManagementDao" ref="productionTypeManagementDao"></property>
+	</bean>
+	<bean id="productionTypeManagementDao"
+		class="com.exhibition.production.dao.impl.productionTypeManagementDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+</beans>
