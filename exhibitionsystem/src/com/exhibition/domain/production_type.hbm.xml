@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-7-18 14:08:42 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.exhibition.domain.production_type" table="PRODUCTION_TYPE">
+        <id name="production_type_id" type="java.lang.String">
+            <column name="production_type_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="production_type_name" type="java.lang.String">
+            <column name="production_type_name" />
+        </property>
+        <property name="production_type_logo" type="java.lang.String">
+            <column name="production_type_logo" />
+        </property>
+        <property name="production_type_title" type="java.lang.String">
+            <column name="production_type_title" />
+        </property>
+        <property name="production_type_discription" type="java.lang.String">
+            <column name="production_type_discription" />
+        </property>
+        <property name="production_type_picture" type="java.lang.String">
+            <column name="production_type_picture" />
+        </property>
+        <property name="production_type_creationtime" type="java.lang.String">
+            <column name="production_type_creationtime" />
+        </property>
+        <property name="production_type_modifytime" type="java.lang.String">
+            <column name="production_type_modifytime" />
+        </property>
+        <property name="production_type_isdelete" type="int">
+            <column name="production_type_isdelete" />
+        </property>
+    </class>
+</hibernate-mapping>
