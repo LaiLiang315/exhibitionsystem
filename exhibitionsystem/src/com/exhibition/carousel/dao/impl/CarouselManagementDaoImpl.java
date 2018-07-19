@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.exhibition.carousel.dao.CarouselManagementDao;
+import com.exhibition.domain.carousel;
 
 /**
  * 轮播图管理的Dao层实现层
@@ -105,4 +106,19 @@ public class CarouselManagementDaoImpl implements CarouselManagementDao {
 		session.clear();
 		return list;
 	}
+	/**
+	 * 根据id查询轮播图片
+	 * 
+	 */
+	@Override
+	public List<carousel> getCarouselById(String trim) {
+		Session session = getSession();
+		String hql = "from carousel where carousel_isshow='1'and carousel_isdelete='0' carousel_belong = :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		List<carousel> carousel = (List<carousel>) query.list();
+		return carousel;
+	}
+	
+	
 }
