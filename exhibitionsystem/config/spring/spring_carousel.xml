@@ -16,5 +16,4 @@
 		class="com.exhibition.carousel.dao.impl.CarouselManagementDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
 </beans>

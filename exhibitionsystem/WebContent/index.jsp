@@ -8,9 +8,9 @@
 </head>
 <body>
 <from action="${pageContext.request.contextPath }/adminlogin/adminLogin_login" method="post">
-	<input type="username" name="users.username">
-	<input type="password" name="users.password">
-	<input type="submit" name="登陆">
-	<p>dududu</p>				
+<input type="username" name="users.username">
+<input type="password" name="users.password">
+<input type="submit" name="登陆">
+					
 </body>
 </html>

@@ -16,5 +16,4 @@
 		class="com.exhibition.login.dao.impl.AdminLoginDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
 </beans>
