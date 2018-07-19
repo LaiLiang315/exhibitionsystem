@@ -131,23 +131,23 @@
     <div class="newsad"> <img src="images/exhibition/news.png"  alt="html5" width="320" height="485" /> </div>
     <ul>
       
-       <li> <a href="news/hynews/23.html"><img src="uploads/131102/1-131102210K4H1.jpg"   width="90" height="90" alt="网络营销最重要的一步，你做到了吗？"/></a>
-        <div class="newslist"> <a href="news/hynews/23.html" title="网络营销最重要的一步，你做到了吗？">网络营销最重要的一步，你做到了吗？</a> <span>UPTATED:2013/11/02</span>
+       <li> <a href=""><img src="images/exhibition/a.jpg"   width="90" height="90" alt="网络营销最重要的一步，你做到了吗？"/></a>
+        <div class="newslist"> <a href="" title="网络营销最重要的一步，你做到了吗？">网络营销最重要的一步，你做到了吗？</a> <span>UPTATED:2013/11/02</span>
           <p>很多人总是会问，为什么我的网站转化率总是居高不下？也许你的网站很美观大气，功能很完善，入口非常便捷丰富，但是就是转化不好！原因只在于，你....</p>
         </div>
       </li>
-<li> <a href="news/hynews/9.html" ><img src="uploads/131031/1-1310312352421V.jpg"  width="90" height="90" alt="百度免费＂发武器＂ 布局移动互联网"/></a>
-        <div class="newslist"> <a href="news/hynews/9.html" title="百度免费＂发武器＂ 布局移动互联网">百度免费＂发武器＂ 布局移动互联网</a> <span>UPTATED:2013/11/01</span>
+<li> <a href="" ><img src="images/exhibition/a.jpg"  width="90" height="90" alt="百度免费＂发武器＂ 布局移动互联网"/></a>
+        <div class="newslist"> <a href="" title="百度免费＂发武器＂ 布局移动互联网">百度免费＂发武器＂ 布局移动互联网</a> <span>UPTATED:2013/11/01</span>
           <p>中广网北京9月3日消息 据经济之声《天下公司》报道，说起百度，恐怕听众朋友们都不会陌生。这家创办于2001年1月1日的中文互联网搜索公司，经过十余年....</p>
         </div>
       </li>
-<li> <a href="news/hynews/8.html" ><img src="uploads/131102/1-131102210K4H1.jpg"  width="90" height="90" alt="企业网站已经悄悄的转变成了一种网络营销应用"/></a>
-        <div class="newslist"> <a href="news/hynews/8.html" title="企业网站已经悄悄的转变成了一种网络营销应用">企业网站已经悄悄的转变成了一种网络营销应用</a> <span>UPTATED:2013/11/01</span>
+<li> <a href="" ><img src="images/exhibition/a.jpg"  width="90" height="90" alt="企业网站已经悄悄的转变成了一种网络营销应用"/></a>
+        <div class="newslist"> <a href="" title="企业网站已经悄悄的转变成了一种网络营销应用">企业网站已经悄悄的转变成了一种网络营销应用</a> <span>UPTATED:2013/11/01</span>
           <p>当是你最后一次使用的电话簿找到的产品或服务？如果你有一台电脑，平板电脑或智能手机的技术和访问，甚至有基本的了解，这可能是很难记住，当你拖....</p>
         </div>
       </li>
-<li> <a href="news/gsnews/7.html" ><img src="uploads/131031/1-1310312352421V.jpg"  width="90" height="90" alt="html5+js技术网站应用案例：三盛·都会城网站建设"/></a>
-        <div class="newslist"> <a href="news/gsnews/7.html"  title="html5+js技术网站应用案例：三盛·都会城网站建设">html5+js技术网站应用案例：三盛·都会城网站建设</a> <span>UPTATED:2013/11/01</span>
+<li> <a href="" ><img src="images/exhibition/a.jpg"  width="90" height="90" alt="html5+js技术网站应用案例：三盛·都会城网站建设"/></a>
+        <div class="newslist"> <a href=""  title="html5+js技术网站应用案例：三盛·都会城网站建设">html5+js技术网站应用案例：三盛·都会城网站建设</a> <span>UPTATED:2013/11/01</span>
           <p>三盛·都会城作为三盛地产在成都的全资开发项目，入主龙泉经开区，承载三盛地产在成都建立品牌的任务，三盛·都会城总投入近40亿元，前期将投入3亿重....</p>
         </div>
       </li>
