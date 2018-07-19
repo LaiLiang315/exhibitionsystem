@@ -61,10 +61,7 @@ public class AdminLoginAction extends ActionSupport implements ServletResponseAw
 /**
  * 实现request以及response结束
  */
-<<<<<<< HEAD
-=======
 	public void login() {
 		
 	}
->>>>>>> origin/LL
 }
