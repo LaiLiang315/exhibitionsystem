@@ -15,8 +15,8 @@ function countwidth(){
 	document.getElementById("li-list").style.width=ulWidth+"px";	//set总宽度
 	document.getElementById("banner_ctr").style.width=ulWidth+"px";	
 	document.getElementById("dudu").style.marginLeft=marginleft+"px";
-	document.getElementById("drag_ctr").style.left=marginleft+20+"px";
-	document.getElementById("drag_arrow").style.left=marginleft+20+"px";
+	document.getElementById("drag_ctr").style.left=marginleft+60+"px";
+	document.getElementById("drag_arrow").style.left=marginleft+60+"px";
 }
 	$("header>div>nav>ul>li>a").hover(function(){
 		$(this).parent().stop(false,true).animate({"background-position-x":"6px",opacity:"0.7"},{duration:"normal", easing: "easeOutElastic"});
@@ -50,7 +50,7 @@ function countwidth(){
 	}
 	function show(index){
 		$.easing.def="easeOutQuad";
-		$("#drag_ctr,#drag_arrow").stop(false,true).animate({left:index*115+marginleft+20},300);
+		$("#drag_ctr,#drag_arrow").stop(false,true).animate({left:index*115+marginleft+60},300);
 		console.log(index+"index")
 		$("#banner_img>li").eq(curIndex).stop(false,true).fadeOut(time);
 		adTxt.eq(curIndex).stop(false,true).animate({top:"340px"},time);
