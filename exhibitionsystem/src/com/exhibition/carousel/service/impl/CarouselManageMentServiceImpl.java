@@ -57,7 +57,4 @@ public class CarouselManageMentServiceImpl implements CarouselManagementService{
 		}
 		return listCarouselManagementDTO;
 	}
-	
-	
-
 }

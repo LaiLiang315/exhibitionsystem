@@ -113,7 +113,7 @@ public class CarouselManagementDaoImpl implements CarouselManagementDao {
 	@Override
 	public List<carousel> getCarouselById(String trim) {
 		Session session = getSession();
-		String hql = "from carousel where carousel_belong = :ID";
+		String hql = "from carousel where carousel_isshow='1'and carousel_isdelete='0' carousel_belong = :ID";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		List<carousel> carousel = (List<carousel>) query.list();
