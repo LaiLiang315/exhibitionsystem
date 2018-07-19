@@ -33,6 +33,7 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 	 * 用域模型把carousel,production_type,List<CarouselDTO>放到struts中
 	 */
 	private carousel carousel;
+	
 	private production_type type;
 	
 	/**
@@ -98,8 +99,8 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
-		List<CarouselManagementDTO> listCarouselDTO = carouselManagementService.querryCarousel();
 		response.setContentType("text/html;charset=utf-8");
+		List<CarouselManagementDTO> listCarouselDTO = carouselManagementService.querryCarousel();
 		try {
 			response.getWriter().write(gson.toJson(listCarouselDTO));
 		} catch (IOException e) {
