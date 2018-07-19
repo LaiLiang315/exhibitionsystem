@@ -2,6 +2,8 @@ package com.exhibition.carousel.dao;
 
 import java.util.List;
 
+import com.exhibition.domain.carousel;
+
 /**
  * 轮播图管理的Dao层接口
  * @author LL
@@ -49,5 +51,12 @@ public interface CarouselManagementDao {
 	 * 获取对象列表
 	 */
 	public List<?> listObject(String hql);
+	/**
+	 * 根据id查询轮播图
+	 * @param trim
+	 * @return
+	 */
+
+	public List<carousel> getCarouselById(String trim);
 
 }
