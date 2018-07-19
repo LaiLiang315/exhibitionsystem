@@ -20,10 +20,10 @@
 	<link rel="stylesheet" type="text/css" href="css/photoalbum/pattern.css" />
 
 	<script>
-	if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-		var root = document.getElementsByTagName('html')[0];
-		root.setAttribute('class', 'ff');
-	};
+		if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+			var root = document.getElementsByTagName('html')[0];
+			root.setAttribute('class', 'ff');
+		};
 	</script>
 </head>
 <body class="demo-1">
