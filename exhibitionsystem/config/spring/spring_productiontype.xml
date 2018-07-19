@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="productionTypeManagementAction"
+<<<<<<< HEAD
 		class=""
 		scope="prototype">
 		<property name="productionTypeManagementService"
@@ -14,6 +15,19 @@
 	</bean>
 	<bean id="productionTypeManagementDao"
 		class="com.exhibition.production.dao.impl.productionTypeManagementDaoImpl">
+=======
+		class="com.exhibition.productiontype.action.ProductionTypeManagementAction"
+		scope="prototype">
+		<property name="productionTypeService"
+			ref="productionTypeService"></property>
+	</bean>
+	<bean id="productionTypeService"
+		class="com.exhibition.productiontype.service.impl.ProductionTypeServiceImpl">
+		<property name="productionTypeDao" ref="productionTypeDao"></property>
+	</bean>
+	<bean id="productionTypeDao"
+		class="com.exhibition.productiontype.dao.impl.ProductionTypeDaoImpl">
+>>>>>>> origin/LL
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 

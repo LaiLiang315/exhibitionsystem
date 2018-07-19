@@ -3,17 +3,29 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="carouselManagementAction"
+<<<<<<< HEAD
 		class=""
+=======
+		class="com.exhibition.carousel.action.CarouselManagementAction"
+>>>>>>> origin/LL
 		scope="prototype">
 		<property name="carouselManagementService"
 			ref="carouselManagementService"></property>
 	</bean>
 	<bean id="carouselManagementService"
+<<<<<<< HEAD
 		class="com.exhibition.carousel.service.impl.carouselManagementServiceImpl">
 		<property name="carouselManagementDao" ref="carouselManagementDao"></property>
 	</bean>
 	<bean id="carouselManagementDao"
 		class="com.exhibition.carousel.dao.impl.carouselManagementDaoImpl">
+=======
+		class="com.exhibition.carousel.service.impl.CarouselManageMentServiceImpl">
+		<property name="carouselManagementDao" ref="carouselManagementDao"></property>
+	</bean>
+	<bean id="carouselManagementDao"
+		class="com.exhibition.carousel.dao.impl.CarouselManagementDaoImpl">
+>>>>>>> origin/LL
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
