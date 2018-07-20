@@ -3,6 +3,7 @@ package com.exhibition.production.service;
 import java.util.List;
 
 import com.exhibition.production.DTO.ProductionDTO;
+import com.exhibition.production.VO.ProductionVO;
 
 /**
  * 作品的Service层接口
@@ -16,6 +17,19 @@ public interface ProductionManagementService {
 	 * @param showAll
 	 * @return
 	 */
-	public List<ProductionDTO> shouPictures(String showAll);
+
+/**
+ * 显示图片的DTO
+ * @param showAll
+ * @return
+ */
+	public List<ProductionDTO> showPicturesDTO(String showAll);
+/**
+ * 显示图片的分页
+ * @param showAll
+ * @return
+ */
+	public ProductionVO showPicturesVO(String showAll);
+
 
 }
