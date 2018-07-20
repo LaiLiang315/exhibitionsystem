@@ -2,6 +2,8 @@ package com.exhibition.login.dao;
 
 import java.util.List;
 
+import com.exhibition.domain.adminAcount;
+
 /**
  * 管理员登陆注册Dao层
  * @author LL
@@ -50,5 +52,7 @@ public interface AdminLoginDao  {
 	 * 获取对象列表
 	 */
 	public List<?> listObject(String hql);
+
+	public adminAcount getAdminAcountById(Object trim);
 
 }

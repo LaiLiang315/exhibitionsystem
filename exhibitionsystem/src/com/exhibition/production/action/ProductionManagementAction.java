@@ -1,20 +1,27 @@
 package com.exhibition.production.action;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.service.ProductionManagementService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * 作品的Action层
+ * 
  * @author LL
  *
  */
-public class ProductionManagementAction extends ActionSupport implements ServletResponseAware, ServletRequestAware{
+public class ProductionManagementAction extends ActionSupport implements ServletResponseAware, ServletRequestAware {
 	/**
 	 * service层注入
 	 */
@@ -25,6 +32,11 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	private HttpServletResponse response;
 
 	private HttpServletRequest request;
+	/**
+	 * 显示所有图片
+	 */
+	private String showAll;
+	
 
 	public HttpServletResponse getResponse() {
 		return response;
@@ -42,7 +54,6 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		this.request = request;
 	}
 
-	
 	public void setProductionManagementService(ProductionManagementService productionManagementService) {
 		this.productionManagementService = productionManagementService;
 	}
@@ -56,7 +67,34 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
 	}
-/**
- * 实现request以及response结束
- */
+
+	public String getShowAll() {
+		return showAll;
+	}
+
+	public void setShowAll(String showAll) {
+		this.showAll = showAll;
+	}
+
+	/**
+	 * 实现request以及response结束
+	 */
+	/**
+	 * 显示图片
+	 */
+	public void shouPictures() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		List<ProductionDTO> listProductionDTO = productionManagementService.shouPictures(showAll);
+		try {
+			response.getWriter().write(gson.toJson(listProductionDTO));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 }

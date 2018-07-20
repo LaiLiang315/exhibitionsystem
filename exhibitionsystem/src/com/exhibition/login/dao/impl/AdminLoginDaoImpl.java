@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.exhibition.domain.adminAcount;
 import com.exhibition.login.dao.AdminLoginDao;
 
 /**
@@ -104,5 +105,19 @@ public class AdminLoginDaoImpl implements AdminLoginDao{
 		List<?> list = query.list();
 		session.clear();
 		return list;
+	}
+	@Override
+	public adminAcount getAdminAcountById(Object trim) {
+		adminAcount adminInfo = new adminAcount();
+		Session session = getSession();
+		String hql = "from adminAcount where username= :ID ";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		adminInfo = (adminAcount) query.uniqueResult();
+		
+		return adminInfo;
+		
+		
+		
 	}
 }
