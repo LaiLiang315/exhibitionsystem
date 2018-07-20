@@ -80,6 +80,7 @@ public class AdminLoginAction extends ActionSupport implements ServletResponseAw
 	 * 实现request以及response结束
 	 */
 	public String adminLogin() {
+		String result = null;
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -99,14 +100,16 @@ public class AdminLoginAction extends ActionSupport implements ServletResponseAw
 			 * 判断密码是否匹配
 			 */
 			if (adminInfo.getPassword().equals(adminSession.getPassword())) {
-				return "success";
+				result="success";
+				return result;
 
 			} else {
-				return "error";
+				result="error";
+				return result;
 			}
 		}
 		try {
-			response.getWriter().write(gson.toJson(adminSession));
+			response.getWriter().write(gson.toJson(result));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

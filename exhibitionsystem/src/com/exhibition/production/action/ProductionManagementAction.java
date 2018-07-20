@@ -10,6 +10,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.exhibition.production.DTO.ProductionDTO;
+import com.exhibition.production.VO.ProductionVO;
 import com.exhibition.production.service.ProductionManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,6 +37,12 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	 * 显示所有图片
 	 */
 	private String showAll;
+	/**
+	 * 模糊查询关键字
+	 */
+	private String search;
+	
+	private int page = 1;
 	
 
 	public HttpServletResponse getResponse() {
@@ -76,18 +83,34 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		this.showAll = showAll;
 	}
 
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
 	/**
 	 * 实现request以及response结束
 	 */
 	/**
-	 * 显示图片
+	 * 显示图片DTO
 	 */
-	public void shouPictures() {
+	public void showPicturesDTO() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
-		List<ProductionDTO> listProductionDTO = productionManagementService.shouPictures(showAll);
+		List<ProductionDTO> listProductionDTO = productionManagementService.showPicturesDTO(showAll);
 		try {
 			response.getWriter().write(gson.toJson(listProductionDTO));
 		} catch (IOException e) {
@@ -95,6 +118,16 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			e.printStackTrace();
 		}
 
+	}
+	public void showPicturesVO() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		ProductionVO productionVO = new ProductionVO();
+		productionVO.setSearch(search);
+		productionVO.setPageIndex(page);
+		productionVO = productionManagementService.showPicturesVO(showAll);
 	}
 
 }
