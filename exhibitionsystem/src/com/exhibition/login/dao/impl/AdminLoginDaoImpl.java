@@ -110,7 +110,7 @@ public class AdminLoginDaoImpl implements AdminLoginDao{
 	public adminAcount getAdminAcountById(Object trim) {
 		adminAcount adminInfo = new adminAcount();
 		Session session = getSession();
-		String hql = "from adminAcount where admin_id= :ID ";
+		String hql = "from adminAcount where username= :ID ";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		adminInfo = (adminAcount) query.uniqueResult();

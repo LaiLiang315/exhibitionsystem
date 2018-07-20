@@ -11,7 +11,7 @@ import com.exhibition.domain.adminAcount;
 public interface AdminLoginService {
 
 
-	public String adminLogin(adminAcount adminInfo);
+	public adminAcount adminLogin(adminAcount adminInfo);
 
 
 }

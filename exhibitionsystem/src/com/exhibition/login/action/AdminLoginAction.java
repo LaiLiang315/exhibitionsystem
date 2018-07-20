@@ -36,6 +36,8 @@ public class AdminLoginAction extends ActionSupport implements ServletResponseAw
 
 	private HttpServletRequest request;
 
+	private adminAcount adminInfo;
+
 	public HttpServletResponse getResponse() {
 		return response;
 	}
@@ -66,22 +68,49 @@ public class AdminLoginAction extends ActionSupport implements ServletResponseAw
 		this.response = response;
 	}
 
+	public adminAcount getAdminInfo() {
+		return adminInfo;
+	}
+
+	public void setAdminInfo(adminAcount adminInfo) {
+		this.adminInfo = adminInfo;
+	}
+
 	/**
 	 * 实现request以及response结束
 	 */
-	public void adminLogin() {
+	public String adminLogin() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
+		/**
+		 * 设置session
+		 */
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		adminAcount adminInfo = (adminAcount) session.getAttribute("admin_session");
-		String adminSession = adminLoginService.adminLogin(adminInfo);
+		/**
+		 * 获取前service层返回的对象
+		 */
+		adminAcount adminSession = adminLoginService.adminLogin(adminInfo);
+		session.setAttribute("admin_session", adminSession);
+
+		if (adminSession != null) {
+			/**
+			 * 判断密码是否匹配
+			 */
+			if (adminInfo.getPassword().equals(adminSession.getPassword())) {
+				return "success";
+
+			} else {
+				return "error";
+			}
+		}
 		try {
 			response.getWriter().write(gson.toJson(adminSession));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 }
