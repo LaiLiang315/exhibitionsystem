@@ -6,6 +6,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.exhibition.domain.carousel;
+import com.exhibition.domain.production_info;
 import com.exhibition.production.dao.ProductionManagementDao;
 
 /**
@@ -105,4 +107,17 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao{
 		return list;
 	}
 
+	/**
+	 * 根据id查询轮播图片
+	 * 
+	 */
+	@Override
+	public List<production_info> getProductionInfoById(String trim) {
+		Session session = getSession();
+		String hql = "from production_info where production_info_isdelete='0' production_info_type = :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		List<production_info> productionInfo = (List<production_info>) query.list();
+		return productionInfo;
+	}
 }

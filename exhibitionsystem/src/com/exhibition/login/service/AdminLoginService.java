@@ -1,4 +1,7 @@
 package com.exhibition.login.service;
+
+import com.exhibition.domain.adminAcount;
+
 /**
  * 管理员登陆注册Service层
  * @author LL
@@ -6,5 +9,9 @@ package com.exhibition.login.service;
  *
  */
 public interface AdminLoginService {
+
+
+	public String adminLogin(adminAcount adminInfo);
+
 
 }
