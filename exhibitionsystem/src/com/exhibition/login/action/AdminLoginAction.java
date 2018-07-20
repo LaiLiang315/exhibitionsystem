@@ -1,6 +1,7 @@
 package com.exhibition.login.action;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import com.exhibition.login.DTO.AdminSessionDTO;
 import com.exhibition.login.service.AdminLoginService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -79,8 +81,8 @@ public class AdminLoginAction extends ActionSupport implements ServletResponseAw
 	/**
 	 * 实现request以及response结束
 	 */
-	public String adminLogin() {
-		String result = null;
+	public void adminLogin() {
+		String result = "";
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -93,20 +95,19 @@ public class AdminLoginAction extends ActionSupport implements ServletResponseAw
 		 * 获取前service层返回的对象
 		 */
 		adminAcount adminSession = adminLoginService.adminLogin(adminInfo);
-		session.setAttribute("admin_session", adminSession);
-
+		System.out.println(adminInfo);
 		if (adminSession != null) {
 			/**
 			 * 判断密码是否匹配
 			 */
 			if (adminInfo.getPassword().equals(adminSession.getPassword())) {
+				session.setAttribute("admin_session", adminSession);
 				result="success";
-				return result;
-
-			} else {
+			}else{
 				result="error";
-				return result;
 			}
+		} else {
+			result="error";
 		}
 		try {
 			response.getWriter().write(gson.toJson(result));
@@ -114,6 +115,20 @@ public class AdminLoginAction extends ActionSupport implements ServletResponseAw
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+	}
+	
+	//注销用户
+	public void logout() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Methods", "GET,POST");
+		response.setContentType("text/html;charset=utf-8");
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession session = request.getSession();
+		PrintWriter pw = response.getWriter();
+		ActionContext.getContext().getSession().remove("admin_session");
+		System.out.println("执行退出=------");
+		pw.write("logoutSuccess");
+		
 	}
 }

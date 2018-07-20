@@ -23,7 +23,7 @@ function countwidth(){
 	},function(){
 		$(this).parent().stop(false,true).animate({"background-position-x":"10px",opacity:"1"},{duration:"normal", easing: "easeOutElastic"});
 	});
-	<!--- 首页 ---->
+
 	$('.ad_img,#banner_ctr,#client').pngFix();
 	$(window).scroll(function(){
 		$(this).scrollTop()>80?$("#navbg").stop(false,true).animate({opacity:"1"},"normal"):$("#navbg").stop(false,true).animate({opacity:"0.8"},"normal");

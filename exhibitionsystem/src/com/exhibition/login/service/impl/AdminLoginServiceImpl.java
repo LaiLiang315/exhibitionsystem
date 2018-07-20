@@ -26,6 +26,8 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 		 * 3.判断密码是不是匹配
 		 * 
 		 */
+		System.out.println("adminInfo"+adminInfo);
+		System.out.println(adminInfo!=null);
 		if(adminInfo!=null) {
 			adminAcount admin = new adminAcount();
 			admin = adminLoginDao.getAdminAcountById(adminInfo.getUsername());

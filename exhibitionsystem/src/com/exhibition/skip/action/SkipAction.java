@@ -6,4 +6,17 @@ public class SkipAction {
 	public String intoBackground(){
 		return "intoBackground";
 	}
+	
+	//进入作品列表管理页面
+	public String intoProductionList(){
+		return "intoProductionList";
+	}
+	//进入添加作品页面
+	public String intoProductionAdd(){
+		return "intoProductionAdd";
+	}
+	//退出到登陆界面
+	public String intoLogin(){
+		return "intoLogin";
+	}
 }

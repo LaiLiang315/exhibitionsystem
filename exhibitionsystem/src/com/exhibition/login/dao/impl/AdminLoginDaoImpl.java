@@ -114,7 +114,6 @@ public class AdminLoginDaoImpl implements AdminLoginDao{
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		adminInfo = (adminAcount) query.uniqueResult();
-		
 		return adminInfo;
 		
 		

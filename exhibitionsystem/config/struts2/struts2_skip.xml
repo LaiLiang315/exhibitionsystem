@@ -7,7 +7,10 @@
 		strict-method-invocation="false">
 		<action name="skip_*"
 			class="com.exhibition.skip.action.SkipAction" method="{1}">
-			<result name="intoBackground">/WEB-INF/view/intoBackground.jsp</result>	
+			<result name="intoBackground">/WEB-INF/view/intoBackground.jsp</result>
+			<result name="intoProductionList">/WEB-INF/view/production/ProductionList.jsp</result>
+			<result name="intoLogin">/login.jsp</result>	
+			<result name="intoProductionAdd">/WEB-INF/view/production/addProduction.jsp</result>			
 		</action>
 	</package>
 	
