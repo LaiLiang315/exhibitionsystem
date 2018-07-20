@@ -44,6 +44,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	
 	private int page = 1;
 	
+	private ProductionVO productionVO;
 
 	public HttpServletResponse getResponse() {
 		return response;
@@ -99,6 +100,14 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		this.page = page;
 	}
 
+	public ProductionVO getProductionVO() {
+		return productionVO;
+	}
+
+	public void setProductionVO(ProductionVO productionVO) {
+		this.productionVO = productionVO;
+	}
+
 	/**
 	 * 实现request以及response结束
 	 */
@@ -119,6 +128,9 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		}
 
 	}
+	/**
+	 * 页面显示VO
+	 */
 	public void showPicturesVO() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -127,7 +139,13 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		ProductionVO productionVO = new ProductionVO();
 		productionVO.setSearch(search);
 		productionVO.setPageIndex(page);
-		productionVO = productionManagementService.showPicturesVO(showAll);
+		productionVO = productionManagementService.showPicturesVO( showAll,productionVO);
+		try {
+			response.getWriter().write(gson.toJson(productionVO));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

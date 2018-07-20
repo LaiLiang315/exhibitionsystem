@@ -27,9 +27,10 @@ public interface ProductionManagementService {
 /**
  * 显示图片的分页
  * @param showAll
+ * @param productionVO 
  * @return
  */
-	public ProductionVO showPicturesVO(String showAll);
+	public ProductionVO showPicturesVO(String showAll, ProductionVO productionVO);
 
 
 }

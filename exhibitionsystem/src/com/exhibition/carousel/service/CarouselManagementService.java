@@ -18,6 +18,8 @@ public interface CarouselManagementService {
 	 */
 	public List<CarouselManagementDTO> querryCarousel();
 
+	public String deleteCarousel(String idList);
+
 	
 
 }

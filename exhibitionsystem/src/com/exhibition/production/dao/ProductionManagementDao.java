@@ -60,4 +60,6 @@ public interface ProductionManagementDao {
  */
 	public List<production_info> getProductionInfoById(String trim);
 
+List<?> queryForSix(String hql, int offset, int length);
+
 }
