@@ -128,7 +128,6 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		productionVO.setSearch(search);
 		productionVO.setPageIndex(page);
 		productionVO = productionManagementService.showPicturesVO(showAll);
-		response.getWriter().write(g);
 	}
 
 }
