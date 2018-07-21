@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<from action="${pageContext.request.contextPath }/adminlogin/adminLogin_login" method="post">
+<from action="${pageContext.request.contextPath }/userlogin/userlogin_userLogin" method="post">
 <input type="username" name="users.username">
 <input type="password" name="users.password">
 <input type="submit" name="登陆">
-						
+					
 </body>
 </html>

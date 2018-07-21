@@ -2,8 +2,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	<import resource="spring/spring_login.xml" />
-	<import resource="spring/spring_carousel.xml" />
-	<import resource="spring/spring_production.xml"/>
-	<import resource="spring/spring_productiontype.xml"/>
+	<import resource="spring/spring_userlogin.xml" />
+	
 </beans>
