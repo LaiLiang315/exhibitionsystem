@@ -131,4 +131,5 @@ public class AdminLoginAction extends ActionSupport implements ServletResponseAw
 		pw.write("logoutSuccess");
 		
 	}
+
 }
