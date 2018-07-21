@@ -106,6 +106,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					productionVO.getPageIndex(), productionVO.getPageSize());
 			System.out.println("PPPPPP"+listInfo);
 */		
+			
 			// 查询所有类型
 						List<production_type> listproductiontype = (List<production_type>) productionManagementDao.listObject(
 								"from production_type where production_type_isdelete='0' order by production_type_modifytime desc");
