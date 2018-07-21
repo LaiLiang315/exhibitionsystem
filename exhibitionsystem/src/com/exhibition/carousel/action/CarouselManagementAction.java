@@ -33,9 +33,13 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 	 * 用域模型把carousel,production_type,List<CarouselDTO>放到struts中
 	 */
 	private carousel carousel;
-	
+
 	private production_type type;
-	
+
+	/**
+	 * 批量删除idList
+	 */
+	private String idList;
 	/**
 	 * 实现request以及response
 	 */
@@ -72,9 +76,10 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
 	}
-/**
- * 实现request以及response结束
- */
+
+	/**
+	 * 实现request以及response结束
+	 */
 
 	public carousel getCarousel() {
 		return carousel;
@@ -92,6 +97,14 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 		this.type = type;
 	}
 
+	public String getIdList() {
+		return idList;
+	}
+
+	public void setIdList(String idList) {
+		this.idList = idList;
+	}
+
 	/**
 	 * 查看轮播图
 	 */
@@ -104,10 +117,21 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 		try {
 			response.getWriter().write(gson.toJson(listCarouselDTO));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
+	public void deleteCarousel() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		String carousels = carouselManagementService.deleteCarousel(idList);
+		try {
+			response.getWriter().write(gson.toJson(carousels));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
