@@ -19,30 +19,28 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 	}
 
 	@Override
-	public String adminLogin(adminAcount adminInfo) {
+	public adminAcount adminLogin(adminAcount adminInfo) {
 		/**
 		 * 1.判断Session是不是为空
 		 * 2.判断用户名是不是在表中
 		 * 3.判断密码是不是匹配
 		 * 
 		 */
+		System.out.println("adminInfo"+adminInfo);
+		System.out.println(adminInfo!=null);
 		if(adminInfo!=null) {
 			adminAcount admin = new adminAcount();
-			admin = adminLoginDao.getAdminAcountById(adminInfo.getAdmin_id());
+			admin = adminLoginDao.getAdminAcountById(adminInfo.getUsername());
 			/**
 			 * 如果查出来的管理员不为空
 			 * 并且用户名和密码都匹配
 			 */
-			if(admin!=null && adminInfo.getUsername().equals(admin.getUsername())&&adminInfo.getPassword().equals(admin.getPassword())) {
-			
-				return "success";
-			}
-			
-			
-			
+			return admin;
+		}else {
+			return null;
 		}
 		
-		return null;
+		
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_type;
 import com.exhibition.production.DTO.ProductionDTO;
+import com.exhibition.production.VO.ProductionVO;
 import com.exhibition.production.dao.ProductionManagementDao;
 import com.exhibition.production.service.ProductionManagementService;
 
@@ -21,9 +22,11 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 	public void setProductionManagementDao(ProductionManagementDao productionManagementDao) {
 		this.productionManagementDao = productionManagementDao;
 	}
-
+/**
+ * 显示图片的DTO
+ */
 	@Override
-	public List<ProductionDTO> shouPictures(String showAll) {
+	public List<ProductionDTO> showPicturesDTO(String showAll) {
 		List<ProductionDTO> listProductionDTO = new ArrayList<>();
 		List<production_info> listInfo;
 		ProductionDTO productionDTO;
@@ -55,5 +58,13 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		}
 		return listProductionDTO;
 	}
-
+/**
+ * 显示图片的分页
+ */
+	@Override
+	public ProductionVO showPicturesVO(String showAll) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+   
 }
