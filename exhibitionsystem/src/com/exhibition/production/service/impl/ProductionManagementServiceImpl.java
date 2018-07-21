@@ -102,12 +102,13 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		}
 		// 如果showAll=0，默认显示前六条
 		if (showAll.equals("0")) {
-			listInfo = (List<production_info>) productionManagementDao.queryForPage(listProductionHql,
+/*			listInfo = (List<production_info>) productionManagementDao.queryForPage(listProductionHql,
 					productionVO.getPageIndex(), productionVO.getPageSize());
 			System.out.println("PPPPPP"+listInfo);
+*/		
 			// 查询所有类型
-						List<production_type> listproductiontype = (List<production_type>) productionManagementDao.queryForSix(
-								"from production_type where production_type_isdelete='0' order by production_type_modifytime desc",productionVO.getPageIndex(), productionVO.getPageSize());
+						List<production_type> listproductiontype = (List<production_type>) productionManagementDao.listObject(
+								"from production_type where production_type_isdelete='0' order by production_type_modifytime desc");
 						// 遍历类型表
 						for (production_type production_type : listproductiontype) {
 							System.out.println("HHHHHHH");
