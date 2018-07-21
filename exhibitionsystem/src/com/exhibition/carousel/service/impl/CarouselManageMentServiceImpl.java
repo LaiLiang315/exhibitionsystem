@@ -1,6 +1,8 @@
 package com.exhibition.carousel.service.impl;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.exhibition.carousel.DTO.CarouselDTO;
@@ -9,6 +11,9 @@ import com.exhibition.carousel.dao.CarouselManagementDao;
 import com.exhibition.carousel.service.CarouselManagementService;
 import com.exhibition.domain.carousel;
 import com.exhibition.domain.production_type;
+
+import util.BuildUuid;
+import util.TimeUtil;
 
 /**
  * 轮播图给管理的Service层实现层
@@ -68,40 +73,53 @@ public class CarouselManageMentServiceImpl implements CarouselManagementService 
 	 */
 	@Override
 	public String deleteCarousel(String idList) {
+		String result = null;
 		if (idList != null && idList.trim().length() > 0) {
 			/**
 			 * 将多个对象id去掉分隔符转化为数组
 			 */
 			String[] deleteIdList = idList.split(",");
+			System.out.println(Arrays.toString(deleteIdList) + "uuuu" + deleteIdList[1]);
 			/**
-			 * 遍历数组
+			 * 遍历数组String id : deleteIdList
 			 */
 			for (String id : deleteIdList) {
-				/**
-				 * 如果轮播图表中存在需要删除的id
-				 */
-				if (carouselManagementDao.getCarouselById(id) != null) {
-					
-					carouselManagementDao.removeObject(carouselManagementDao.getCarouselById(id));
+				System.out.println("111111" + deleteIdList);
+				carousel carousel = new carousel();
+				carousel = carouselManagementDao.getCarouselPictureById(id);
 
-					return "deleteSuccess";
+				System.out.println("AAAAA" + carousel);
+				if (carousel != null) {
+					carousel.setCarousel_isdelete(1);
+					carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
+					System.out.println("DDDDDD" + carousel);
+					carouselManagementDao.saveOrUpdateObject(carousel);
+					System.out.println("=======");
+					result = "deleteSuccess";
+				} else {
+					result = "error";
 				}
 				/**
 				 * 如果数据库不存在需要删除的中转站的id
 				 */
-				else {
-					return "error";
-				}
 			}
-
+		} else {
+			result = "error";
 		}
-		return null;
+		return result;
 	}
-/**
- * 添加轮播图
- */
+
+	/**
+	 * 添加轮播图
+	 */
 	@Override
 	public String addCarousel(carousel carousel) {
+		if (carousel != null) {
+			carousel.setCarousel_id(BuildUuid.getUuid());
+			carousel.setCarousel_creationtime(TimeUtil.getStringSecond());
+			carouselManagementDao.saveOrUpdateObject(carousel);
+		}
+
 		return null;
 	}
 }

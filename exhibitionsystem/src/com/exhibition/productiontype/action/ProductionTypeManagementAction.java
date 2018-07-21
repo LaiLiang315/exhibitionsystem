@@ -7,6 +7,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.exhibition.productiontype.service.ProductionTypeService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -61,4 +63,16 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 /**
  * 实现request以及response结束
  */
+	/**
+	 * 查询所有作品类型
+	 */
+	public void querryProductionType() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		
+		
+	}
+	
 }

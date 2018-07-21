@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
+import org.apache.tomcat.util.security.MD5Encoder;
 
 import com.exhibition.domain.adminAcount;
 import com.exhibition.login.DTO.AdminSessionDTO;

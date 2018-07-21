@@ -31,10 +31,21 @@ public class CarouselTest {
 	public void setCarouselManagementService(CarouselManagementService carouselManagementService) {
 		this.carouselManagementService = carouselManagementService;
 	}
+	/**
+	 * 查询轮播图测试
+	 */
     @Test
 	public void querryCarousel() {
     	List<CarouselManagementDTO> listCarouselDTO = carouselManagementService.querryCarousel();
-    	System.out.println(listCarouselDTO);
+    	System.out.println("kkkkkkk"+listCarouselDTO);
 		
 	}
+    /**
+     * 批量删除测试
+     */
+    @Test
+    public void deleteCarousel() {
+    	String idList = "C001,C002,C003";
+    	carouselManagementService.deleteCarousel(idList);
+    }
 }
