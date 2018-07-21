@@ -14,6 +14,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.exhibition.production.DTO.ProductionDTO;
+import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.VO.ProductionVO;
 import com.exhibition.production.service.ProductionManagementService;
 import com.google.gson.Gson;
@@ -200,12 +201,12 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 /**
  * 获取单个作品信息和图集
  */
-		public void getProductionInFo() {
+		public void getProductionInfo() {
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			gsonBuilder.setPrettyPrinting();// 格式化json数据
 			Gson gson = gsonBuilder.create();
 			response.setContentType("text/html;charset=utf-8");
-			
+			List<ProductionInfoDTO> listProductionInfoDTO = productionManagementService.getProductionInfo();
 			
 		}
 		

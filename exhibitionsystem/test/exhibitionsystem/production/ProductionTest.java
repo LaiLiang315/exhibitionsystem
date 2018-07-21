@@ -40,8 +40,8 @@ public class ProductionTest {
 		String showAll = "0";
 		/*String search = "夏";
 		productionVO.setSearch(search);*/
-		String type = "Type002";
-		productionVO.setType(type);
+	/*	String type = "Type002";
+		productionVO.setType(type);*/
 		productionVO = productionManagementService.showPicturesVO(showAll, productionVO);
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据

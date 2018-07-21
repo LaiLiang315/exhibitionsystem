@@ -1,5 +1,7 @@
 package com.exhibition.production.DTO;
 
+import java.util.List;
+
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
 
@@ -17,7 +19,7 @@ public class ProductionInfoDTO {
 	/**
 	 * 作品图集表
 	 */
-	private production_pictures productionPictures;
+	private List<production_pictures> listProductionPictures;
 
 	public production_info getProductionInfo() {
 		return productionInfo;
@@ -27,18 +29,18 @@ public class ProductionInfoDTO {
 		this.productionInfo = productionInfo;
 	}
 
-	public production_pictures getProductionPictures() {
-		return productionPictures;
+	public List<production_pictures> getListProductionPictures() {
+		return listProductionPictures;
 	}
 
-	public void setProductionPictures(production_pictures productionPictures) {
-		this.productionPictures = productionPictures;
+	public void setListProductionPictures(List<production_pictures> listProductionPictures) {
+		this.listProductionPictures = listProductionPictures;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductionInfoDTO [productionInfo=" + productionInfo + ", productionPictures=" + productionPictures
-				+ "]";
+		return "ProductionInfoDTO [productionInfo=" + productionInfo + ", listProductionPictures="
+				+ listProductionPictures + "]";
 	}
 
 }

@@ -3,6 +3,7 @@ package com.exhibition.production.service;
 import java.util.List;
 
 import com.exhibition.production.DTO.ProductionDTO;
+import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.VO.ProductionVO;
 
 /**
@@ -31,6 +32,11 @@ public interface ProductionManagementService {
  * @return
  */
 	public ProductionVO showPicturesVO(String showAll, ProductionVO productionVO);
+/**
+ * 查询每个图集的信息
+ * @return
+ */
+	public List<ProductionInfoDTO> getProductionInfo();
 
 
 }
