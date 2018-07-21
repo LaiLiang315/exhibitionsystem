@@ -8,14 +8,16 @@ import org.hibernate.SessionFactory;
 
 import com.exhibition.domain.carousel;
 import com.exhibition.domain.production_info;
+import com.exhibition.domain.production_pictures;
 import com.exhibition.production.dao.ProductionManagementDao;
 
 /**
  * 作品的Dao层实现层
+ * 
  * @author LL
  *
  */
-public class ProductionManagementDaoImpl implements ProductionManagementDao{
+public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	/**
 	 * session注入
 	 */
@@ -121,17 +123,15 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao{
 		return productionInfo;
 	}
 	/**
-	 * 查询分类中的六条
+	 * 根据Id查询图片信息
 	 */
 	@Override
-	public List<?> queryForSix(String hql, int offset, int length) {
+	public List<production_pictures> getPictureInfoById(String trim) {
 		Session session = getSession();
+		String hql = "from production_pictures where production_pictures_isdelete ='0' and production_pictures_belong= :ID";
 		Query query = session.createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(6);
-		List<?> list = query.list();
-		session.clear();
-		return list;
+		query.setParameter("ID", trim);
+		List<production_pictures> listPicture = (List<production_pictures>) query.list();
+		return listPicture;
 	}
-
 }

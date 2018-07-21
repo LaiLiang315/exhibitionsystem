@@ -1,5 +1,7 @@
 package exhibitionsystem.production;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -8,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.exhibition.domain.production_info;
+import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.VO.ProductionVO;
 import com.exhibition.production.service.ProductionManagementService;
 import com.google.gson.Gson;
@@ -37,7 +40,7 @@ public class ProductionTest {
 	@Test
 	public void productionVO() {
 		ProductionVO productionVO = new ProductionVO();
-		String showAll = "0";
+		String showAll = "1";
 		/*String search = "夏";
 		productionVO.setSearch(search);*/
 	/*	String type = "Type002";
@@ -47,6 +50,12 @@ public class ProductionTest {
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		System.out.println("wwwwwwwww"+gson.toJson(productionVO));
+	}
+	@Test
+	public void getProductionInfo() {
+		List<ProductionInfoDTO> listProductionInfoDTO = productionManagementService.getProductionInfo();
+		System.out.println("DDDDDD"+listProductionInfoDTO);
+		
 	}
 
 }

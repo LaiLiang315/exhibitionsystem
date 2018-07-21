@@ -100,32 +100,30 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 			System.out.println("EEEEE" + listProductionHql);
 
 		}
+		listInfo = (List<production_info>) productionManagementDao.queryForPage(listProductionHql,
+				productionVO.getPageIndex(), productionVO.getPageSize());
+		// 这里如果不加desc表示正序，如果加上desc表示倒序
+		productionCountHql = productionCountHql + " order by production_info_creationtime desc";
+		int productionCount = productionManagementDao.getCount(productionCountHql);
+		// 设置总数量
+		productionVO.setTotalRecords(productionCount);
+		// 设置总页数
+		productionVO.setTotalPages(((productionCount - 1) / productionVO.getPageSize()) + 1);
+		// 判断是否拥有上一页
+		if (productionVO.getPageIndex() <= 1) {
+			productionVO.setHavePrePage(false);
+		} else {
+			productionVO.setHavePrePage(true);
+		}
+		// 判断是否拥有下一页
+		if (productionVO.getPageIndex() >= productionVO.getTotalPages()) {
+
+			productionVO.setHaveNextPage(false);
+		} else {
+			productionVO.setHaveNextPage(true);
+		}
 		// 如果showAll=0，默认显示前六条
 		if (showAll.equals("0")) {
-			listInfo = (List<production_info>) productionManagementDao.queryForPage(listProductionHql,
-					productionVO.getPageIndex(), productionVO.getPageSize());
-			System.out.println("PPPPPP" + listInfo);
-			// 这里如果不加desc表示正序，如果加上desc表示倒序
-			productionCountHql = productionCountHql + " order by production_info_creationtime desc";
-			int productionCount = productionManagementDao.getCount(productionCountHql);
-			// 设置总数量
-			productionVO.setTotalRecords(productionCount);
-			// 设置总页数
-			productionVO.setTotalPages(((productionCount - 1) / productionVO.getPageSize()) + 1);
-			// 判断是否拥有上一页
-			if (productionVO.getPageIndex() <= 1) {
-				productionVO.setHavePrePage(false);
-			} else {
-				productionVO.setHavePrePage(true);
-			}
-			// 判断是否拥有下一页
-			if (productionVO.getPageIndex() >= productionVO.getTotalPages()) {
-
-				productionVO.setHaveNextPage(false);
-			} else {
-				productionVO.setHaveNextPage(true);
-			}
-
 			// 查询所有类型
 			List<production_type> listproductiontype = (List<production_type>) productionManagementDao.listObject(
 					"from production_type where production_type_isdelete='0' order by production_type_modifytime desc");
@@ -159,30 +157,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 			productionVO.setListProductionDTO(listProductionDTO);
 			System.out.println("--------------" + productionVO);
 			return productionVO;
-		}
-		if (showAll.equals("1")) {
-			listInfo = (List<production_info>) productionManagementDao.queryForPage(listProductionHql,
-					productionVO.getPageIndex(), productionVO.getPageSize());
-			// 这里如果不加desc表示正序，如果加上desc表示倒序
-			productionCountHql = productionCountHql + " order by production_info_creationtime desc";
-			int productionCount = productionManagementDao.getCount(productionCountHql);
-			// 设置总数量
-			productionVO.setTotalRecords(productionCount);
-			// 设置总页数
-			productionVO.setTotalPages(((productionCount - 1) / productionVO.getPageSize()) + 1);
-			// 判断是否拥有上一页
-			if (productionVO.getPageIndex() <= 1) {
-				productionVO.setHavePrePage(false);
-			} else {
-				productionVO.setHavePrePage(true);
-			}
-			// 判断是否拥有下一页
-			if (productionVO.getPageIndex() >= productionVO.getTotalPages()) {
-
-				productionVO.setHaveNextPage(false);
-			} else {
-				productionVO.setHaveNextPage(true);
-			}
+		} else if (showAll.equals("1")) {
 			// 查询所有类型
 			List<production_type> listproductiontype = (List<production_type>) productionManagementDao.listObject(
 					"from production_type where production_type_isdelete='0' order by production_type_modifytime desc");
@@ -206,6 +181,8 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 				}
 				listProductionDTO.add(productionDTO);
 			}
+		}else {
+			return null;
 		}
 		/**
 		 * 分页获取单位列表
@@ -228,7 +205,16 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 				productionInfoDTO = new ProductionInfoDTO();
 				if (production_info.getProduction_info_id() != null
 						&& production_info.getProduction_info_id().trim().length() > 0) {
+					
+					listPictures = productionManagementDao.getPictureInfoById(production_info.getProduction_info_id());
 
+					if(listPictures != null) {
+						productionInfoDTO.setListProductionPictures(listPictures);
+						productionInfoDTO.setProductionInfo(production_info);
+						System.out.println("AAAAAA"+productionInfoDTO);
+						listProductionInfoDTO.add(productionInfoDTO);
+						System.out.println("BBBBBBB"+listProductionInfoDTO);
+					}
 				}
 			}
 		}
