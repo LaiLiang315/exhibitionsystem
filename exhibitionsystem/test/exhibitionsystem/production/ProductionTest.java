@@ -40,7 +40,7 @@ public class ProductionTest {
 		String showAll = "0";
 		/*String search = "夏";
 		productionVO.setSearch(search);*/
-		String type = "Type001";
+		String type = "Type002";
 		productionVO.setType(type);
 		productionVO = productionManagementService.showPicturesVO(showAll, productionVO);
 		GsonBuilder gsonBuilder = new GsonBuilder();

@@ -101,7 +101,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		}
 		// 如果showAll=0，默认显示前六条
 		if (showAll.equals("0")) {
-			listInfo = (List<production_info>) productionManagementDao.queryForSix(listProductionHql,
+			listInfo = (List<production_info>) productionManagementDao.queryForPage(listProductionHql,
 					productionVO.getPageIndex(), productionVO.getPageSize());
 			System.out.println("PPPPPP"+listInfo);
 			// 查询所有类型
@@ -118,16 +118,17 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 								 * 查询每个类型的作品的集合
 								 */
 								listInfo = productionManagementDao.getProductionInfoById(production_type.getProduction_type_id());
-								if (listInfo != null) {
+								if (listInfo != null  ) {
+									productionDTO.setListInfo(listInfo);
+									productionDTO.setType(production_type);
+									System.out.println("zzzzzz"+productionDTO);
 									
 								} else {
 									return null;
 
 								}
 							}
-							productionDTO.setListInfo(listInfo);
-							productionDTO.setType(production_type);
-							System.out.println("zzzzzz"+productionDTO);
+							
 							
 							listProductionDTO.add(productionDTO);
 						}
@@ -137,6 +138,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 						 */
 
 						productionVO.setListProductionDTO(listProductionDTO);
+						System.out.println("--------------"+productionVO);
 						return productionVO;
 		}
 		if (showAll.equals("1")) {
