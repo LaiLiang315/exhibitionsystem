@@ -1,17 +1,78 @@
-//<![CDATA[
-	//Nav Start
-window.onload = function() {
-	countwidth();
-}
 var marginleft=0;
-//计算类型栏宽度
+$(document).ready(function(){
+	getProductionTypeInfo();
+});
+// 首页查询分类信息
+function getProductionTypeInfo() {
+	$.ajax({
+		type:'POST',
+		url:'/exhibitionsystem/carouselManagement/carouselManagement_querryCarousel',
+		cache: false,  
+	    processData: false,  
+	    contentType: false,
+	    success:function(result){
+	    	// console.log(result);
+	    	var listCarouselDTO = JSON.parse(result);
+	    	putProductionTypeInfo(listCarouselDTO);
+	    	countwidth();
+	    	putCarouselInfo(listCarouselDTO);
+	    }
+	})
+}
+// 将获取到的分类信息放到首页相应位置
+function putProductionTypeInfo(listCarouselDTO){
+	var str="";// 初始化中间层li
+	var strStart='<li class="first-item">网站建设</li>';// 定义第一个li
+	var strOver='<li class="last-item">网站设计</li>';// 定义最后一个li
+	var typeInfo= document.querySelector("#li-list");// 定位放入的位置
+	// 遍历result
+	for(var i=0;i<listCarouselDTO.length;i++){
+		var logo = listCarouselDTO[i].type.production_type_logo;// 获取logo
+		var typename = listCarouselDTO[i].type.production_type_name;// 获取分类名称
+		str=str+'<li style="background-image: url('+logo+');">'+typename+'</li>';// 生成中间层菜单
+	}
+	var strAll=strStart+str+strOver;// 拼接三层li
+	typeInfo.innerHTML=strAll;// 插入标签
+	console.log("typebar加载完毕")
+}
+// 插入轮播图信息
+function putCarouselInfo(listCarouselDTO){
+	var str="";// 初始化li
+	var typeInfo= document.querySelector("#banner_img");// 定位放入的位置
+	var display = "";// 标签显示
+	// 遍历result
+	for(var i=0;i<listCarouselDTO.length;i++){
+		// 判断该分类是否有轮播图
+		if(listCarouselDTO[i].listcarouselpicture.length>0){
+			if(i==0){
+				str=str+'<li style="background-image:url('+listCarouselDTO[i].listcarouselpicture[0].carousel_picture+'); display:block;">';}
+			else{
+				str=str+'<li style="background-image:url('+listCarouselDTO[i].listcarouselpicture[0].carousel_picture+'); display:none;">';
+			}
+		      str+='<div class="wrapper">'+
+		        '<div class="ad_txt">'+
+		          '<h2>'+listCarouselDTO[i].type.production_type_title+'</h2>'+
+		          '<p>'+listCarouselDTO[i].type.production_type_discription+'</p>'+
+		        '</div>'+
+		        '<div class="ad_img"> <img src="'+listCarouselDTO[i].type.production_type_picture+'"  width="506" height="404" alt="" /> </div>'+
+		      '</div>'+
+		    '</li>';// 生成中间层菜单
+		}
+	}
+	typeInfo.innerHTML=str;// 插入标签
+	console.log("加载完毕")
+}
+// 计算类型栏宽度
 function countwidth(){
 	var lii=document.getElementById("li-list").getElementsByTagName("li");
-	var Nli=lii.length-2;	//图标个数
+	console.log("tubiaoshu"+lii.length)
+	var Nli=lii.length-2;	// 图标个数
 	var nbanner_ctr=document.getElementById("banner_ctr");
 	var NliWidth=nbanner_ctr.offsetWidth/Nli;
 	var ulWidth=Nli*115+20*2;
+	console.log("ulWidth"+ulWidth)
 	marginleft=(960-ulWidth)/2;
+	console.log("marginleft"+marginleft)
 	document.getElementById("li-list").style.width=ulWidth+"px";
 	document.getElementById("banner_ctr").style.width=ulWidth+"px";
 	document.getElementById("dudu").style.marginLeft=marginleft+"px";
@@ -28,7 +89,7 @@ function countwidth(){
 	$(window).scroll(function(){
 		$(this).scrollTop()>80?$("#navbg").stop(false,true).animate({opacity:"1"},"normal"):$("#navbg").stop(false,true).animate({opacity:"0.8"},"normal");
 	});
-	//Banner Start
+	// Banner Start
 	var curIndex=0;
 	var time=800;
 	var slideTime=5000;
@@ -36,13 +97,14 @@ function countwidth(){
 	var adImg=$("#banner_img>li>div>.ad_img");
 	var int=setInterval("autoSlide()",slideTime);
 
-	$("#banner_ctr>#dudu>ul>li[class!='first-item'][class!='last-item']").click(function(){
-		console.log("点击了分类")
-		show($(this).index("#banner_ctr>#dudu>ul>li[class!='first-item'][class!='last-item']"));
+	$("#banner_ctr>#dudu>ul").click(function(event){
+		if(event.target.class!='first-item'&&event.target.class!='ast-item'){
+		show($(event.target).index("#banner_ctr>#dudu>ul>li[class!='first-item'][class!='last-item']"));
 		window.clearInterval(int);
 		int=setInterval("autoSlide()",slideTime);
+		}
 	});
-	
+
 	function autoSlide(){
 		curIndex+1>=$("#banner_img>li").size()?curIndex=-1:false;
 		console.log("=========ttt"+$("#banner_img>li").size());
@@ -53,7 +115,6 @@ function countwidth(){
 		$("#drag_ctr,#drag_arrow").stop(false,true).animate({left:index*115+marginleft+20},300);
 		console.log(index+"index")
 		var lis = document.getElementById("li-list").getElementsByTagName("li");
-		console.log("分类"+lis[index].innerHTML)
 		$("#banner_img>li").eq(curIndex).stop(false,true).fadeOut(time);
 		adTxt.eq(curIndex).stop(false,true).animate({top:"340px"},time);
 		adImg.eq(curIndex).stop(false,true).animate({right:"120px"},time);
@@ -65,8 +126,8 @@ function countwidth(){
 		},200)
 		curIndex=index;
 	}
-	//Banner End
-	//Cases Start
+	// Banner End
+	// Cases Start
 	if($.support.transition){
 		$("#cases>ul>li").hover(function(){
 			$("img",this).stop(false,true).transition({
