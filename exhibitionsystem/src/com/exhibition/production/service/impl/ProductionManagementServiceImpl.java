@@ -98,6 +98,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					+ productionVO.getType().trim() + "'";
 			System.out.println("EEEEE"+listProductionHql);
 			
+			
 		}
 		// 如果showAll=0，默认显示前六条
 		if (showAll.equals("0")) {
