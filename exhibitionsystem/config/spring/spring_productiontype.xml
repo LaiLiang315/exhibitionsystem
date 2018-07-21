@@ -3,17 +3,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="productionTypeManagementAction"
-		class=""
+		class="com.exhibition.productiontype.action.ProductionTypeManagementAction"
 		scope="prototype">
-		<property name="productionTypeManagementService"
-			ref="productionTypeManagementService"></property>
+		<property name="productionTypeService"
+			ref="productionTypeService"></property>
 	</bean>
-	<bean id="productionTypeManagementService"
-		class="com.exhibition.productiontype.service.impl.productionTypeManagementServiceImpl">
-		<property name="productionTypeManagementDao" ref="productionTypeManagementDao"></property>
+	<bean id="productionTypeService"
+		class="com.exhibition.productiontype.service.impl.ProductionTypeServiceImpl">
+		<property name="productionTypeDao" ref="productionTypeDao"></property>
 	</bean>
-	<bean id="productionTypeManagementDao"
-		class="com.exhibition.production.dao.impl.productionTypeManagementDaoImpl">
+	<bean id="productionTypeDao"
+		class="com.exhibition.productiontype.dao.impl.ProductionTypeDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
