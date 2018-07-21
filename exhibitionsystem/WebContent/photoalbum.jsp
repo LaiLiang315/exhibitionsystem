@@ -243,12 +243,12 @@
 	
 	<!-- /container -->
 	<!-- JS -->
-<!--<script src="js/photoalbum/vendors/trianglify.min.js"></script>
+<script src="js/photoalbum/vendors/trianglify.min.js"></script>
 	<script src="js/photoalbum/vendors/TweenMax.min.js"></script>
 	<script src="js/photoalbum/vendors/ScrollToPlugin.min.js"></script>
 	<script src="js/photoalbum/vendors/cash.min.js"></script>
 	<script src="js/photoalbum/Card-circle.js"></script>
-	<script src="js/photoalbum/demo.js"></script> -->
+	<script src="js/photoalbum/demo.js"></script> 
 </body>
 
 </html>
