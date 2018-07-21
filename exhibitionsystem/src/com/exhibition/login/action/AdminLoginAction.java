@@ -132,19 +132,4 @@ public class AdminLoginAction extends ActionSupport implements ServletResponseAw
 		
 	}
 	
-	//注销用户
-	public void logout() throws IOException {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setHeader("Access-Control-Allow-Origin", "*");
-		response.setHeader("Access-Control-Allow-Methods", "GET,POST");
-		response.setContentType("text/html;charset=utf-8");
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
-		PrintWriter pw = response.getWriter();
-		ActionContext.getContext().getSession().remove("admin_session");
-		System.out.println("执行退出=------");
-		pw.write("logoutSuccess");
-		
-	}
-
 }
