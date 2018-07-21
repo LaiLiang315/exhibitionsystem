@@ -81,12 +81,9 @@ public class CarouselManageMentServiceImpl implements CarouselManagementService 
 				 * 如果轮播图表中存在需要删除的id
 				 */
 				if (carouselManagementDao.getCarouselById(id) != null) {
-					List<carousel> listCarousel = new ArrayList<>();
-					listCarousel = carouselManagementDao.getCarouselById(id);
-                   if(listCarousel!=null) {
-                	   
-                	   
-                   }
+					
+					carouselManagementDao.removeObject(carouselManagementDao.getCarouselById(id));
+
 					return "deleteSuccess";
 				}
 				/**
@@ -105,9 +102,6 @@ public class CarouselManageMentServiceImpl implements CarouselManagementService 
  */
 	@Override
 	public String addCarousel(carousel carousel) {
-		
-		
-		
 		return null;
 	}
 }
