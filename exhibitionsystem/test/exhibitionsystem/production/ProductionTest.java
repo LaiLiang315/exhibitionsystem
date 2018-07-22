@@ -45,6 +45,7 @@ public class ProductionTest {
 		productionVO.setSearch(search);*/
 	/*	String type = "Type002";
 		productionVO.setType(type);*/
+		productionVO.setPageIndex(1);
 		productionVO = productionManagementService.showPicturesVO(showAll, productionVO);
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据

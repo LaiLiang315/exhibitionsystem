@@ -125,8 +125,9 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		// 如果showAll=0，默认显示前六条
 		if (showAll.equals("0")) {
 			// 查询所有类型
-			List<production_type> listproductiontype = (List<production_type>) productionManagementDao.listObject(
-					"from production_type where production_type_isdelete='0' order by production_type_modifytime desc");
+			List<production_type> listproductiontype = (List<production_type>) productionManagementDao.queryForPage(
+					"from production_type where production_type_isdelete='0' order by production_type_modifytime desc",
+					productionVO.getPageIndex(), productionVO.getPageSize());
 			// 遍历类型表
 			for (production_type production_type : listproductiontype) {
 				System.out.println("HHHHHHH");
@@ -147,6 +148,21 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 						return null;
 
 					}
+					// 模糊查询显示高亮
+					if (productionVO.getSearch() != null && productionVO.getSearch().trim().length() > 0) {
+						/*
+						 * production_info.setProduction_info_name(production_info.
+						 * getProduction_info_name().replaceAll(productionVO.getSearch(),
+						 * "<span style='color: #ff5063;'> " + productionVO.getSearch() + "</span>"));
+						 */
+						/*
+						 * unit.setUnit_address(unit.getUnit_address().replaceAll(productionVO.getSearch
+						 * (), "<span style='color: #ff5063;'>" + productionVO.getSearch() +
+						 * "</span>"));
+						 */
+
+					}
+
 				}
 
 				listProductionDTO.add(productionDTO);
@@ -159,8 +175,10 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 			return productionVO;
 		} else if (showAll.equals("1")) {
 			// 查询所有类型
-			List<production_type> listproductiontype = (List<production_type>) productionManagementDao.listObject(
-					"from production_type where production_type_isdelete='0' order by production_type_modifytime desc");
+			List<production_type> listproductiontype = (List<production_type>) productionManagementDao.queryForPage(
+					"from production_type where production_type_isdelete='0' order by production_type_modifytime desc",
+					productionVO.getPageIndex(), productionVO.getPageSize());
+			System.out.println("DDDDDDD"+listproductiontype);
 			// 遍历类型表
 			for (production_type production_type : listproductiontype) {
 				System.out.println("qzdsdwqda");
@@ -171,7 +189,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					/**
 					 * 查询每个类型的作品的集合
 					 */
-					listInfo = productionManagementDao.getProductionInfoById(production_type.getProduction_type_id());
+					listInfo = productionManagementDao.getProductionsInfoById(production_type.getProduction_type_id());
 					if (listInfo != null) {
 						productionDTO.setListInfo(listInfo);
 						productionDTO.setType(production_type);
@@ -180,8 +198,9 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					}
 				}
 				listProductionDTO.add(productionDTO);
+				System.out.println("123123234"+listProductionDTO);
 			}
-		}else {
+		} else {
 			return null;
 		}
 		/**
@@ -190,9 +209,10 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		productionVO.setListProductionDTO(listProductionDTO);
 		return productionVO;
 	}
-/**
- * 显示每条信息的图集
- */
+
+	/**
+	 * 显示每条信息的图集
+	 */
 	@Override
 	public List<ProductionInfoDTO> getProductionInfo() {
 		List<ProductionInfoDTO> listProductionInfoDTO = new ArrayList<>();
@@ -212,17 +232,24 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					 */
 					listPictures = productionManagementDao.getPictureInfoById(production_info.getProduction_info_id());
 
-					if(listPictures != null) {
+					if (listPictures != null) {
 						productionInfoDTO.setListProductionPictures(listPictures);
 						productionInfoDTO.setProductionInfo(production_info);
-						System.out.println("AAAAAA"+productionInfoDTO);
+						System.out.println("AAAAAA" + productionInfoDTO);
 						listProductionInfoDTO.add(productionInfoDTO);
-						System.out.println("BBBBBBB"+listProductionInfoDTO);
+						System.out.println("BBBBBBB" + listProductionInfoDTO);
 					}
 				}
 			}
 		}
 
+		return null;
+	}
+
+	@Override
+	public ProductionVO querryAllProduction(ProductionVO productionVO) {
+		
+		
 		return null;
 	}
 }

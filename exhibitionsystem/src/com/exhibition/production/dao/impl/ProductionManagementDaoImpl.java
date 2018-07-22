@@ -110,7 +110,7 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	}
 
 	/**
-	 * 根据id查询作品信息
+	 * 根据id查询作品信息前六条
 	 * 
 	 */
 	@Override
@@ -118,6 +118,18 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 		Session session = getSession();
 		String hql = "from production_info where production_info_isdelete ='0' and production_info_type= :ID";
 		Query query = session.createQuery(hql).setMaxResults(6);
+		query.setParameter("ID", trim);
+		List<production_info> productionInfo = (List<production_info>) query.list();
+		return productionInfo;
+	}
+	/**
+	 * 根据id查询所有作品前十条
+	 */
+	@Override
+	public List<production_info> getProductionsInfoById(String trim) {
+		Session session = getSession();
+		String hql = "from production_info where production_info_isdelete ='0' and production_info_type= :ID";
+		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		List<production_info> productionInfo = (List<production_info>) query.list();
 		return productionInfo;
