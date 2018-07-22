@@ -18,9 +18,17 @@ public interface CarouselManagementService {
 	 * @return
 	 */
 	public List<CarouselManagementDTO> querryCarousel();
-
+/**
+ * 批量删除轮播图
+ * @param idList
+ * @return
+ */
 	public String deleteCarousel(String idList);
-
+/**
+ * 添加轮播图
+ * @param carousel
+ * @return
+ */
 	public String addCarousel(carousel carousel);
 
 	

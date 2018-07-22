@@ -2,9 +2,12 @@ package com.exhibition.production.service;
 
 import java.util.List;
 
+import com.exhibition.domain.production_info;
 import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
+import com.exhibition.production.DTO.ProductionThreeFormDTO;
 import com.exhibition.production.VO.ProductionVO;
+import com.google.gson.JsonElement;
 
 /**
  * 作品的Service层接口
@@ -43,6 +46,25 @@ public interface ProductionManagementService {
  * @return
  */
 	public ProductionVO querryAllProduction(ProductionVO productionVO);
+	/**
+	 * 添加作品
+	 * @param productionInfo
+	 * @return
+	 */
+    public String addProduction(production_info productionInfo);
+    /**
+     * 查询单个作品信息
+     * @param productionInfo
+     * @return
+     */
+	public ProductionThreeFormDTO querryOneProduction(production_info productionInfo);
+	/**
+	 * 批量删除作品
+	 * @param idList
+	 * @return
+	 */
+	
+	public String deleteProduction(String idList);
 
 
 }

@@ -120,6 +120,9 @@ public class CarouselManagementDaoImpl implements CarouselManagementDao {
 		List<carousel> carousel = (List<carousel>) query.list();
 		return carousel;
 	}
+	/**
+	 * 根据id获取图片
+	 */
 	@Override
 	public carousel getCarouselPictureById(String trim) {
 		carousel carousel = new carousel();
