@@ -15,6 +15,14 @@ public class SkipAction {
 	public String intoProductionAdd(){
 		return "intoProductionAdd";
 	}
+	//进入分类列表管理页面
+	public String intoCategoryList(){
+		return "intoCategoryList";
+	}
+	//进入添加作品分类页面
+	public String intoCategoryAdd(){
+		return "intoCategoryAdd";
+	}
 	//退出到登陆界面
 	public String intoLogin(){
 		return "intoLogin";
