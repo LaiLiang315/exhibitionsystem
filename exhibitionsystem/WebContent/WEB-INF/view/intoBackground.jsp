@@ -34,7 +34,7 @@ request.setAttribute("path", basePath);
 				
 			    <ul class="layui-nav top_menu">
 			    	<li class="layui-nav-item" id="showNotice" pc>
-						<a href="javascript:;" ><i class="iconfont icon-gonggao"></i><cite>Come on~</cite></a>
+						<a href="javascript:;" ><i class="iconfont icon-gonggao"></i><cite id="helloday"></cite></a>
 					</li>
 			    	
 					<li class="layui-nav-item" pc>
@@ -43,8 +43,6 @@ request.setAttribute("path", basePath);
 							<cite><s:property value="#session.admin_session.username" /></cite>
 						</a>
 						<dl class="layui-nav-child">	
-							<dd><a href="${pageContext.request.contextPath }/skip/skip_intoUserInfo;" target="qqq"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
-							<dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
 							<dd><a href="javascript:;" onclick="logout();"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
 						</dl>
 					</li>
@@ -62,32 +60,31 @@ request.setAttribute("path", basePath);
 					<li class="layui-nav-item">
   					  <a href="javascript:;"><cite class="title1">作品管理</cite></a>
    						 <dl class="layui-nav-child">
-    					 <dd><a href="${pageContext.request.contextPath }/skip/skip_intoProductionList;" target="qqq"><cite class="title1">作品管理</cite></a></dd>
+    					 <dd><a href="${pageContext.request.contextPath }/skip/skip_intoProductionList;" target="qqq"><cite class="title1">作品列表</cite></a></dd>
      					 <dd><a href="${pageContext.request.contextPath }/skip/skip_intoProductionAdd;" target="qqq"><cite class="title1">新增作品</cite></a></dd>
     					</dl>
   					</li>
 					<li class="layui-nav-item">
-						<a href="" target="qqq">
-							<i data-icon="icon-computer">
-								<cite class="title1">xx管理</cite>
-							</i>
-						</a>
-						<div class="child">
-						<a href="javascript:;" data-url=""><cite>二级菜单1</cite></a>
-						<a href="javascript:;" data-url=""><cite>二级菜单2</cite></a>
-						</div>
-						
-					</li>
-					<li class="layui-nav-item">
-						<a href="" target="qqq">
-						<%-- <a href="${pageContext.request.contextPath }/skip/skip_intoScrol;" target="qqq"> --%>
-							<i  data-icon="icon-computer">
-								<cite class="title1">xx管理</cite>
-							</i>
-						</a>
-					</li>
-					
-									
+  					  <a href="javascript:;"><cite class="title1">分类管理</cite></a>
+   						 <dl class="layui-nav-child">
+    					 <dd><a href="${pageContext.request.contextPath }/skip/skip_intoCategoryList;" target="qqq"><cite class="title1">分类列表</cite></a></dd>
+     					 <dd><a href="${pageContext.request.contextPath }/skip/skip_intoCategoryAdd;" target="qqq"><cite class="title1">新增分类</cite></a></dd>
+    					</dl>
+  					</li>
+  					<li class="layui-nav-item">
+  					  <a href="javascript:;"><cite class="title1">新闻管理</cite></a>
+   						 <dl class="layui-nav-child">
+    					 <dd><a href="${pageContext.request.contextPath }/skip/skip_intoProductionList;" target="qqq"><cite class="title1">新闻列表</cite></a></dd>
+     					 <dd><a href="${pageContext.request.contextPath }/skip/skip_intoProductionAdd;" target="qqq"><cite class="title1">新增新闻</cite></a></dd>
+    					</dl>
+  					</li>
+  					<li class="layui-nav-item">
+  					  <a href="javascript:;"><cite class="title1">图库管理</cite></a>
+   						 <dl class="layui-nav-child">
+    					 <dd><a href="${pageContext.request.contextPath }/skip/skip_intoProductionList;" target="qqq"><cite class="title1">图库列表</cite></a></dd>
+     					 <dd><a href="${pageContext.request.contextPath }/skip/skip_intoProductionAdd;" target="qqq"><cite class="title1">新增图库</cite></a></dd>
+    					</dl>
+  					</li>
 					
 				</ul>
 			</div>

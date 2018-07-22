@@ -17,26 +17,19 @@
 </head>
 <body class="childrenBody">
 	<blockquote class="layui-elem-quote news_search">
-	<form class="layui-form" action="">
-		<div class="layui-form-item">
-			<div class="layui-inline">
+			<div class="layui-inline layui-form-item layui-form">
 			    <label class="layui-form-label">作品类型</label>
 				<div class="layui-input-block">
-					<select name="userGrade" class="userGrade" lay-filter="userGrade">
-						<option value="0">类型1</option>
-						<option value="1">类型2</option>
-				        <option value="2">类型3</option>
-				        <option value="3">类型4</option>
+					<select name="userGrade" id="selectType" class="userGrade" lay-filter="userGrade">
 				    </select>
 				</div>
 		   </div>
-	</form>
 	<div class="layui-inline">
 		  <a class="layui-btn layui-btn-danger batchDel">批量删除</a>
 		</div>
 		<div class="layui-inline">
 			  <div class="layui-input-inline">
-		    	<input type="text" value="" placeholder="请输入关键字" class="layui-input search_input">
+		    	<input type="text" value="" id="searchInfo" placeholder="请输入关键字" class="layui-input search_input">
 		 	  </div>
 		<a class="layui-btn search_btn">查询</a>
 	</div>
@@ -45,32 +38,42 @@
 	  	<table class="layui-table">
 		    <colgroup>
 				<col width="9">
-				<col>
-				<col width="12%">
-				<col width="30%">
-				<col width="9%">
-				<col width="9%">
-				<col width="9%">
 				<col width="15%">
+				<col width="12%">
+				<col width="40%">
+				<col width="9%">
+				<col width="20%">
 		    </colgroup>
 		    <thead>
 				<tr>
 					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
 					<th>作品名</th>
 					<th>作者</th>
-					<th style="text-align:left;">作品描述</th>
+					<th>作品描述</th>
 					<th>作品类型</th>
-					<th>创建时间</th>
-					<th>修改时间</th>
 					<th>操作</th>
-				</tr> 
+				</tr>
 		    </thead>
-		    <tbody class="news_content"></tbody>
+		    <tbody class="news_content" id="productionInfo">
+		    	
+		    </tbody>
 		</table>
+	</div>
+	<div class="page-footer">
+			<div class="page_info">
+				&nbsp;&nbsp;&nbsp;&nbsp; <button class="layui-btn" onclick="firstPage()"><i
+				class="fa fa-angle-double-left">首页</i></button>&nbsp;&nbsp;&nbsp;&nbsp;
+				 <button class="layui-btn"  onclick="prePage()"><i class="layui-icon"></i></button>
+   	 			<button class="layui-btn" onclick="nextPage()"><i class="layui-icon"></i></button>
+				<button class="layui-btn" onclick="lastPage()">尾页<i
+					class="fa fa-angle-double-right"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="text" class="layui-input-inline"  id="go_input"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<button class="layui-btn" onclick="goPage()">GO</button>	</div>
+			<p class='page-infomation'></p>					
 	</div>
 	<div id="page"></div>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/productionList.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js"></script>
 </body>
 </html>
