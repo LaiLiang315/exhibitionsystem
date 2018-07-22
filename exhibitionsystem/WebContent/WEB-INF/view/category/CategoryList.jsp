@@ -14,16 +14,13 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/layui/css/layui.css" media="all" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/production/list.css" media="all" />
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/productionList.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js"></script>
 </head>
 <body class="childrenBody">
 	<blockquote class="layui-elem-quote news_search">
-			<div class="layui-inline layui-form-item layui-form">
-			    <label class="layui-form-label">作品类型</label>
+			<div class="layui-inline layui-form layui-form-item">
+			    <label class="layui-form-label">分类名称</label>
 				<div class="layui-input-block">
-					<select name="userGrade" id="selectType" class="userGrade" lay-filter="userGrade">
+					<select name="userGrade" class="userGrade" lay-filter="userGrade">
 				    </select>
 				</div>
 		   </div>
@@ -32,7 +29,7 @@
 		</div>
 		<div class="layui-inline">
 			  <div class="layui-input-inline">
-		    	<input type="text" value="" id="searchInfo" placeholder="请输入关键字" class="layui-input search_input">
+		    	<input type="text" value="" placeholder="请输入关键字" class="layui-input search_input">
 		 	  </div>
 		<a class="layui-btn search_btn">查询</a>
 	</div>
@@ -41,25 +38,22 @@
 	  	<table class="layui-table">
 		    <colgroup>
 				<col width="9">
-				<col width="15%">
+				<col>
 				<col width="12%">
-				<col width="40%">
+				<col width="30%">
 				<col width="9%">
-				<col width="20%">
+				<col width="15%">
 		    </colgroup>
 		    <thead>
 				<tr>
 					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
-					<th>作品名</th>
-					<th>作者</th>
-					<th>作品描述</th>
-					<th>作品类型</th>
+					<th>分类名称</th>
+					<th>分类标题</th>
+					<th style="text-align:left;">分类描述</th>
 					<th>操作</th>
-				</tr>
+				</tr> 
 		    </thead>
-		    <tbody class="news_content" id="productionInfo">
-		    	
-		    </tbody>
+		    <tbody class="news_content"></tbody>
 		</table>
 	</div>
 	<div class="page-footer">
@@ -75,5 +69,8 @@
 			<p class='page-infomation'></p>					
 	</div>
 	<div id="page"></div>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/productionList.js"></script>
 </body>
 </html>
