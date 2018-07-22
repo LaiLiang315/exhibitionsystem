@@ -49,7 +49,7 @@
 		    </colgroup>
 		    <thead>
 				<tr>
-					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
+					<th><input type="checkbox" name="" lay-skin="primary" onclick="allChoose()" lay-filter="allChoose" id="allChoose"></th>
 					<th>作品名</th>
 					<th>作者</th>
 					<th>作品描述</th>

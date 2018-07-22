@@ -96,3 +96,17 @@ function putProductionInfo(productionVO){
 	}
 	productionInfo.innerHTML=str;// 插入标签
 }
+//全选
+function allChoose(){
+	var checkal=document.getElementById("allChoose");
+	var checkbos=document.getElementsByName("item");
+	for(i=0;i<checkbos.length;i++){
+		var checkbo=checkbos[i];
+		if(checkal.checked){
+			checkbo.checked="checked";
+		}else{
+			checkbo.checked=null;
+		}
+		
+	}		
+}			
