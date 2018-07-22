@@ -52,11 +52,17 @@ public interface CarouselManagementDao {
 	 */
 	public List<?> listObject(String hql);
 	/**
-	 * 根据id查询轮播图
+	 * 根据id查询轮播图集合
 	 * @param trim
 	 * @return
 	 */
 
 	public List<carousel> getCarouselById(String trim);
+	/**
+	 * 根据id查询轮播图
+	 * @param trim
+	 * @return
+	 */
+	public carousel getCarouselPictureById(String trim);
 
 }

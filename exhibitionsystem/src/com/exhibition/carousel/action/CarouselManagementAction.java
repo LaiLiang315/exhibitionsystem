@@ -122,6 +122,9 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 
 	}
 
+	/**
+	 * 批量删除轮播图
+	 */
 	public void deleteCarousel() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -134,4 +137,31 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 添加轮播图
+	 */
+	public void addCarousel() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		String add = carouselManagementService.addCarousel(carousel);
+		try {
+			response.getWriter().write(gson.toJson(add));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
