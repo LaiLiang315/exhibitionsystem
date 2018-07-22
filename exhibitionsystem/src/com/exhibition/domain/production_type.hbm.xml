@@ -29,7 +29,7 @@
         <property name="production_type_modifytime" type="java.lang.String">
             <column name="production_type_modifytime" />
         </property>
-        <property name="production_type_isdelete" type="int">
+        <property name="production_type_isdelete" type="java.lang.Integer">
             <column name="production_type_isdelete" />
         </property>
     </class>

@@ -208,8 +208,41 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			Gson gson = gsonBuilder.create();
 			response.setContentType("text/html;charset=utf-8");
 			List<ProductionInfoDTO> listProductionInfoDTO = productionManagementService.getProductionInfo();
+			try {
+				response.getWriter().write(gson.toJson(listProductionInfoDTO));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		/**
+		 * 添加作品
+		 */
+		public void addProduction() {
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
 			
 		}
-		
+		/**
+		 * 分页显示所有作品
+		 */
+		public void querryAllProduction() {
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			ProductionVO productionVO = new ProductionVO();
+			productionVO.setSearch(search);
+			productionVO.setPageIndex(page);
+			productionVO = productionManagementService.querryAllProduction(productionVO);
+			try {
+				response.getWriter().write(gson.toJson(productionVO));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 }
