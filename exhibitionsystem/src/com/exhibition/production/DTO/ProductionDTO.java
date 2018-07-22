@@ -7,6 +7,7 @@ import com.exhibition.domain.production_type;
 
 /**
  * 作品信息DTO
+ * 
  * @author LL
  *
  */
@@ -14,40 +15,52 @@ public class ProductionDTO {
 	/**
 	 * 作品信息表和作品类型表
 	 */
-  private production_info info;
-  
-  private production_type type;
-  
-  private List<production_info> listInfo;
+	private production_info info;
 
-public production_info getInfo() {
-	return info;
-}
+	private production_type type;
 
-public void setInfo(production_info info) {
-	this.info = info;
-}
+	private List<production_info> listInfo;
 
-public production_type getType() {
-	return type;
-}
+	/**
+	 * 构造方法
+	 */
+	public ProductionDTO() {
+		super();
+	}
 
-public void setType(production_type type) {
-	this.type = type;
-}
+	public production_info getInfo() {
+		return info;
+	}
 
-public List<production_info> getListInfo() {
-	return listInfo;
-}
+	public void setInfo(production_info info) {
+		this.info = info;
+	}
 
-public void setListInfo(List<production_info> listInfo) {
-	this.listInfo = listInfo;
-}
+	public production_type getType() {
+		return type;
+	}
 
-@Override
-public String toString() {
-	return "ProductionDTO [info=" + info + ", type=" + type + ", listInfo=" + listInfo + "]";
-}
-  
-  
+	public void setType(production_type type) {
+		this.type = type;
+	}
+
+	public List<production_info> getListInfo() {
+		return listInfo;
+	}
+
+	public void setListInfo(List<production_info> listInfo) {
+		this.listInfo = listInfo;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductionDTO [info=" + info + ", type=" + type + ", listInfo=" + listInfo + "]";
+	}
+
+	public ProductionDTO(production_info info, production_type type) {
+		super();
+		this.info = info;
+		this.type = type;
+	}
+
 }

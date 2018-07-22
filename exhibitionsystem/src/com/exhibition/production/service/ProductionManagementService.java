@@ -37,6 +37,12 @@ public interface ProductionManagementService {
  * @return
  */
 	public List<ProductionInfoDTO> getProductionInfo();
+/**
+ * 查询所有类型信息
+ * @param productionVO
+ * @return
+ */
+	public ProductionVO querryAllProduction(ProductionVO productionVO);
 
 
 }
