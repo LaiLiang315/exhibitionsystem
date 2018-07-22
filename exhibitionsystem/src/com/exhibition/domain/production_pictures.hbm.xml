@@ -14,7 +14,7 @@
         <property name="production_pictures_belong" type="java.lang.String">
             <column name="production_pictures_belong" />
         </property>
-        <property name="production_pictures_sequence" type="int">
+        <property name="production_pictures_sequence" type="java.lang.Integer">
             <column name="production_pictures_sequence" />
         </property>
         <property name="production_pictures_creationtime" type="java.lang.String">
@@ -23,7 +23,7 @@
         <property name="production_pictures_modifytime" type="java.lang.String">
             <column name="production_pictures_modifytime" />
         </property>
-        <property name="production_pictures_isdelete" type="int">
+        <property name="production_pictures_isdelete" type="java.lang.Integer">
             <column name="production_pictures_isdelete" />
         </property>
     </class>

@@ -205,7 +205,9 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 				productionInfoDTO = new ProductionInfoDTO();
 				if (production_info.getProduction_info_id() != null
 						&& production_info.getProduction_info_id().trim().length() > 0) {
-					
+					/**
+					 * 得到每种信息的图集
+					 */
 					listPictures = productionManagementDao.getPictureInfoById(production_info.getProduction_info_id());
 
 					if(listPictures != null) {
