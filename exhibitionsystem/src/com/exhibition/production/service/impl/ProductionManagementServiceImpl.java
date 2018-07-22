@@ -190,7 +190,9 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		productionVO.setListProductionDTO(listProductionDTO);
 		return productionVO;
 	}
-
+/**
+ * 显示每条信息的图集
+ */
 	@Override
 	public List<ProductionInfoDTO> getProductionInfo() {
 		List<ProductionInfoDTO> listProductionInfoDTO = new ArrayList<>();
