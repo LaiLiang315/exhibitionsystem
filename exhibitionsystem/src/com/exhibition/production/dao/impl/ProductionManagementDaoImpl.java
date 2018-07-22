@@ -122,9 +122,11 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 		List<production_info> productionInfo = (List<production_info>) query.list();
 		return productionInfo;
 	}
+	
 	/**
 	 * 根据Id查询图片信息
 	 */
+	
 	@Override
 	public List<production_pictures> getPictureInfoById(String trim) {
 		Session session = getSession();
