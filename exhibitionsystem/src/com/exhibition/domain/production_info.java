@@ -15,7 +15,7 @@ public class production_info {
 	private String production_info_type; // 作品类型
 	private String production_info_creationtime; // 创建时间
 	private String production_info_modifytime; // 修改时间
-	private int production_info_isdelete; // 是否删除
+	private Integer production_info_isdelete; // 是否删除
 
 	public String getProduction_info_id() {
 		return production_info_id;
@@ -73,11 +73,11 @@ public class production_info {
 		this.production_info_modifytime = production_info_modifytime;
 	}
 
-	public int getProduction_info_isdelete() {
+	public Integer getProduction_info_isdelete() {
 		return production_info_isdelete;
 	}
 
-	public void setProduction_info_isdelete(int production_info_isdelete) {
+	public void setProduction_info_isdelete(Integer production_info_isdelete) {
 		this.production_info_isdelete = production_info_isdelete;
 	}
 
@@ -90,4 +90,6 @@ public class production_info {
 				+ ", production_info_modifytime=" + production_info_modifytime + ", production_info_isdelete="
 				+ production_info_isdelete + "]";
 	}
+
+	
 }
