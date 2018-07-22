@@ -79,9 +79,10 @@ public class ProductionTest {
     
     @Test
     public void ProductionThreeFormDTOTest() {
+    	ProductionThreeFormDTO productionThreeFormDTO = new ProductionThreeFormDTO();
     	production_info productionInfo = new production_info();
     	productionInfo.setProduction_info_id("A001");
-    	ProductionThreeFormDTO productionThreeFormDTO = productionManagementService.querryOneProduction(productionInfo);
+    	 productionManagementService.querryOneProduction(productionInfo);
     	System.out.println("????????>>><><><"+productionThreeFormDTO);
     	
     	
