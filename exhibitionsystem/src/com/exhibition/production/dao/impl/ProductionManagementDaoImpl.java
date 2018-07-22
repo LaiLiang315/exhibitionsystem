@@ -8,14 +8,16 @@ import org.hibernate.SessionFactory;
 
 import com.exhibition.domain.carousel;
 import com.exhibition.domain.production_info;
+import com.exhibition.domain.production_pictures;
 import com.exhibition.production.dao.ProductionManagementDao;
 
 /**
  * 作品的Dao层实现层
+ * 
  * @author LL
  *
  */
-public class ProductionManagementDaoImpl implements ProductionManagementDao{
+public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	/**
 	 * session注入
 	 */
@@ -108,16 +110,28 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao{
 	}
 
 	/**
-	 * 根据id查询轮播图片
+	 * 根据id查询作品信息
 	 * 
 	 */
 	@Override
 	public List<production_info> getProductionInfoById(String trim) {
 		Session session = getSession();
-		String hql = "from production_info where production_info_isdelete='0' production_info_type = :ID";
-		Query query = session.createQuery(hql);
+		String hql = "from production_info where production_type_isdelete ='0' and production_info_type= :ID";
+		Query query = session.createQuery(hql).setMaxResults(6);
 		query.setParameter("ID", trim);
 		List<production_info> productionInfo = (List<production_info>) query.list();
 		return productionInfo;
+	}
+	/**
+	 * 根据Id查询图片信息
+	 */
+	@Override
+	public List<production_pictures> getPictureInfoById(String trim) {
+		Session session = getSession();
+		String hql = "from production_pictures where production_pictures_isdelete ='0' and production_pictures_belong= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		List<production_pictures> listPicture = (List<production_pictures>) query.list();
+		return listPicture;
 	}
 }

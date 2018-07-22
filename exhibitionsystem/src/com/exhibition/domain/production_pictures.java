@@ -6,6 +6,7 @@ package com.exhibition.domain;
  */
 public class production_pictures {
 private String production_pictures_id; //图集id
+private String production_pictures_name; //图片名称
 private String production_pictures_belong; //图集所属作品
 private int production_pictures_sequence; //图集顺序
 private String production_pictures_creationtime; //创建时间
@@ -16,6 +17,12 @@ public String getProduction_pictures_id() {
 }
 public void setProduction_pictures_id(String production_pictures_id) {
 	this.production_pictures_id = production_pictures_id;
+}
+public String getProduction_pictures_name() {
+	return production_pictures_name;
+}
+public void setProduction_pictures_name(String production_pictures_name) {
+	this.production_pictures_name = production_pictures_name;
 }
 public String getProduction_pictures_belong() {
 	return production_pictures_belong;
@@ -49,11 +56,11 @@ public void setProduction_pictures_isdelete(int production_pictures_isdelete) {
 }
 @Override
 public String toString() {
-	return "production_pictures [production_pictures_id=" + production_pictures_id + ", production_pictures_belong="
-			+ production_pictures_belong + ", production_pictures_sequence=" + production_pictures_sequence
-			+ ", production_pictures_creationtime=" + production_pictures_creationtime
-			+ ", production_pictures_modifytime=" + production_pictures_modifytime + ", production_pictures_isdelete="
-			+ production_pictures_isdelete + "]";
+	return "production_pictures [production_pictures_id=" + production_pictures_id + ", production_pictures_name="
+			+ production_pictures_name + ", production_pictures_belong=" + production_pictures_belong
+			+ ", production_pictures_sequence=" + production_pictures_sequence + ", production_pictures_creationtime="
+			+ production_pictures_creationtime + ", production_pictures_modifytime=" + production_pictures_modifytime
+			+ ", production_pictures_isdelete=" + production_pictures_isdelete + "]";
 }
 
 }

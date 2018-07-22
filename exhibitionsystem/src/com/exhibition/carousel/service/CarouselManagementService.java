@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.exhibition.carousel.DTO.CarouselDTO;
 import com.exhibition.carousel.DTO.CarouselManagementDTO;
+import com.exhibition.domain.carousel;
 
 /**
  * 轮播图管理的Service层接口
@@ -17,6 +18,10 @@ public interface CarouselManagementService {
 	 * @return
 	 */
 	public List<CarouselManagementDTO> querryCarousel();
+
+	public String deleteCarousel(String idList);
+
+	public String addCarousel(carousel carousel);
 
 	
 

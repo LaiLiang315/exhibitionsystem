@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.exhibition.domain.carousel;
 import com.exhibition.domain.production_info;
+import com.exhibition.domain.production_pictures;
 
 /**
  * 作品的Dao层
@@ -53,11 +54,15 @@ public interface ProductionManagementDao {
 	 * 获取对象列表
 	 */
 	public List<?> listObject(String hql);
-/**
- * 根据ID查询作品信息
- * @param trim
- * @return
- */
+
+	/**
+	 * 根据ID查询作品信息
+	 * 
+	 * @param trim
+	 * @return
+	 */
 	public List<production_info> getProductionInfoById(String trim);
+
+	public List<production_pictures> getPictureInfoById(String trim);
 
 }

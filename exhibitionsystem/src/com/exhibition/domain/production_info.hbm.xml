@@ -26,8 +26,8 @@
         <property name="production_info_modifytime" type="java.lang.String">
             <column name="production_info_modifytime" />
         </property>
-        <property name="production_type_isdelete" type="int">
-            <column name="production_type_isdelete" />
+        <property name="production_info_isdelete" type="int">
+            <column name="production_info_isdelete" />
         </property>
     </class>
 </hibernate-mapping>

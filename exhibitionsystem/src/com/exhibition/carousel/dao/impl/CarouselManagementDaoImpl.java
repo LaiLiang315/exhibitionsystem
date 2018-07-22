@@ -1,5 +1,6 @@
 package com.exhibition.carousel.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -107,7 +108,7 @@ public class CarouselManagementDaoImpl implements CarouselManagementDao {
 		return list;
 	}
 	/**
-	 * 根据id查询轮播图片
+	 * 根据id查询轮播图片集合
 	 * 
 	 */
 	@Override
@@ -119,6 +120,15 @@ public class CarouselManagementDaoImpl implements CarouselManagementDao {
 		List<carousel> carousel = (List<carousel>) query.list();
 		return carousel;
 	}
-	
+	@Override
+	public carousel getCarouselPictureById(String trim) {
+		carousel carousel = new carousel();
+		Session session = getSession();
+		String hql ="from carousel where carousel_isshow='1'and carousel_isdelete='0' and carousel_id = :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		carousel =(carousel) query.uniqueResult();
+		 return carousel;
+	}
 	
 }
