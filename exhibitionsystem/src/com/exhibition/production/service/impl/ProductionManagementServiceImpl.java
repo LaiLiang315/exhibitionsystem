@@ -310,7 +310,8 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		ProductionThreeFormDTO productionThreeFormDTO = new ProductionThreeFormDTO();
 		List<ProductionDTO> listProductionDTO;
 		List<production_pictures> listProduction_pictures;
-		listProductionDTO = productionManagementDao.getInfoAndTypeById(productionInfo.getProduction_info_id());
+		listProductionDTO = (List<ProductionDTO>) productionManagementDao.listObject(
+				"select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where production_info_type=production_type_id ");
 		System.out.println("MMMMMMM" + listProductionDTO);
 
 		if (!listProductionDTO.isEmpty()) {
@@ -328,6 +329,9 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		return productionThreeFormDTO;
 	}
 
+	/**
+	 * 批量删除
+	 */
 	@Override
 	public String deleteProduction(String idList) {
 		String result = null;

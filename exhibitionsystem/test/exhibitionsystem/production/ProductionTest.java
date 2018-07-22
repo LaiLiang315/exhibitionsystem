@@ -76,6 +76,7 @@ public class ProductionTest {
     	productionVO = productionManagementService.querryAllProduction(productionVO);
     	System.out.println("赖亮天天写bug"+productionVO);
     }
+    
     @Test
     public void ProductionThreeFormDTOTest() {
     	production_info productionInfo = new production_info();
