@@ -141,7 +141,7 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	}
 
 	/**
-	 * 根据Id查询图片
+	 * 根据Id查询图片集合
 	 */
 
 	@Override

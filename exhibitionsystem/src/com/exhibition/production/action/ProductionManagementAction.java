@@ -298,7 +298,12 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			Gson gson = gsonBuilder.create();
 			response.setContentType("text/html;charset=utf-8");
 			String prodctions = productionManagementService.deleteProduction(idList);
-			
+			try {
+				response.getWriter().write(gson.toJson(prodctions));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 }

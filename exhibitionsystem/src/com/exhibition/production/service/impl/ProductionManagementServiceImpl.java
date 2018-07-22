@@ -316,11 +316,11 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 
 		if (!listProductionDTO.isEmpty()) {
 			for (ProductionDTO productionDTO : listProductionDTO) {
-				ProductionDTO newProductionDTO = (ProductionDTO) productionManagementDao
+				List<production_pictures> pictures =  productionManagementDao
 						.getPictureInfoById(productionInfo.getProduction_info_id());
-				System.out.println("///////" + newProductionDTO);
-				if (newProductionDTO != null) {
-
+				System.out.println("///////" + pictures);
+				if (pictures != null) {
+					productionThreeFormDTO.setListPicture(pictures);
 					listProductionDTO.add(productionDTO);
 				}
 
