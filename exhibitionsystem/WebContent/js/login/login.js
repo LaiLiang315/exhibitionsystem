@@ -63,39 +63,4 @@ function logout(){
 	        }
 		});
 	});}
-var day=new Date().getDay();
-var x="";
-switch (day)
-{
-case 0:
-  x="星期天";
-  break;
-case 1:
-  x="星期一";
-  break;
-case 2:
-  x="星期二";
-  break;
-case 3:
-  x="星期三";
-  break;
-case 4:
-  x="星期四";
-  break;
-case 5:
-  x="星期五";
-  break;
-case 6:
-  x="星期六";
-  break;
-}
-var myDate=new Date();
-var hello=document.querySelector("#helloday");
-if(myDate>5&&myDate<12){
-	hello.innerHTML = x+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 早上好呀";
-}else if(myDate>12&&myDate<19){
-	hello.innerHTML = x+"  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下午茶时光~";
-}else{	
-	hello.innerHTML = x+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;晚上好~";
-}
 

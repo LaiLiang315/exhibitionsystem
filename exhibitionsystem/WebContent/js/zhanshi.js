@@ -1,6 +1,7 @@
 var marginleft=0;
 $(document).ready(function(){
 	getProductionTypeInfo();
+	show_scrolList();
 });
 // 首页查询分类信息
 function getProductionTypeInfo() {
@@ -86,7 +87,7 @@ function countwidth(){
 	},function(){
 		$(this).parent().stop(false,true).animate({"background-position-x":"10px",opacity:"1"},{duration:"normal", easing: "easeOutElastic"});
 	});
-	<!--- 首页 ---->
+/*<!--- 首页 ---->*/
 	$('.ad_img,#banner_ctr,#client').pngFix();
 	$(window).scroll(function(){
 		$(this).scrollTop()>80?$("#navbg").stop(false,true).animate({opacity:"1"},"normal"):$("#navbg").stop(false,true).animate({opacity:"0.8"},"normal");
@@ -130,39 +131,83 @@ function countwidth(){
 	}
 	// Banner End
 	// Cases Start
-	if($.support.transition){
-		$("#cases>ul>li").hover(function(){
-			$("img",this).stop(false,true).transition({
-				perspective: '300px',
-				rotateY: '180deg',
-				opacity: '0'
+	$("#cases>ul").hover(function(){
+		if($.support.transition){
+			$("#cases>ul>li").hover(function(){
+				$("img",this).stop(false,true).transition({
+					perspective: '300px',
+					rotateY: '180deg',
+					opacity: '0'
+				});
+				$("p",this).css({display:'block',opacity:'0',rotateY: '-180deg'}).stop(false,true).transition({
+					perspective: '300px',
+					rotateY: '0deg',
+					opacity: '1'
+				});
+			},function(){
+				$("img",this).show().stop(false,true).transition({
+					perspective: '300px',
+					rotateY: '0deg',
+					opacity: '1'
+				});
+				$("p",this).stop(false,true).transition({
+					perspective: '300px',
+					rotateY: '180deg',
+					opacity: '0'
+				});
 			});
-			$("p",this).css({display:'block',opacity:'0',rotateY: '-180deg'}).stop(false,true).transition({
-				perspective: '300px',
-				rotateY: '0deg',
-				opacity: '1'
+		}else{
+			$("#cases>ul>li").hover(function(){
+				$("img",this).stop(false,true).slideUp("fast");
+				$("p",this).stop(false,true).slideDown("fast");
+			},function(){
+				$("img",this).stop(false,true).slideDown("fast");
+				$("p",this).stop(false,true).slideUp("fast");
 			});
-		},function(){
-			$("img",this).show().stop(false,true).transition({
-				perspective: '300px',
-				rotateY: '0deg',
-				opacity: '1'
-			});
-			$("p",this).stop(false,true).transition({
-				perspective: '300px',
-				rotateY: '180deg',
-				opacity: '0'
-			});
-		});
-	}else{
-		$("#cases>ul>li").hover(function(){
-			$("img",this).stop(false,true).slideUp("fast");
-			$("p",this).stop(false,true).slideDown("fast");
-		},function(){
-			$("img",this).stop(false,true).slideDown("fast");
-			$("p",this).stop(false,true).slideUp("fast");
-		});
-	}
+		}
+	})
 	$("#cases>ul>li>img").lazyload({effect:"fadeIn",failurelimit:10});
 						$("#gotop").click(function(){$('body,html').animate({scrollTop:0},500);})
+
+
+//展示分类作品信息
+function show_scrolList(iquery_data) {
+	console.log("执66666666666666行");						
+	var showAll=0;
+	$.ajax({
+		url : "/exhibitionsystem/productionManagement/productionManagement_showPicturesVO",		//数据传输的目的地址，将在这里对前台数据进行操作
+		type : "post",
+		data : showAll,				//这里是前台传到后台的数据
+		success : function(result) {
+			if(result.success=true){
+				console.log("result"+result);
+				// 显示article信息列表
+				var card_table_info =  document.querySelector("#productionList");		//获取文档元素
+				card_table_info.innerHTML;
+				var str = "";
+				
+				// 遍历json集合
+				for (var i = 0; i < result.length; i++) {
+					// 得到每条数据
+			
+					var object = result[i].get[0];
+					console.log("object=="+object.production_info_name);
+					// 得到各条数据的某个信息
+					// 得到各条数据的某个信息
+					str+= ''
+					// 遍历是把article_id的值传给checkbox的value(为后期的批量删除)
+					str+= '<li><img src="/lx/upload/upload_IoReadImage?uploadFileName='+object.production_info_name+'"   width="240" height="152" alt="成都城市设计研究中心"/>'+
+					      '<p> <strong>成都城市设计研究中心</strong>成都市城市设计研究中心（英文缩写：CDUDC）是以城市设计和研究为主要方向的研究性机构，提....<br/>'+
+					        '<a href="case/gov/22.html"  class="btn_blue">查看品牌故事</a>'+
+					      '</p>'+
+					    '</li>';
+				
+				card_table_info.innerHTML = str;
+				console.log("传值成功!!");
+				}}else{
+				console.log("传值失败");
+			}	
+		}
+	});
+}
 	
