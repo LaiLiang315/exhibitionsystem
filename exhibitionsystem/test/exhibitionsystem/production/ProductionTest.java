@@ -16,6 +16,8 @@ import com.exhibition.production.service.ProductionManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import util.BuildMd5;
+
 /**
  * 作品信息测试类
  * @author LL
@@ -58,5 +60,15 @@ public class ProductionTest {
 		System.out.println("DDDDDD"+listProductionInfoDTO);
 		
 	}
-
+	@Test
+	public void Md5Test() {
+		String pwd ="111111";
+		BuildMd5 MD5 =new BuildMd5();
+		System.out.println(MD5.getMD5Code(pwd));;
+	}
+    @Test
+    public void querryAllProductionTest() {
+    	ProductionVO productionVO = new ProductionVO();
+    	productionVO = productionManagementService.querryAllProduction(productionVO);
+    }
 }

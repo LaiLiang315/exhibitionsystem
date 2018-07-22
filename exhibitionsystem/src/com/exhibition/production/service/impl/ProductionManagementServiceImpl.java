@@ -146,23 +146,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 
 					} else {
 						return null;
-
 					}
-					// 模糊查询显示高亮
-					if (productionVO.getSearch() != null && productionVO.getSearch().trim().length() > 0) {
-						/*
-						 * production_info.setProduction_info_name(production_info.
-						 * getProduction_info_name().replaceAll(productionVO.getSearch(),
-						 * "<span style='color: #ff5063;'> " + productionVO.getSearch() + "</span>"));
-						 */
-						/*
-						 * unit.setUnit_address(unit.getUnit_address().replaceAll(productionVO.getSearch
-						 * (), "<span style='color: #ff5063;'>" + productionVO.getSearch() +
-						 * "</span>"));
-						 */
-
-					}
-
 				}
 
 				listProductionDTO.add(productionDTO);
@@ -178,7 +162,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 			List<production_type> listproductiontype = (List<production_type>) productionManagementDao.queryForPage(
 					"from production_type where production_type_isdelete='0' order by production_type_modifytime desc",
 					productionVO.getPageIndex(), productionVO.getPageSize());
-			System.out.println("DDDDDDD"+listproductiontype);
+			System.out.println("DDDDDDD" + listproductiontype);
 			// 遍历类型表
 			for (production_type production_type : listproductiontype) {
 				System.out.println("qzdsdwqda");
@@ -198,7 +182,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					}
 				}
 				listProductionDTO.add(productionDTO);
-				System.out.println("123123234"+listProductionDTO);
+				System.out.println("123123234" + listProductionDTO);
 			}
 		} else {
 			return null;
@@ -248,8 +232,65 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 
 	@Override
 	public ProductionVO querryAllProduction(ProductionVO productionVO) {
+		// 实例化List<ProductionDTO>
+		List<ProductionDTO> listProductionDTO = new ArrayList<>();
+		// 实例化ProductionDTO
+		ProductionDTO productionDTO;
+		// 实例化List<production_info>
+		List<production_info> listInfo;
+		String listProductionHql = "";
+		String productionCountHql = "";
+		listProductionHql = "select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where 1=1";
+		productionCountHql = "select count(*) from production_info where 1=1";
+		/**
+		 * 根据作者和作品名模糊查询
+		 */
+		if (productionVO.getSearch() != null && productionVO.getSearch().trim().length() > 0) {
+			String search = "%" + productionVO.getSearch().trim() + "%";
+			productionCountHql = productionCountHql + " and (production_info_name like '" + search + "'";
+			listProductionHql = listProductionHql + " and (info.production_info_name like '" + search + "'";
+			productionCountHql = productionCountHql + " or production_info_author like '" + search + "')";
+			listProductionHql = listProductionHql + " or info.production_info_author like '" + search + "')";
+			System.out.println("+++++++++");
+		}
+		/**
+		 * 根据Type查询
+		 */
+		if (productionVO.getType() != null && productionVO.getType().trim().length() > 0) {
+			System.out.println("KKKKKAAAA");
+			productionCountHql = productionCountHql + " and production_info_type = '" + productionVO.getType().trim()
+					+ "'";
+			System.out.println("YYYYYYDDDDD" + productionCountHql);
+			listProductionHql = listProductionHql + " and production_info_type = '" + productionVO.getType().trim()
+					+ "'";
+			System.out.println("ZZZZZEEEEE" + listProductionHql);
+
+		}
+		listInfo = (List<production_info>) productionManagementDao.queryForPage(listProductionHql,
+				productionVO.getPageIndex(), productionVO.getPageSize());
 		
-		
-		return null;
+		System.out.println("+++___________________"+listInfo);
+		// 这里如果不加desc表示正序，如果加上desc表示倒序
+		productionCountHql = productionCountHql + " order by production_info_creationtime desc";
+		int productionCount = productionManagementDao.getCount(productionCountHql);
+		// 设置总数量
+		productionVO.setTotalRecords(productionCount);
+		// 设置总页数
+		productionVO.setTotalPages(((productionCount - 1) / productionVO.getPageSize()) + 1);
+		// 判断是否拥有上一页
+		if (productionVO.getPageIndex() <= 1) {
+			productionVO.setHavePrePage(false);
+		} else {
+			productionVO.setHavePrePage(true);
+		}
+		// 判断是否拥有下一页
+		if (productionVO.getPageIndex() >= productionVO.getTotalPages()) {
+
+			productionVO.setHaveNextPage(false);
+		} else {
+			productionVO.setHaveNextPage(true);
+		}
+		productionVO.setListProductionDTO(listProductionDTO);
+		return productionVO;
 	}
 }

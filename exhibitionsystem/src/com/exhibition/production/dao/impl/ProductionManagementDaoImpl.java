@@ -63,6 +63,7 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	@Override
 	public List<?> queryForPage(String hql, int offset, int length) {
 		Session session = getSession();
+		System.out.println("执行的hql:"+hql);
 		Query query = session.createQuery(hql);
 		query.setFirstResult((offset - 1) * length);
 		query.setMaxResults(length);

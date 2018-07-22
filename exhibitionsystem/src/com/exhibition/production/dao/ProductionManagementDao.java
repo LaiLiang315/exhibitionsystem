@@ -62,7 +62,11 @@ public interface ProductionManagementDao {
 	 * @return
 	 */
 	public List<production_info> getProductionInfoById(String trim);
-
+/**
+ * 
+ * @param trim
+ * @return
+ */
 	public List<production_pictures> getPictureInfoById(String trim);
 
 	public List<production_info> getProductionsInfoById(String trim);
