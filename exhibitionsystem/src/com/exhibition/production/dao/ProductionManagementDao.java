@@ -63,12 +63,16 @@ public interface ProductionManagementDao {
 	 */
 	public List<production_info> getProductionInfoById(String trim);
 /**
- * 
+ * 根据id查图集
  * @param trim
  * @return
  */
 	public List<production_pictures> getPictureInfoById(String trim);
-
+/**
+ * 根据id查信息
+ * @param trim
+ * @return
+ */
 	public List<production_info> getProductionsInfoById(String trim);
 
 }
