@@ -25,8 +25,9 @@ function putProductionTypeInfo(listCarouselDTO){
 	var strStart='<li class="first-item">网站建设</li>';// 定义第一个li
 	var strOver='<li class="last-item">网站设计</li>';// 定义最后一个li
 	var typeInfo= document.querySelector("#li-list");// 定位放入的位置
+	var length = listCarouselDTO.length;
 	// 遍历result
-	for(var i=0;i<listCarouselDTO.length;i++){
+	for(var i=0;i<length;i++){
 		var logo = listCarouselDTO[i].type.production_type_logo;// 获取logo
 		var typename = listCarouselDTO[i].type.production_type_name;// 获取分类名称
 		str=str+'<li style="background-image: url('+logo+');">'+typename+'</li>';// 生成中间层菜单
@@ -40,8 +41,9 @@ function putCarouselInfo(listCarouselDTO){
 	var str="";// 初始化li
 	var typeInfo= document.querySelector("#banner_img");// 定位放入的位置
 	var display = "";// 标签显示
+	var length=listCarouselDTO.length;
 	// 遍历result
-	for(var i=0;i<listCarouselDTO.length;i++){
+	for(var i=0;i<length;i++){
 		// 判断该分类是否有轮播图
 		if(listCarouselDTO[i].listcarouselpicture.length>0){
 			if(i==0){

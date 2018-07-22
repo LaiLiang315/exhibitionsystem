@@ -154,6 +154,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	 * 页面显示VO
 	 */
 	public void showPicturesVO() {
+		System.out.println("showAll"+showAll);
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
