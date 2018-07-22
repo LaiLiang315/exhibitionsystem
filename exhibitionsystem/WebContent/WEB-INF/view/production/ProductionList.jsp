@@ -12,6 +12,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/toastr.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/production/list.css" media="all" />
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
@@ -75,5 +76,6 @@
 			<p class='page-infomation'></p>					
 	</div>
 	<div id="page"></div>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/toastr.js"></script>
 </body>
 </html>
