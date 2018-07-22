@@ -33,7 +33,7 @@
 		</div>
 		<div class="layui-inline">
 			  <div class="layui-input-inline">
-		    	<input type="text" value="" id="searchInfo" placeholder="请输入关键字" class="layui-input search_input">
+		    	<input type="text" value="" id="searchInfo" placeholder="请输入关键字" class="layui-input search_input" oninput="getProductionInfo()">
 		 	  </div>
 		<a class="layui-btn search_btn">查询</a>
 	</div>
@@ -71,7 +71,7 @@
    	 			<button class="layui-btn" onclick="nextPage()"><i class="layui-icon"></i></button>
 				<button class="layui-btn" onclick="lastPage()">尾页<i
 					class="fa fa-angle-double-right"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="text" class="layui-input-inline"  id="go_input"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="text" class="layui-input-xjc" id="go_input"/>&nbsp;&nbsp;&nbsp;&nbsp;
 				<button class="layui-btn" onclick="goPage()">GO</button>	</div>
 			<p class='page-infomation'></p>					
 	</div>
