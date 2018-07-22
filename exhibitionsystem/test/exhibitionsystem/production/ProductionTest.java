@@ -69,6 +69,10 @@ public class ProductionTest {
     @Test
     public void querryAllProductionTest() {
     	ProductionVO productionVO = new ProductionVO();
+    	String search = "";
+    	productionVO.setSearch(search);
+    	productionVO.setPageIndex(1);
     	productionVO = productionManagementService.querryAllProduction(productionVO);
+    	System.out.println("赖亮天天写bug"+productionVO);
     }
 }

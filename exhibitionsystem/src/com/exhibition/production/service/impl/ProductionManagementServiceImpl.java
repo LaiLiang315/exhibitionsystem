@@ -236,11 +236,9 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		List<ProductionDTO> listProductionDTO = new ArrayList<>();
 		// 实例化ProductionDTO
 		ProductionDTO productionDTO;
-		// 实例化List<production_info>
-		List<production_info> listInfo;
 		String listProductionHql = "";
 		String productionCountHql = "";
-		listProductionHql = "select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where 1=1";
+		listProductionHql = "select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where production_info_type=production_type_id";
 		productionCountHql = "select count(*) from production_info where 1=1";
 		/**
 		 * 根据作者和作品名模糊查询
@@ -266,10 +264,10 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 			System.out.println("ZZZZZEEEEE" + listProductionHql);
 
 		}
-		listInfo = (List<production_info>) productionManagementDao.queryForPage(listProductionHql,
+		listProductionDTO = (List<ProductionDTO>) productionManagementDao.queryForPage(listProductionHql,
 				productionVO.getPageIndex(), productionVO.getPageSize());
 		
-		System.out.println("+++___________________"+listInfo);
+		System.out.println("+++___________________"+listProductionDTO);
 		// 这里如果不加desc表示正序，如果加上desc表示倒序
 		productionCountHql = productionCountHql + " order by production_info_creationtime desc";
 		int productionCount = productionManagementDao.getCount(productionCountHql);
