@@ -62,9 +62,32 @@ function getProductionInfoByType(){
 	    }
 	})
 }
-//删除作品
-function deleteProduction(){
-	
+//删除单个作品
+function deleteProduction(object_i){
+		layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
+			var productionId=$(object_i).attr('data_id');//定义id
+			var formData = new FormData;
+			formData.append("idList", "productionId");
+			//var arid=JSON.parse(ar);		//转换成json对象
+				$.ajax({
+					url:'/exhibitionsystem/productionManagement/productionManagement_deleteProduction',
+					type:"post",
+					data :formData,
+					//报错请加入以下三行，则ajax提交无问题
+			        cache: false,  
+			        processData: false,  
+			        contentType: false,
+					success:function(result){
+						if(result=="delete_success"){
+							toastr.success("文章删除成功了哦!");
+							setTimeout(function(){
+								location.href="/lx/skip/skip_intoArticlelist";
+							},1000);
+						}else{
+							toastr.error("删除失败!");
+						}}
+				});
+			})
 }
 //点击帅选触发事件
 layui.use('form', function(){
@@ -121,7 +144,7 @@ function putProductionByType(productionVO){
 							'<td style="text-align:center;">'+productions[i].type.production_type_name+'</td>'+
 							'<td style="text-align:center;">'+
 								'<a class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 编辑</a>'+
-								'<a class="layui-btn layui-btn-danger layui-btn-mini news_del" onclick="article_delete(this)" data_id="'+infoList[j].production_info_id+ '" ><i class="layui-icon">&#xe640;</i> 删除</a>'+
+								'<a class="layui-btn layui-btn-danger layui-btn-mini news_del" onclick="deleteProduction(this)" data_id="'+infoList[j].production_info_id+ '" ><i class="layui-icon">&#xe640;</i> 删除</a>'+
 							'</td>'+
 						'</tr>';
 			}
@@ -176,7 +199,7 @@ function putProductionInfo(productionVO){
 						'<td style="text-align:center;">'+productions[j].type.production_type_name+'</td>'+
 						'<td style="text-align:center;">'+
 							'<a class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 编辑</a>'+
-							'<a class="layui-btn layui-btn-danger layui-btn-mini news_del" onclick="article_delete(this)" data_id="'+productions[j].info.production_info_id+ '" ><i class="layui-icon">&#xe640;</i> 删除</a>'+
+							'<a class="layui-btn layui-btn-danger layui-btn-mini news_del" onclick="deleteProduction(this)" data_id="'+productions[j].info.production_info_id+ '" ><i class="layui-icon">&#xe640;</i> 删除</a>'+
 						'</td>'+
 					'</tr>';
 		}
