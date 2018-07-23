@@ -6,6 +6,7 @@ import java.util.List;
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
 import com.exhibition.domain.production_type;
+import com.exhibition.production.DTO.PictureInfoDTO;
 import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.DTO.ProductionThreeFormDTO;
@@ -15,6 +16,7 @@ import com.exhibition.production.service.ProductionManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import util.BuildUuid;
 import util.TimeUtil;
 
 /**
@@ -144,7 +146,19 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					 * 查询每个类型的作品的集合
 					 */
 					listInfo = productionManagementDao.getProductionInfoById(production_type.getProduction_type_id());
-					if (listInfo != null) {
+					
+					
+					if (!listInfo.isEmpty()) {
+						for (production_info info : listInfo) {
+							PictureInfoDTO pictureInfoDTO = new PictureInfoDTO();
+							production_pictures firstPicure = new production_pictures();
+							firstPicure = (production_pictures) productionManagementDao.getFistPictureById(info.getProduction_info_id());
+							if(firstPicure!=null) {
+								pictureInfoDTO.setPropicture(firstPicure);
+								pictureInfoDTO.setProinfo(info);
+							}
+							
+						}
 						productionDTO.setListInfo(listInfo);
 						productionDTO.setType(production_type);
 						System.out.println("zzzzzz" + productionDTO);
@@ -154,6 +168,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					}
 				}
 				listProductionDTO.add(productionDTO);
+				
 			}
 			/**
 			 * 分页获取单位列表
@@ -295,11 +310,40 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		productionVO.setListProductionDTO(listProductionDTO);
 		return productionVO;
 	}
-
+/**
+ * 添加作品
+ */
 	@Override
-	public String addProduction(production_info productionInfo) {
-		// TODO Auto-generated method stub
-		return null;
+	public String addProduction(production_info productionInfo,List<production_pictures> production_pictures) {
+		String id = BuildUuid.getUuid();
+		String result = null;
+		if(productionInfo!=null) {
+			production_info production = new production_info();
+			production.setProduction_info_id(id);
+			production.setProduction_info_name(productionInfo.getProduction_info_name());
+			production.setProduction_info_author(productionInfo.getProduction_info_author());
+			production.setProduction_info_discription(productionInfo.getProduction_info_discription());
+			production.setProduction_info_type(productionInfo.getProduction_info_type());
+			production.setProduction_info_creationtime(TimeUtil.getStringSecond());
+			production.setProduction_info_isdelete(0);
+			productionManagementDao.saveOrUpdateObject(production);
+			result = "addSuccess";
+		}else {
+			result = "addFailed";
+		}
+		if(!production_pictures.isEmpty()) {
+			for(production_pictures pic:production_pictures) {
+				pic.setProduction_pictures_id(BuildUuid.getUuid());
+				pic.setProduction_pictures_belong(id);
+				pic.setProduction_pictures_creationtime(TimeUtil.getStringSecond());
+				pic.setProduction_pictures_isdelete(0);
+				productionManagementDao.saveOrUpdateObject(pic);
+			}
+			result = "addSuccess";
+		}else {
+			result = "addFailed";
+		}
+		return result;
 	}
 
 	/**
@@ -361,6 +405,32 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 			}
 		} else {
 			result = "error";
+		}
+		return result;
+	}
+/**
+ * 更改作品信息
+ * 更改成功 "success"
+ * 更改失败 "fail"
+ */
+	@Override
+	public String updateProdction(production_info productionInfo) {
+		String result = null;
+		production_info info = new production_info();
+		if(productionInfo.getProduction_info_id()!=null&&productionInfo.getProduction_info_id().trim().length()>0) {
+			
+			info = productionManagementDao.getInfoById(productionInfo.getProduction_info_id());
+		if(info!=null) {
+			info.setProduction_info_name(productionInfo.getProduction_info_name());
+			info.setProduction_info_author(productionInfo.getProduction_info_author());
+			info.setProduction_info_discription(productionInfo.getProduction_info_discription());
+			info.setProduction_info_type(productionInfo.getProduction_info_type());
+			info.setProduction_info_modifytime(TimeUtil.getStringSecond());
+			productionManagementDao.saveOrUpdateObject(info);
+			result = "success";
+		}else {
+			result = "fail";
+		}
 		}
 		return result;
 	}
