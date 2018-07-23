@@ -1,6 +1,8 @@
 var marginleft=0;
+var currentType=0;
 $(document).ready(function(){
 	getProductionTypeInfo();
+	show_scrolList(currentType);
 });
 
 // 首页查询分类信息
@@ -47,7 +49,7 @@ function putCarouselInfo(listCarouselDTO){
 	for(var i=0;i<length;i++){
 		// 判断该分类是否有轮播图
 		if(listCarouselDTO[i].listcarouselpicture.length>0){
-			if(i==0){
+			if(i==0){									
 				str=str+'<li style="background-image:url('+listCarouselDTO[i].listcarouselpicture[0].carousel_picture+'); display:block;">';}
 			else{
 				str=str+'<li style="background-image:url('+listCarouselDTO[i].listcarouselpicture[0].carousel_picture+'); display:none;">';
@@ -118,6 +120,7 @@ function countwidth(){
 		$.easing.def="easeOutQuad";
 		$("#drag_ctr,#drag_arrow").stop(false,true).animate({left:index*115+marginleft+20},300);
 		console.log(index+"index")
+		currentType = index;
 		var lis = document.getElementById("li-list").getElementsByTagName("li");
 		$("#banner_img>li").eq(curIndex).stop(false,true).fadeOut(time);
 		adTxt.eq(curIndex).stop(false,true).animate({top:"340px"},time);
@@ -129,7 +132,7 @@ function countwidth(){
 			adImg.eq(index).css({right:"-50px",opacity:"0"}).stop(false,true).animate({right:"10px",opacity:"1"},time);
 		},200)
 		curIndex=index;
-		show_scrolList();
+		show_scrolList(currentType);
 	}
 	// Banner End
 	// Cases Start
@@ -173,10 +176,10 @@ function countwidth(){
 
 
 //展示分类作品信息
-function show_scrolList(iquery_data) {
+function show_scrolList(currentType) {
 	console.log("执66666666666666行");						
 	var formData = new FormData();
-	formData.append("showAll",1);
+	formData.append("showAll",0);
 	$.ajax({
 		url : "/exhibitionsystem/productionManagement/productionManagement_showPicturesVO",		//数据传输的目的地址，将在这里对前台数据进行操作
 		type : "post",
@@ -192,12 +195,11 @@ function show_scrolList(iquery_data) {
 				var card_table_info =  document.querySelector("#productionList");		//获取文档元素
 				card_table_info.innerHTML;
 				var str = "";
-				
 				// 遍历json集合
-				for (var i = 0; i < vo.listProductionDTO[1].listInfo.length; i++) {
+				for (var i = 0; i < vo.listProductionDTO[currentType].listInfo.length; i++) {
 					// 得到每条数据
 			
-					var object = vo.listProductionDTO[1].listInfo[i];//DTO[0,1,2]分别为类型1,2,3的图片集合
+					var object = vo.listProductionDTO[currentType].listInfo[i];//DTO[0,1,2]分别为类型1,2,3的图片集合
 					// 得到各条数据的某个信息
 					// 得到各条数据的某个信息
 					str+= ''
