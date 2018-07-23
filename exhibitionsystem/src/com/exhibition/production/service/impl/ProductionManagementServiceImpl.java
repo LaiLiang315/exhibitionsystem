@@ -333,7 +333,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 			production.setProduction_info_author(productionInfo.getProduction_info_author());
 			production.setProduction_info_discription(productionInfo.getProduction_info_discription());
 			production.setProduction_info_type(productionInfo.getProduction_info_type());
-			production.setProduction_info_creationtime(TimeUtil.getStringSecond());
+			production.setProduction_info_creationtime(productionInfo.getProduction_info_creationtime());
 			production.setProduction_info_isdelete(0);
 			productionManagementDao.saveOrUpdateObject(production);
 			result = "addSuccess";

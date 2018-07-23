@@ -2,6 +2,9 @@ package com.exhibition.productiontype.dao;
 
 import java.util.List;
 
+import com.exhibition.domain.carousel;
+import com.exhibition.domain.production_type;
+
 /**
  * 作品类型管理的Dao层
  * @author LL
@@ -51,6 +54,8 @@ public interface ProductionTypeDao {
 	 * 获取对象列表
 	 */
 	public List<?> listObject(String hql);
+
+	public production_type getTypeById(String id);
 
 
 }

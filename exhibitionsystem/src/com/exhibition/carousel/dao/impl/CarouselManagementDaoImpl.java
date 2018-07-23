@@ -127,7 +127,7 @@ public class CarouselManagementDaoImpl implements CarouselManagementDao {
 	public carousel getCarouselPictureById(String trim) {
 		carousel carousel = new carousel();
 		Session session = getSession();
-		String hql ="from carousel where carousel_isshow='1'and carousel_isdelete='0' and carousel_id = :ID";
+		String hql ="from carousel where carousel_isshow='1'and carousel_isdelete='0' and carousel_id= :ID";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		carousel =(carousel) query.uniqueResult();

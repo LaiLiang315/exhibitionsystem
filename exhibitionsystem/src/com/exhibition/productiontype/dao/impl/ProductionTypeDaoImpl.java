@@ -6,6 +6,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.exhibition.domain.carousel;
+import com.exhibition.domain.production_type;
 import com.exhibition.productiontype.dao.ProductionTypeDao;
 
 /**
@@ -109,6 +111,17 @@ public class ProductionTypeDaoImpl implements ProductionTypeDao {
 		List<?> list = query.list();
 		session.clear();
 		return list;
+	}
+
+	@Override
+	public production_type getTypeById( String trim) {
+		production_type type = new production_type();
+		Session session = getSession();
+		String hql ="from carousel where production_type_isdelete='0' and production_type_id= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		type =(production_type) query.uniqueResult();
+		 return type;
 	}
 
 }
