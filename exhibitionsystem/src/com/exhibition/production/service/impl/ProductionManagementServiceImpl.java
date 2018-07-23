@@ -8,9 +8,14 @@ import com.exhibition.domain.production_pictures;
 import com.exhibition.domain.production_type;
 import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
+import com.exhibition.production.DTO.ProductionThreeFormDTO;
 import com.exhibition.production.VO.ProductionVO;
 import com.exhibition.production.dao.ProductionManagementDao;
 import com.exhibition.production.service.ProductionManagementService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import util.TimeUtil;
 
 /**
  * 作品的Service层实现层
@@ -148,7 +153,6 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 						return null;
 					}
 				}
-
 				listProductionDTO.add(productionDTO);
 			}
 			/**
@@ -238,7 +242,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		ProductionDTO productionDTO;
 		String listProductionHql = "";
 		String productionCountHql = "";
-		listProductionHql = "select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where production_info_type=production_type_id";
+		listProductionHql = "select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where production_info_isdelete='0' and production_info_type=production_type_id";
 		productionCountHql = "select count(*) from production_info where 1=1";
 		/**
 		 * 根据作者和作品名模糊查询
@@ -266,8 +270,8 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		}
 		listProductionDTO = (List<ProductionDTO>) productionManagementDao.queryForPage(listProductionHql,
 				productionVO.getPageIndex(), productionVO.getPageSize());
-		
-		System.out.println("+++___________________"+listProductionDTO);
+
+		System.out.println("+++___________________" + listProductionDTO);
 		// 这里如果不加desc表示正序，如果加上desc表示倒序
 		productionCountHql = productionCountHql + " order by production_info_creationtime desc";
 		int productionCount = productionManagementDao.getCount(productionCountHql);
@@ -290,5 +294,74 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		}
 		productionVO.setListProductionDTO(listProductionDTO);
 		return productionVO;
+	}
+
+	@Override
+	public String addProduction(production_info productionInfo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * 查询条信息（图集，类型，信息）
+	 */
+
+	@Override
+	public ProductionThreeFormDTO querryOneProduction(production_info productionInfo) {
+		ProductionThreeFormDTO productionThreeFormDTO = new ProductionThreeFormDTO();
+		ProductionDTO productionDTO;
+		List<production_pictures> listPictures;
+		productionDTO =  productionManagementDao.getOnePrductionInfo(productionInfo.getProduction_info_id());
+		System.out.println("MMMMMMM" + productionDTO);
+
+		
+		
+		if (productionDTO!=null) {
+				List<production_pictures> pictures =  productionManagementDao
+						.getPictureInfoById(productionInfo.getProduction_info_id());
+				System.out.println("///////" + pictures);
+				if (pictures != null) {
+					productionThreeFormDTO.setListPicture(pictures);
+					productionThreeFormDTO.setProductionDTO(productionDTO);
+					
+					GsonBuilder gsonBuilder = new GsonBuilder();
+				 		gsonBuilder.setPrettyPrinting();// 格式化json数据
+				 		Gson gson = gsonBuilder.create();
+					System.out.println("*********"+gson.toJson(productionThreeFormDTO));
+				}
+
+		}
+		
+		return productionThreeFormDTO;
+		
+	}
+
+	/**
+	 * 批量删除
+	 */
+	@Override
+	public String deleteProduction(String idList) {
+		String result = null;
+		if (idList != null && idList.trim().length() > 0) {
+			/**
+			 * 将多个对象id去掉分隔符转化为数组
+			 */
+			String[] deleteIdList = idList.split(",");
+			for (String id : deleteIdList) {
+				production_info productionInfo = new production_info();
+				productionInfo = productionManagementDao.getInfoById(id);
+				if (productionInfo != null) {
+					productionInfo.setProduction_info_isdelete(1);
+					productionInfo.setProduction_info_modifytime(TimeUtil.getStringSecond());
+					productionManagementDao.saveOrUpdateObject(productionInfo);
+					result = "deleteSuccess";
+				} else {
+					result = "error";
+				}
+			}
+		} else {
+			result = "error";
+		}
+		return result;
 	}
 }

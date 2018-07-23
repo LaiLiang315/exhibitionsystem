@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.exhibition.domain.production_info;
 import com.exhibition.production.DTO.ProductionInfoDTO;
+import com.exhibition.production.DTO.ProductionThreeFormDTO;
 import com.exhibition.production.VO.ProductionVO;
 import com.exhibition.production.service.ProductionManagementService;
 import com.google.gson.Gson;
@@ -74,5 +75,19 @@ public class ProductionTest {
     	productionVO.setPageIndex(1);
     	productionVO = productionManagementService.querryAllProduction(productionVO);
     	System.out.println("赖亮天天写bug"+productionVO);
+    }
+    
+    @Test
+    public void ProductionThreeFormDTOTest() {
+    	ProductionThreeFormDTO productionThreeFormDTO = new ProductionThreeFormDTO();
+    	production_info productionInfo = new production_info();
+    	productionInfo.setProduction_info_id("A001");
+    	productionThreeFormDTO = productionManagementService.querryOneProduction(productionInfo);
+    	 GsonBuilder gsonBuilder = new GsonBuilder();
+ 		gsonBuilder.setPrettyPrinting();// 格式化json数据
+ 		Gson gson = gsonBuilder.create();
+    	System.out.println("????????>>><><><"+gson.toJson(productionThreeFormDTO));
+    	
+    	
     }
 }

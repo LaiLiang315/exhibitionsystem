@@ -1,5 +1,6 @@
 package com.exhibition.production.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -9,6 +10,8 @@ import org.hibernate.SessionFactory;
 import com.exhibition.domain.carousel;
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
+import com.exhibition.production.DTO.ProductionDTO;
+import com.exhibition.production.DTO.ProductionThreeFormDTO;
 import com.exhibition.production.dao.ProductionManagementDao;
 
 /**
@@ -63,7 +66,7 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	@Override
 	public List<?> queryForPage(String hql, int offset, int length) {
 		Session session = getSession();
-		System.out.println("执行的hql:"+hql);
+		System.out.println("执行的hql:" + hql);
 		Query query = session.createQuery(hql);
 		query.setFirstResult((offset - 1) * length);
 		query.setMaxResults(length);
@@ -118,11 +121,12 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	public List<production_info> getProductionInfoById(String trim) {
 		Session session = getSession();
 		String hql = "from production_info where production_info_isdelete ='0' and production_info_type= :ID";
-		Query query = session.createQuery(hql).setMaxResults(6);
+		Query query = session.createQuery(hql).setMaxResults(10);
 		query.setParameter("ID", trim);
 		List<production_info> productionInfo = (List<production_info>) query.list();
 		return productionInfo;
 	}
+
 	/**
 	 * 根据id查询所有作品前十条
 	 */
@@ -135,11 +139,11 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 		List<production_info> productionInfo = (List<production_info>) query.list();
 		return productionInfo;
 	}
-	
+
 	/**
-	 * 根据Id查询图片信息
+	 * 根据Id查询图片集合
 	 */
-	
+
 	@Override
 	public List<production_pictures> getPictureInfoById(String trim) {
 		Session session = getSession();
@@ -148,5 +152,65 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 		query.setParameter("ID", trim);
 		List<production_pictures> listPicture = (List<production_pictures>) query.list();
 		return listPicture;
+	}
+
+    /**
+     * 根据id查询作品信息和类型
+     * @param trim 
+     */
+	@Override
+	public List<ProductionDTO> getInfoAndTypeById(String trim) {
+		Session session = getSession();
+		String hql = "select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where production_info_type=production_type_id and production_info_id= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		List<ProductionDTO> listProductionDTO = (List<ProductionDTO>) query.list();
+		return listProductionDTO;
+	}
+	
+	/**
+	 * 根据id查询单个作品信息
+	 * @param trim 
+	 */
+	@Override
+	public ProductionDTO getOnePrductionInfo(String trim) {
+		ProductionDTO productionDTO = new ProductionDTO();
+		Session session = getSession();
+		String hql = "select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where production_info_isdelete='0' and production_info_type=production_type_id and production_info_id= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		productionDTO = (ProductionDTO) query.uniqueResult(); 
+		return productionDTO;
+
+	}
+	/**
+	 * 根据信息id查询图集
+	 * @param trim 
+	 */
+	@Override
+	public List<production_pictures> getPicturesById(String trim){
+		List<production_pictures> listPictures = new ArrayList<>();
+		Session session = getSession();
+		String hql = "from production_pictures where production_info_id= :ID order by production_pictures_sequence ";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		listPictures = query.list();
+		return listPictures;
+		
+		
+	}
+	
+	/**
+	 * 根据id查询作品信息
+	 */
+	@Override
+	public production_info getInfoById(String trim) {
+		production_info productionInfo = new production_info();
+		Session session = getSession();
+		String hql ="from production_info where  production_info_isdelete='0' and production_info_id = :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		productionInfo =(production_info) query.uniqueResult();
+		 return productionInfo;
 	}
 }

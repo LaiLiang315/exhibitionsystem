@@ -13,8 +13,10 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.exhibition.domain.production_info;
 import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
+import com.exhibition.production.DTO.ProductionThreeFormDTO;
 import com.exhibition.production.VO.ProductionVO;
 import com.exhibition.production.service.ProductionManagementService;
 import com.google.gson.Gson;
@@ -59,7 +61,14 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	 * @return
 	 */
    private String uploadFileName;
+   /**
+    * 作品信息
+    */
+   private production_info productionInfo;
    
+   private String idList;
+   
+   private ProductionThreeFormDTO productionThreeFormDTO;
 	public HttpServletResponse getResponse() {
 		return response;
 	}
@@ -128,6 +137,26 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 
 	public void setUploadFileName(String uploadFileName) {
 		this.uploadFileName = uploadFileName;
+	}
+
+	public void setProductionInfo(production_info productionInfo) {
+		this.productionInfo = productionInfo;
+	}
+
+	public String getIdList() {
+		return idList;
+	}
+
+	public void setIdList(String idList) {
+		this.idList = idList;
+	}
+
+	public ProductionThreeFormDTO getProductionThreeFormDTO() {
+		return productionThreeFormDTO;
+	}
+
+	public void setProductionThreeFormDTO(ProductionThreeFormDTO productionThreeFormDTO) {
+		this.productionThreeFormDTO = productionThreeFormDTO;
 	}
 
 	/**
@@ -216,16 +245,6 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			}
 		}
 		/**
-		 * 添加作品
-		 */
-		public void addProduction() {
-			GsonBuilder gsonBuilder = new GsonBuilder();
-			gsonBuilder.setPrettyPrinting();// 格式化json数据
-			Gson gson = gsonBuilder.create();
-			response.setContentType("text/html;charset=utf-8");
-			
-		}
-		/**
 		 * 分页显示所有作品
 		 */
 		public void querryAllProduction() {
@@ -239,6 +258,48 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			productionVO = productionManagementService.querryAllProduction(productionVO);
 			try {
 				response.getWriter().write(gson.toJson(productionVO));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		/**
+		 * 查询单个作品
+		 */
+		public void querryOneProduction() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		ProductionThreeFormDTO productionThreeFormDTO = productionManagementService.querryOneProduction(productionInfo);
+		}
+		
+		/**
+		 * 添加作品
+		 */
+		public void addProduction() {
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			try {
+				response.getWriter().write(gson.toJson(productionManagementService.addProduction(productionInfo)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		/**
+		 * 批量删除作品
+		 */
+		public void deleteProduction() {
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			String prodctions = productionManagementService.deleteProduction(idList);
+			try {
+				response.getWriter().write(gson.toJson(prodctions));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
