@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>作品添加</title>
+	<title>作品修改</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -80,7 +80,7 @@
 	
 	<div class="layui-upload" style="width:50%; float:right">
 		<div class="layui-inline">
-		<button type="button" class="layui-btn layui-btn-normal" id="testList">添加作品图集</button>
+		<button type="button" class="layui-btn layui-btn-normal" id="testList">修改作品图集</button>
 		</div>
 		<div class="layui-inline">
 			<div class="layui-form-mid layui-word-aux">温馨提示: 上传作品图集时，上传顺序决定图集排列顺序，请注意！</div>
