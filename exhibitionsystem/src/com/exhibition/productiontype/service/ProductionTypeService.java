@@ -1,4 +1,7 @@
 package com.exhibition.productiontype.service;
+
+import com.exhibition.domain.production_type;
+
 /**
  * 作品类型管理Service层
  * @author LL
@@ -6,5 +9,24 @@ package com.exhibition.productiontype.service;
  *
  */
 public interface ProductionTypeService {
+/**
+ * 添加作品类型
+ * @param productionType
+ * @return
+ */
+	public production_type addProductionType(production_type productionType);
+/**
+ * 批量删除类型
+ * @param idList
+ * @return
+ */
+	public String deleteProductionType(String idList);
+	/**
+	 * 修改类型
+	 * @param productionType
+	 * @return
+	 */
+	
+public String updateProductionType(production_type productionType);
 
 }

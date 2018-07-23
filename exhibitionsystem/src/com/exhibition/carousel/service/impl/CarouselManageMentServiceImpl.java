@@ -69,6 +69,8 @@ public class CarouselManageMentServiceImpl implements CarouselManagementService 
 	}
 
 	/**
+	 * 删除成功deleteSuccess
+	 * 删除失败error
 	 * 批量删除轮播图
 	 */
 	@Override

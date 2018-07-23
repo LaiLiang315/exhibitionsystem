@@ -6,6 +6,7 @@ import java.util.List;
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
 import com.exhibition.domain.production_type;
+import com.exhibition.production.DTO.PicTypeInfoDTO;
 import com.exhibition.production.DTO.PictureInfoDTO;
 import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
@@ -79,6 +80,10 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		ProductionDTO productionDTO;
 		// 实例化List<production_info>
 		List<production_info> listInfo;
+		//
+		List<PictureInfoDTO> listPictureInfoDTO = new ArrayList<>();
+		List<production_pictures> firstPicure;
+		List<PicTypeInfoDTO> listPicTypeInfoDTO = new ArrayList<>();
 		String listProductionHql = "from production_info where 1=1";
 		String productionCountHql = "select count(*) from production_info where 1=1";
 		/**
@@ -151,29 +156,32 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					if (!listInfo.isEmpty()) {
 						for (production_info info : listInfo) {
 							PictureInfoDTO pictureInfoDTO = new PictureInfoDTO();
-							production_pictures firstPicure = new production_pictures();
-							firstPicure = (production_pictures) productionManagementDao.getFistPictureById(info.getProduction_info_id());
-							if(firstPicure!=null) {
-								pictureInfoDTO.setPropicture(firstPicure);
+							production_pictures PicureOne =  productionManagementDao.getFistPictureById(info.getProduction_info_id());
+							System.out.println("firstPicure"+PicureOne);
+							if(PicureOne!=null) {
 								pictureInfoDTO.setProinfo(info);
+								pictureInfoDTO.setPropicture(PicureOne);
+								listPictureInfoDTO.add(pictureInfoDTO);
 							}
 							
 						}
-						productionDTO.setListInfo(listInfo);
-						productionDTO.setType(production_type);
+						PicTypeInfoDTO PicTypeInfoDTO = new PicTypeInfoDTO();
+						PicTypeInfoDTO.setType(production_type);
+						PicTypeInfoDTO.setListPictureInfoDTO(listPictureInfoDTO);
+						listPicTypeInfoDTO.add(PicTypeInfoDTO);
+						/*productionDTO.setListInfo(listInfo);
+						productionDTO.setType(production_type);*/
 						System.out.println("zzzzzz" + productionDTO);
 
 					} else {
 						return null;
 					}
 				}
-				listProductionDTO.add(productionDTO);
-				
 			}
 			/**
 			 * 分页获取单位列表
 			 */
-			productionVO.setListProductionDTO(listProductionDTO);
+			productionVO.setList(listPicTypeInfoDTO);
 			System.out.println("--------------" + productionVO);
 			return productionVO;
 		} else if (showAll.equals("1")) {
@@ -310,29 +318,30 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		productionVO.setListProductionDTO(listProductionDTO);
 		return productionVO;
 	}
-/**
- * 添加作品
- */
+
+	/**
+	 * 添加作品
+	 */
 	@Override
-	public String addProduction(production_info productionInfo,List<production_pictures> production_pictures) {
+	public String addProduction(production_info productionInfo, List<production_pictures> production_pictures) {
 		String id = BuildUuid.getUuid();
 		String result = null;
-		if(productionInfo!=null) {
+		if (productionInfo != null) {
 			production_info production = new production_info();
 			production.setProduction_info_id(id);
 			production.setProduction_info_name(productionInfo.getProduction_info_name());
 			production.setProduction_info_author(productionInfo.getProduction_info_author());
 			production.setProduction_info_discription(productionInfo.getProduction_info_discription());
 			production.setProduction_info_type(productionInfo.getProduction_info_type());
-			production.setProduction_info_creationtime(TimeUtil.getStringSecond());
+			production.setProduction_info_creationtime(productionInfo.getProduction_info_creationtime());
 			production.setProduction_info_isdelete(0);
 			productionManagementDao.saveOrUpdateObject(production);
 			result = "addSuccess";
-		}else {
+		} else {
 			result = "addFailed";
 		}
-		if(!production_pictures.isEmpty()) {
-			for(production_pictures pic:production_pictures) {
+		if (!production_pictures.isEmpty()) {
+			for (production_pictures pic : production_pictures) {
 				pic.setProduction_pictures_id(BuildUuid.getUuid());
 				pic.setProduction_pictures_belong(id);
 				pic.setProduction_pictures_creationtime(TimeUtil.getStringSecond());
@@ -340,7 +349,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 				productionManagementDao.saveOrUpdateObject(pic);
 			}
 			result = "addSuccess";
-		}else {
+		} else {
 			result = "addFailed";
 		}
 		return result;
@@ -355,29 +364,27 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		ProductionThreeFormDTO productionThreeFormDTO = new ProductionThreeFormDTO();
 		ProductionDTO productionDTO;
 		List<production_pictures> listPictures;
-		productionDTO =  productionManagementDao.getOnePrductionInfo(productionInfo.getProduction_info_id());
+		productionDTO = productionManagementDao.getOnePrductionInfo(productionInfo.getProduction_info_id());
 		System.out.println("MMMMMMM" + productionDTO);
 
-		
-		
-		if (productionDTO!=null) {
-				List<production_pictures> pictures =  productionManagementDao
-						.getPictureInfoById(productionInfo.getProduction_info_id());
-				System.out.println("///////" + pictures);
-				if (pictures != null) {
-					productionThreeFormDTO.setListPicture(pictures);
-					productionThreeFormDTO.setProductionDTO(productionDTO);
-					
-					GsonBuilder gsonBuilder = new GsonBuilder();
-				 		gsonBuilder.setPrettyPrinting();// 格式化json数据
-				 		Gson gson = gsonBuilder.create();
-					System.out.println("*********"+gson.toJson(productionThreeFormDTO));
-				}
+		if (productionDTO != null) {
+			List<production_pictures> pictures = productionManagementDao
+					.getPictureInfoById(productionInfo.getProduction_info_id());
+			System.out.println("///////" + pictures);
+			if (pictures != null) {
+				productionThreeFormDTO.setListPicture(pictures);
+				productionThreeFormDTO.setProductionDTO(productionDTO);
+
+				GsonBuilder gsonBuilder = new GsonBuilder();
+				gsonBuilder.setPrettyPrinting();// 格式化json数据
+				Gson gson = gsonBuilder.create();
+				System.out.println("*********" + gson.toJson(productionThreeFormDTO));
+			}
 
 		}
-		
+
 		return productionThreeFormDTO;
-		
+
 	}
 
 	/**
@@ -408,29 +415,29 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		}
 		return result;
 	}
-/**
- * 更改作品信息
- * 更改成功 "success"
- * 更改失败 "fail"
- */
+
+	/**
+	 * 更改作品信息 更改成功 "success" 更改失败 "fail"
+	 */
 	@Override
 	public String updateProdction(production_info productionInfo) {
 		String result = null;
 		production_info info = new production_info();
-		if(productionInfo.getProduction_info_id()!=null&&productionInfo.getProduction_info_id().trim().length()>0) {
-			
+		if (productionInfo.getProduction_info_id() != null
+				&& productionInfo.getProduction_info_id().trim().length() > 0) {
+
 			info = productionManagementDao.getInfoById(productionInfo.getProduction_info_id());
-		if(info!=null) {
-			info.setProduction_info_name(productionInfo.getProduction_info_name());
-			info.setProduction_info_author(productionInfo.getProduction_info_author());
-			info.setProduction_info_discription(productionInfo.getProduction_info_discription());
-			info.setProduction_info_type(productionInfo.getProduction_info_type());
-			info.setProduction_info_modifytime(TimeUtil.getStringSecond());
-			productionManagementDao.saveOrUpdateObject(info);
-			result = "success";
-		}else {
-			result = "fail";
-		}
+			if (info != null) {
+				info.setProduction_info_name(productionInfo.getProduction_info_name());
+				info.setProduction_info_author(productionInfo.getProduction_info_author());
+				info.setProduction_info_discription(productionInfo.getProduction_info_discription());
+				info.setProduction_info_type(productionInfo.getProduction_info_type());
+				info.setProduction_info_modifytime(TimeUtil.getStringSecond());
+				productionManagementDao.saveOrUpdateObject(info);
+				result = "success";
+			} else {
+				result = "fail";
+			}
 		}
 		return result;
 	}

@@ -231,13 +231,16 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	 * 根据信息id查询图集表第一条
 	 */
 	@Override
-	public List<production_pictures> getFistPictureById(String trim) {
-		List<production_pictures> fistPicture = new ArrayList<>();
+	public production_pictures getFistPictureById(String trim) {
+		production_pictures fistPicture = new production_pictures();
 		Session session = getSession();
 		String hql ="from production_pictures where  production_pictures_isdelete='0' and production_pictures_belong= :ID";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
-		fistPicture =(List<production_pictures>) query.list().get(0);
+		//fistPicture =(production_pictures) query.list().get(0);
+		if(!query.list().isEmpty()) {
+			fistPicture =(production_pictures) query.list().get(0);
+		}
 		 return fistPicture;
 	}
 	
