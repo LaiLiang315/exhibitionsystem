@@ -15,6 +15,10 @@ public class SkipAction {
 	public String intoProductionAdd(){
 		return "intoProductionAdd";
 	}
+	//进入修改作品页面
+	public String intoProductionEdit(){
+		return "intoProductionEdit";
+	}
 	//进入分类列表管理页面
 	public String intoCategoryList(){
 		return "intoCategoryList";
@@ -22,6 +26,10 @@ public class SkipAction {
 	//进入添加作品分类页面
 	public String intoCategoryAdd(){
 		return "intoCategoryAdd";
+	}
+	//进入修改作品分类页面
+	public String intoCategoryEdit(){
+		return "intoCategoryEdit";
 	}
 	//退出到登陆界面
 	public String intoLogin(){

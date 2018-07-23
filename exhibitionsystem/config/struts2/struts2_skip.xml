@@ -9,9 +9,11 @@
 			class="com.exhibition.skip.action.SkipAction" method="{1}">
 			<result name="intoBackground">/WEB-INF/view/intoBackground.jsp</result>
 			<result name="intoProductionList">/WEB-INF/view/production/ProductionList.jsp</result>
+			<result name="intoProductionEdit">/WEB-INF/view/production/EditProduction.jsp</result>
 			<result name="intoLogin">/login.jsp</result>	
 			<result name="intoProductionAdd">/WEB-INF/view/production/addProduction.jsp</result>
 			<result name="intoCategoryAdd">/WEB-INF/view/category/addCategory.jsp</result>	
+			<result name="intoCategoryEdit">/WEB-INF/view/category/EditCategory.jsp</result>
 			<result name="intoCategoryList">/WEB-INF/view/category/CategoryList.jsp</result>			
 		</action>
 	</package>
