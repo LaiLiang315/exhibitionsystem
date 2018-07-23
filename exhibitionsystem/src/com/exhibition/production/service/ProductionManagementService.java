@@ -3,6 +3,7 @@ package com.exhibition.production.service;
 import java.util.List;
 
 import com.exhibition.domain.production_info;
+import com.exhibition.domain.production_pictures;
 import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.DTO.ProductionThreeFormDTO;
@@ -51,7 +52,7 @@ public interface ProductionManagementService {
 	 * @param productionInfo
 	 * @return
 	 */
-    public String addProduction(production_info productionInfo);
+    public String addProduction(production_info productionInfo,List<production_pictures> production_pictures);
     /**
      * 查询单个作品信息
      * @param productionInfo
@@ -65,6 +66,12 @@ public interface ProductionManagementService {
 	 */
 	
 	public String deleteProduction(String idList);
+	/**
+	 * 修改作品
+	 * @param productionInfo
+	 * @return
+	 */
+	public String updateProdction(production_info productionInfo);
 
 
 }

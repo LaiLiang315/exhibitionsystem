@@ -14,6 +14,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.exhibition.domain.production_info;
+import com.exhibition.domain.production_pictures;
 import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.DTO.ProductionThreeFormDTO;
@@ -22,6 +23,8 @@ import com.exhibition.production.service.ProductionManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
+
+import util.uploadFiles;
 
 /**
  * 作品的Action层
@@ -56,11 +59,14 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	 * 作品分页VO
 	 */
 	private ProductionVO productionVO;
+	private List<production_pictures> production_pictures;
 	/**
 	 * 上传图片
 	 * @return
 	 */
-   private String uploadFileName;
+	private File file;				
+	private String fileFileName;		//文件名
+	private String fileContentType;	//文件类型
    /**
     * 作品信息
     */
@@ -83,6 +89,14 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
+	}
+
+	public List<production_pictures> getProduction_pictures() {
+		return production_pictures;
+	}
+
+	public void setProduction_pictures(List<production_pictures> production_pictures) {
+		this.production_pictures = production_pictures;
 	}
 
 	public void setProductionManagementService(ProductionManagementService productionManagementService) {
@@ -131,12 +145,29 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		this.productionVO = productionVO;
 	}
 
-	public String getUploadFileName() {
-		return uploadFileName;
+
+	public File getFile() {
+		return file;
 	}
 
-	public void setUploadFileName(String uploadFileName) {
-		this.uploadFileName = uploadFileName;
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
+	}
+
+	public String getFileContentType() {
+		return fileContentType;
+	}
+
+	public void setFileContentType(String fileContentType) {
+		this.fileContentType = fileContentType;
 	}
 
 	public void setProductionInfo(production_info productionInfo) {
@@ -158,7 +189,6 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	public void setProductionThreeFormDTO(ProductionThreeFormDTO productionThreeFormDTO) {
 		this.productionThreeFormDTO = productionThreeFormDTO;
 	}
-
 	/**
 	 * 实现request以及response结束
 	 */
@@ -204,10 +234,15 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	 * @return
 	 * @throws IOException
 	 */
+	//添加图片
+	public void addPhoto(){
+		
+	}
+	
 	//图片转为二进制流输出
 		public String IoReadImage() throws IOException{
 			System.out.println("====ppp");
-			String linkurl="D:\\Aupload\\test\\"+uploadFileName;
+			String linkurl="D:\\Aupload\\test\\"+fileFileName;
 			FileInputStream in = new FileInputStream(new File(linkurl));
 			ServletOutputStream out =null;
 			HttpServletResponse response=ServletActionContext.getResponse();
@@ -283,11 +318,13 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			Gson gson = gsonBuilder.create();
 			response.setContentType("text/html;charset=utf-8");
 			try {
-				response.getWriter().write(gson.toJson(productionManagementService.addProduction(productionInfo)));
-			} catch (IOException e) {
+				String res=uploadFiles.excuteUpload(file, fileFileName, fileContentType);
+				response.getWriter().write(gson.toJson(productionManagementService.addProduction(productionInfo,production_pictures)+","+res));
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 		}
 		/**
 		 * 批量删除作品
@@ -305,5 +342,21 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 				e.printStackTrace();
 			}
 		}
-		
+		/**
+		 * 更改作品信息
+		 */
+		public void updateProdction() {
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			String result = productionManagementService.updateProdction(productionInfo);
+			try {
+				response.getWriter().write(gson.toJson(result));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 }
