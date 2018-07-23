@@ -43,7 +43,7 @@ public class ProductionTest {
 	@Test
 	public void productionVO() {
 		ProductionVO productionVO = new ProductionVO();
-		String showAll = "1";
+		String showAll = "0";
 		/*String search = "夏";
 		productionVO.setSearch(search);*/
 	/*	String type = "Type002";

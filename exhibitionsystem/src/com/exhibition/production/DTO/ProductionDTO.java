@@ -20,6 +20,7 @@ public class ProductionDTO {
 	private production_type type;
 
 	private List<production_info> listInfo;
+	
 
 	/**
 	 * 构造方法

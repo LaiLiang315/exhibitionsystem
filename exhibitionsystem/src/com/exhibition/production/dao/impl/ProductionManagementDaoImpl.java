@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import com.exhibition.domain.carousel;
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
+import com.exhibition.domain.production_type;
 import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionThreeFormDTO;
 import com.exhibition.production.dao.ProductionManagementDao;
@@ -207,10 +208,37 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	public production_info getInfoById(String trim) {
 		production_info productionInfo = new production_info();
 		Session session = getSession();
-		String hql ="from production_info where  production_info_isdelete='0' and production_info_id = :ID";
+		String hql ="from production_info where  production_info_isdelete='0' and production_info_id= :ID";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		productionInfo =(production_info) query.uniqueResult();
 		 return productionInfo;
 	}
+	/**
+	 * 根据id查询类型
+	 */
+	@Override
+	public production_type getTypeById(String trim) {
+		production_type type = new production_type();
+		Session session = getSession();
+		String hql ="from production_type where  production_type_isdelete='0' and production_type_id= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		type =(production_type) query.uniqueResult();
+		 return type;
+	}
+	/**
+	 * 根据信息id查询图集表第一条
+	 */
+	@Override
+	public List<production_pictures> getFistPictureById(String trim) {
+		List<production_pictures> fistPicture = new ArrayList<>();
+		Session session = getSession();
+		String hql ="from production_pictures where  production_pictures_isdelete='0' and production_pictures_belong= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		fistPicture =(List<production_pictures>) query.list().get(0);
+		 return fistPicture;
+	}
+	
 }
