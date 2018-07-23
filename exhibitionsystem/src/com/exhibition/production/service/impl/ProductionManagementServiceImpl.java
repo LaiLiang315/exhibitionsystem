@@ -153,7 +153,6 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 						return null;
 					}
 				}
-
 				listProductionDTO.add(productionDTO);
 			}
 			/**
