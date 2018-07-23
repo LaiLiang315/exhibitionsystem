@@ -162,7 +162,6 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	public List<ProductionDTO> getInfoAndTypeById(String trim) {
 		Session session = getSession();
 		String hql = "select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where production_info_type=production_type_id and production_info_id= :ID";
-		System.out.println("::::::"+hql);
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		List<ProductionDTO> listProductionDTO = (List<ProductionDTO>) query.list();
@@ -174,14 +173,14 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	 * @param trim 
 	 */
 	@Override
-	public ProductionThreeFormDTO getOnePrductionInfo(String trim) {
-		ProductionThreeFormDTO productionThreeFormDTO = new ProductionThreeFormDTO();
+	public ProductionDTO getOnePrductionInfo(String trim) {
+		ProductionDTO productionDTO = new ProductionDTO();
 		Session session = getSession();
-		String hql = "select new com.exhibition.production.DTO.ProductionThreeFormDTO(info,type,listPicture) from production_info info, production_type type,production_pictures listPicture where info.production_info_type=type.production_type_id and listPicture.production_pictures_belong=info.production_info_id and info.production_info_id= :ID";
+		String hql = "select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where production_info_isdelete='0' and production_info_type=production_type_id and production_info_id= :ID";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
-		productionThreeFormDTO = (ProductionThreeFormDTO) query.uniqueResult(); 
-		return productionThreeFormDTO;
+		productionDTO = (ProductionDTO) query.uniqueResult(); 
+		return productionDTO;
 
 	}
 	/**

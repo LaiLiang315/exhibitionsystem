@@ -83,7 +83,7 @@ public interface ProductionManagementDao {
  * @return
  */
 
-    public ProductionThreeFormDTO getOnePrductionInfo(String trim);
+    public ProductionDTO getOnePrductionInfo(String trim);
 /**
  * 根据id查询信息和类型
  * @return

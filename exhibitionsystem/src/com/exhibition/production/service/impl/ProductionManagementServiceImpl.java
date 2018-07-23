@@ -12,6 +12,8 @@ import com.exhibition.production.DTO.ProductionThreeFormDTO;
 import com.exhibition.production.VO.ProductionVO;
 import com.exhibition.production.dao.ProductionManagementDao;
 import com.exhibition.production.service.ProductionManagementService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import util.TimeUtil;
 
@@ -151,7 +153,6 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 						return null;
 					}
 				}
-
 				listProductionDTO.add(productionDTO);
 			}
 			/**
@@ -241,7 +242,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		ProductionDTO productionDTO;
 		String listProductionHql = "";
 		String productionCountHql = "";
-		listProductionHql = "select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where production_info_type=production_type_id";
+		listProductionHql = "select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where production_info_isdelete='0' and production_info_type=production_type_id";
 		productionCountHql = "select count(*) from production_info where 1=1";
 		/**
 		 * 根据作者和作品名模糊查询
@@ -308,25 +309,31 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 	@Override
 	public ProductionThreeFormDTO querryOneProduction(production_info productionInfo) {
 		ProductionThreeFormDTO productionThreeFormDTO = new ProductionThreeFormDTO();
-		List<ProductionDTO> listProductionDTO;
-		List<production_pictures> listProduction_pictures;
-		listProductionDTO = (List<ProductionDTO>) productionManagementDao.listObject(
-				"select new com.exhibition.production.DTO.ProductionDTO(info,type) from production_info info, production_type type where production_info_type=production_type_id ");
-		System.out.println("MMMMMMM" + listProductionDTO);
+		ProductionDTO productionDTO;
+		List<production_pictures> listPictures;
+		productionDTO =  productionManagementDao.getOnePrductionInfo(productionInfo.getProduction_info_id());
+		System.out.println("MMMMMMM" + productionDTO);
 
-		if (!listProductionDTO.isEmpty()) {
-			for (ProductionDTO productionDTO : listProductionDTO) {
+		
+		
+		if (productionDTO!=null) {
 				List<production_pictures> pictures =  productionManagementDao
 						.getPictureInfoById(productionInfo.getProduction_info_id());
 				System.out.println("///////" + pictures);
 				if (pictures != null) {
 					productionThreeFormDTO.setListPicture(pictures);
-					listProductionDTO.add(productionDTO);
+					productionThreeFormDTO.setProductionDTO(productionDTO);
+					
+					GsonBuilder gsonBuilder = new GsonBuilder();
+				 		gsonBuilder.setPrettyPrinting();// 格式化json数据
+				 		Gson gson = gsonBuilder.create();
+					System.out.println("*********"+gson.toJson(productionThreeFormDTO));
 				}
 
-			}
 		}
+		
 		return productionThreeFormDTO;
+		
 	}
 
 	/**

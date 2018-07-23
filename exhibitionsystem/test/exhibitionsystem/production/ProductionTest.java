@@ -82,8 +82,11 @@ public class ProductionTest {
     	ProductionThreeFormDTO productionThreeFormDTO = new ProductionThreeFormDTO();
     	production_info productionInfo = new production_info();
     	productionInfo.setProduction_info_id("A001");
-    	 productionManagementService.querryOneProduction(productionInfo);
-    	System.out.println("????????>>><><><"+productionThreeFormDTO);
+    	productionThreeFormDTO = productionManagementService.querryOneProduction(productionInfo);
+    	 GsonBuilder gsonBuilder = new GsonBuilder();
+ 		gsonBuilder.setPrettyPrinting();// 格式化json数据
+ 		Gson gson = gsonBuilder.create();
+    	System.out.println("????????>>><><><"+gson.toJson(productionThreeFormDTO));
     	
     	
     }
