@@ -16,8 +16,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/production/list.css" media="all" />
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/productionList.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/productionList.js"></script>
 </head>
 <body class="childrenBody">
 	<blockquote class="layui-elem-quote news_search">
@@ -29,7 +29,7 @@
 				</div>
 		   </div>
 	<div class="layui-inline">
-		  <a class="layui-btn layui-btn-danger batchDel">批量删除</a>
+		  <a class="layui-btn layui-btn-danger batchDel" onclick="batchDelete()")>批量删除</a>
 		</div>
 		<div class="layui-inline">
 			  <div class="layui-input-inline">
@@ -38,7 +38,7 @@
 		<a class="layui-btn search_btn">查询</a>
 	</div>
 	</blockquote>
-	<div class="layui-form news_list">
+	<div>
 	  	<table class="layui-table">
 		    <colgroup>
 				<col width="9">
@@ -50,7 +50,7 @@
 		    </colgroup>
 		    <thead>
 				<tr>
-					<th><input type="checkbox" name="" lay-skin="primary" onclick="allChoose()" lay-filter="allChoose" id="allChoose"></th>
+					<th><input type="checkbox" name="ioo" lay-skin="primary" onclick="allChoose();" lay-filter="allChoose"  id="checkboxallChoose"></th>
 					<th>作品名</th>
 					<th>作者</th>
 					<th>作品描述</th>
