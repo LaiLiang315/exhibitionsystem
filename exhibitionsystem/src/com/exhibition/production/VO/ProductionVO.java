@@ -20,6 +20,8 @@ public class ProductionVO {
 	 * List<ProductionDTO>
 	 */
 	private List<ProductionDTO> listProductionDTO;
+	
+	private List list;
 	/**
 	 * 总记录条数
 	 */
@@ -119,6 +121,14 @@ public class ProductionVO {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public List getList() {
+		return list;
+	}
+
+	public void setList(List list) {
+		this.list = list;
 	}
 
 	@Override
