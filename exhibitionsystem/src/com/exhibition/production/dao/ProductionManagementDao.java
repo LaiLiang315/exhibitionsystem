@@ -5,6 +5,7 @@ import java.util.List;
 import com.exhibition.domain.carousel;
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
+import com.exhibition.domain.production_type;
 import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionThreeFormDTO;
 
@@ -100,5 +101,17 @@ public interface ProductionManagementDao {
  * @return
  */
    public production_info getInfoById(String trim);
+/**
+ * 根据id查询类型
+ * @param trim
+ * @return
+ */
+   public production_type getTypeById(String trim);
+/**
+ * 根据id查询图集表中第一条
+ * @param trim
+ * @return
+ */
+   public List<production_pictures> getFistPictureById(String trim);
 
 }
