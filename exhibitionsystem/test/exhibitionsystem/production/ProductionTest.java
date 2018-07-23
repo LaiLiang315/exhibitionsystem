@@ -59,7 +59,6 @@ public class ProductionTest {
 	public void getProductionInfo() {
 		List<ProductionInfoDTO> listProductionInfoDTO = productionManagementService.getProductionInfo();
 		System.out.println("DDDDDD"+listProductionInfoDTO);
-		
 	}
 	@Test
 	public void Md5Test() {
