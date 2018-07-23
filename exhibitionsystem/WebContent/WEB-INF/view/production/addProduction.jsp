@@ -23,7 +23,7 @@
 </head>
 <body class="childrenBody">
 	<form class="layui-form" style="width:100%;">
-	<div style="float:left;">
+	<div style="margin:auto; width:70%;">
 		<div class="layui-form-item">
 			<div class="layui-inline">
 			<label class="layui-form-label">作品名</label>
@@ -44,27 +44,48 @@
 			<div class="layui-inline">
 			    <label class="layui-form-label">作品类型</label>
 				<div class="layui-input-block" >
-					<select name="production_info_type" class="userGrade" lay-filter="userGrade">
-						<option value="0">类型1</option>
-						<option value="1">类型2</option>
-				        <option value="2">类型3</option>
-				        <option value="3">类型4</option>
+					<select name="production_info_type" id="selectTypes" class="userGrade" lay-filter="userGrade">
+						
 				    </select>
 				</div>
 		    </div>
 		<div class="layui-inline">
 	
-			<label class="layui-form-label">创建时间</label>
+			<label class="layui-form-label">创作时间</label>
 			<div class="layui-input-block">
 				<input name="production_info_creationtime" class="layui-input" id="test1" placeholder="yyyy-MM-dd" type="text">
 			</div>
 		</div>
 		</div>
+		
+		<div class="layui-upload">
+		<div class="layui-inline">
+		<button type="button" class="layui-btn layui-btn-normal" id="testList">添加作品图集</button>
+		</div>
+		<div class="layui-inline">
+			<div class="layui-form-mid layui-word-aux">温馨提示: 上传作品图集时，上传顺序决定图集排列顺序，请注意！</div>
+		</div>
+		<div class="layui-upload-list">
+			<table class="layui-table">
+				<thead>
+					<tr>
+						<th>顺序</th>
+						<th>文件名</th>
+						<th>大小</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="demoList"></tbody>
+			</table>
+		</div>
+		<button type="button" class="layui-btn" id="testListAction">开始上传</button>
+	</div>
 		 
 		<div class="layui-form-item">
 			<label class="layui-form-label">作品描述</label>
 			<div class="layui-input-block">
-				<textarea name="" placeholder="请输入作品描述" class="layui-textarea linksDesc"></textarea>
+				<textarea id="proDiscription" name="" placeholder="请输入作品描述" class="layui-textarea linksDesc"></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -78,32 +99,8 @@
 		
 <!-- ================================作品图集上传==================================== -->
 	
-	<div class="layui-upload" style="width:50%; float:right">
-		<div class="layui-inline">
-		<button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>
-		</div>
-		<div class="layui-inline">
-			<div class="layui-form-mid layui-word-aux">温馨提示: 上传作品图集时，上传顺序决定图集排列顺序，请注意！</div>
-		</div>
-		<div class="layui-upload-list">
-			<table class="layui-table">
-				<thead>
-					<tr>
-						<th>文件名</th>
-						<th>大小</th>
-						<th>状态</th>
-						<th>操作</th>
-					</tr>
-				</thead>
-				<tbody id="demoList"></tbody>
-			</table>
-		</div>
-		<button type="button" class="layui-btn" id="testListAction">开始上传</button>
-	</div>
 	</form>
-	
 
-	
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js" ></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/productionAdd.js"></script>
