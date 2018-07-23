@@ -112,6 +112,6 @@ public interface ProductionManagementDao {
  * @param trim
  * @return
  */
-   public List<production_pictures> getFistPictureById(String trim);
+   public production_pictures getFistPictureById(String trim);
 
 }
