@@ -83,7 +83,6 @@ public interface ProductionManagementService {
  * 添加作品信息完善图集信息
  * @param productionInfo
  */
-	
 	public void addAndComplete(production_info productionInfo);
 
 
