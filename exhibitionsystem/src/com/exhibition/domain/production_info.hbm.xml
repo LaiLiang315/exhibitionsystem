@@ -29,5 +29,8 @@
         <property name="production_info_isdelete" type="java.lang.Integer">
             <column name="production_info_isdelete" />
         </property>
+        <property name="production_info_isdailywork" type="java.lang.Integer">
+            <column name="production_info_isdailywork" />
+        </property>
     </class>
 </hibernate-mapping>
