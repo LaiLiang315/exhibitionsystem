@@ -249,4 +249,15 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 		return fistPicture;
 	}
 
+	// 获取带有特殊标记的图集信息
+	@Override
+	public List<production_pictures> getSpectialPic() {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		String hql = "from production_pictures where production_pictures_sequence='9999'";
+		Query query = session.createQuery(hql);
+		List<production_pictures> production_pictures = (List<production_pictures>) query.list();
+		return production_pictures;
+	}
+
 }

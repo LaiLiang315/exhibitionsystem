@@ -2,6 +2,8 @@ package com.exhibition.production.action;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
@@ -359,4 +362,97 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			}
 			
 		}
+		//定义按单个图集对象
+		private production_pictures production_picture;
+		public production_pictures getProduction_picture() {
+			return production_picture;
+		}
+
+		public void setProduction_picture(production_pictures production_picture) {
+			this.production_picture = production_picture;
+		}
+
+		public ProductionManagementService getProductionManagementService() {
+			return productionManagementService;
+		}
+//上传文件，及保存文件信息到数据库
+public void uploadAndSavePic() {
+	String code="";
+	String result="";
+	String res="";
+	try {
+		String folderpath="D:\\\\Aupload\\\\test\\\\";
+				if(file!=null){
+					if(file.length()<= 50 * 1024 * 1024){
+						String scrol_id = java.util.UUID.randomUUID().toString(); // 采用时间+UUID的方式
+						String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
+						String filename = path+File.separator+fileFileName;
+						fileFileName=scrol_id+"_"+fileFileName;
+						FileInputStream in = new FileInputStream(file);
+						FileOutputStream out = new FileOutputStream(filename);
+						byte[]b = new byte[1024];
+						int len = 0;
+						while((len=in.read(b))>0){
+							out.write(b,0,len);
+						}
+						out.close();
+						System.out.println("filename=="+filename);
+						File folder = new File(folderpath);
+						if (!folder.exists() && !folder.isDirectory()) {
+				            System.out.println("文件夹路径不存在，创建路径:" + folderpath);
+				            folder.mkdirs();
+				        } else {
+				            System.out.println("文件夹路径存在:" + folderpath);
+				        }
+						FileUtils.copyFile(file,new File(folderpath,fileFileName));
+						code="0";
+						result="uploadsuccess";
+					}
+				}else{
+					result = "uploaderror";
+					code = "1";
+					System.out.println("上传文件发生错误");
+				}
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	String belongId= "";
+	System.out.println("给我输出这个对象"+production_picture);
+	System.out.println("输出下："+idList);
+	System.out.println("belongId??:"+(production_picture.getProduction_pictures_belong().trim().length()<=0));
+	/*//判断belongid是否为空
+	if(production_picture.getProduction_pictures_belong()==null||production_picture.getProduction_pictures_belong()==""||production_picture.getProduction_pictures_belong().trim().length()<=0) {
+		belongId = java.util.UUID.randomUUID().toString();
+		production_picture.setProduction_pictures_belong(belongId);
+		System.out.println("有没有重置belongId");
+	}else {
+		belongId = production_picture.getProduction_pictures_belong();
+	}*/
+	production_picture.setProduction_pictures_name(fileFileName);
+	System.out.println(production_picture);
+	productionManagementService.addPictrues(production_picture);
+	res = "{\"code\":\" " + code + " \",\"msg\":\"" + result + "\",\"belongId\":\" "+belongId+" \"}";
+	//返回前端信息
+	GsonBuilder gsonBuilder = new GsonBuilder();
+	gsonBuilder.setPrettyPrinting();// 格式化json数据
+	Gson gson = gsonBuilder.create();
+	response.setContentType("text/html;charset=utf-8");
+	try {
+		response.getWriter().write(gson.toJson(res));
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	System.out.println("CcdmwcC:"+production_picture);
+	
+}
+//测试添加
+public void addAndComplete() {
+	//同时添加作品信息和补充图集信息
+	productionManagementService.addAndComplete(productionInfo);
+}
 }
