@@ -10,18 +10,10 @@ function saveProductionInfo(){
 	//放入作品信息
 	formData.append("productionInfo.production_info_name",$("input[name='production_info_name']").val());
 	formData.append("productionInfo.production_info_author",$("input[name='production_info_author']").val());
+	formData.append("productionInfo.production_info_isdailywork",$("input[type='radio']:checked").val());
 	formData.append("productionInfo.production_info_type",typeId);
 	formData.append("productionInfo.production_info_creationtime",$("input[name='production_info_creationtime']").val());
 	formData.append("productionInfo.production_info_discription",$("#proDiscription").val());
-	/*//放入图集信息
-	var tab=document.getElementById("pictrues");//获取表格
-	var rows=tab.rows;//表格行数（含表头）
-	var length=rows-1;//表格内容行数
-	//遍历表格
-	for(var i=0;i<=length;i++){
-		formData.append("production_pictures["+i+"].production_pictures_sequence",rows[i].cells[0].innerHTML);
-		formData.append("production_pictures["+i+"].production_pictures_name",rows[i].cells[1].innerHTML);
-	}*/
 	$.ajax({
 		type:'POST',
 		data:formData,
@@ -29,9 +21,12 @@ function saveProductionInfo(){
 		cache: false,  
 	    processData: false,  
 	    contentType: false,
-	    success:function(result){
-	    	productionVO = JSON.parse(result);
-	    	putProductionInfo(productionVO);
+	    error:function(){
+	    	alert("请求失败")
+	    },
+	    success:function(){
+	    	/*productionVO = JSON.parse(result);
+	    	putProductionInfo(productionVO);*/
 	    }
 	})
 }
@@ -51,10 +46,10 @@ function getProductionTypeInfo() {
 		cache: false,  
 	    processData: false,  
 	    contentType: false,
-	    /*success:function(result){
+	    success:function(result){
 	    	var listCarouselDTO = JSON.parse(result);
 	    	putType(listCarouselDTO);
-	    }*/
+	    }
 	})
 }
 //查询分类下拉菜单

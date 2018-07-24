@@ -58,8 +58,8 @@
 		</div>
 		<div class="layui-form-item">
 		    <div class="layui-input-block">
-		      <input name="sex" value="毕业设计" title="毕业设计" checked="" type="radio">
-		      <input name="sex" value="平时作业" title="平时作业" type="radio">
+		      <input name="sex" value="0" title="毕业设计" checked="" type="radio">
+		      <input name="sex" value="1" title="平时作业" type="radio">
 		    </div>
   		</div>
 		</div>
@@ -85,7 +85,8 @@
 				<tbody id="demoList"></tbody>
 			</table>
 		</div>
-		<button type="button" class="layui-btn" id="testListAction">开始上传</button>
+		<!-- <button type="button" class="layui-btn" id="testListAction">开始上传</button> -->
+		<input type="button" class="layui-btn" id="testListAction" value="开始上传" />
 	</div>
 		 
 		<div class="layui-form-item">
