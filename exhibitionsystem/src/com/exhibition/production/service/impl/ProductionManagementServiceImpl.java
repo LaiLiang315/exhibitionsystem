@@ -246,9 +246,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					if (listPictures != null) {
 						productionInfoDTO.setListProductionPictures(listPictures);
 						productionInfoDTO.setProductionInfo(production_info);
-						System.out.println("AAAAAA" + productionInfoDTO);
 						listProductionInfoDTO.add(productionInfoDTO);
-						System.out.println("BBBBBBB" + listProductionInfoDTO);
 					}
 				}
 			}
@@ -465,7 +463,6 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		//生成uuid
 		String productionId = BuildUuid.getUuid();
 		productionInfo.setProduction_info_id(productionId);
-		productionInfo.setProduction_info_creationtime(TimeUtil.getStringSecond());
 		productionInfo.setProduction_info_isdelete(0);
 		productionManagementDao.saveOrUpdateObject(productionInfo);
 		//查询出带有特殊标记的图集信息
