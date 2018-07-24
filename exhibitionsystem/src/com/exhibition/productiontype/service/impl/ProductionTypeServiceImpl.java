@@ -2,7 +2,9 @@ package com.exhibition.productiontype.service.impl;
 
 import java.util.Arrays;
 
+import com.exhibition.domain.carousel;
 import com.exhibition.domain.production_type;
+import com.exhibition.productiontype.DTO.TypeCarouselDTO;
 import com.exhibition.productiontype.dao.ProductionTypeDao;
 import com.exhibition.productiontype.service.ProductionTypeService;
 
@@ -27,20 +29,34 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 	 * 添加类型
 	 */
 	@Override
-	public production_type addProductionType(production_type productionType) {
+	public String addProductionType(production_type productionType, carousel carousel) {
+		String result = null;
+
 		if (productionType != null) {
 			productionType.setProduction_type_id(BuildUuid.getUuid());
 			productionType.setProduction_type_creationtime(TimeUtil.getStringSecond());
 			productionType.setProduction_type_isdelete(0);
 			productionTypeDao.saveOrUpdateObject(productionType);
+			result = "success";
+		} else {
+			result = "error";
 		}
-		return null;
+
+		if (carousel != null) {
+			carousel.setCarousel_creationtime(TimeUtil.getStringSecond());
+			carousel.setCarousel_id(BuildUuid.getUuid());
+			carousel.setCarousel_belong(productionType.getProduction_type_id());
+			carousel.setCarousel_isdelete(0);
+			productionTypeDao.saveOrUpdateObject(carousel);
+			result = "success";
+		} else {
+			result = "error";
+		}
+		return result;
 	}
 
 	/**
-	 * 删除成功deleteSuccess 
-	 * 删除失败error 
-	 * 删除类型
+	 * 删除成功deleteSuccess 删除失败error 删除类型
 	 */
 
 	@Override
@@ -81,15 +97,35 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 
 		return result;
 	}
-/**
- * 修改类型
- */
+
+	/**
+	 * 修改类型
+	 */
 	@Override
 	public String updateProductionType(production_type productionType) {
-		if(productionType!=null) {
+		if (productionType != null) {
 			productionType.setProduction_type_modifytime(TimeUtil.getStringSecond());
 			productionTypeDao.saveOrUpdateObject(productionType);
 		}
 		return null;
+	}
+
+	/**
+	 * 查询所有类型
+	 */
+	@Override
+	public TypeCarouselDTO querryProductionType(TypeCarouselDTO typeCarouselDTO, production_type productionType) {
+		TypeCarouselDTO TypeCarouselDTONew = new TypeCarouselDTO();
+		carousel carousel = new carousel();
+		production_type productionTypeNew = new production_type();
+		carousel = productionTypeDao.getCarouselById(productionType.getProduction_type_id());
+		if (carousel != null) {
+			TypeCarouselDTONew.setCarousel(carousel);
+		}
+		productionTypeNew = productionTypeDao.getTypeById(productionType.getProduction_type_id());
+		if (productionTypeNew != null) {
+			TypeCarouselDTONew.setType(productionTypeNew);
+		}
+		return TypeCarouselDTONew;
 	}
 }

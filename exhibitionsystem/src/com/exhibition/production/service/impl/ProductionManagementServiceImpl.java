@@ -441,5 +441,40 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		}
 		return result;
 	}
-
+	
+	/**
+	 * 添加图片
+	 */
+	@Override
+	public void addPictrues(production_pictures production_picture) {
+		// TODO Auto-generated method stub
+		production_picture.setProduction_pictures_id(BuildUuid.getUuid());
+		//将图集顺序设置为特殊值，便去后面补充信息是重置
+		production_picture.setProduction_pictures_sequence(9999);
+		production_picture.setProduction_pictures_creationtime(TimeUtil.getStringSecond());
+		production_picture.setProduction_pictures_isdelete(0);
+		productionManagementDao.saveOrUpdateObject(production_picture);
+	}
+/**
+ * 添加作品信息完善图集信息
+ */
+	@Override
+	public void addAndComplete(production_info productionInfo) {
+		// TODO Auto-generated method stub
+		//首先添加作品信息
+		//生成uuid
+		String productionId = BuildUuid.getUuid();
+		productionInfo.setProduction_info_id(productionId);
+		productionInfo.setProduction_info_creationtime(TimeUtil.getStringSecond());
+		productionInfo.setProduction_info_isdelete(0);
+		productionManagementDao.saveOrUpdateObject(productionInfo);
+		//查询出带有特殊标记的图集信息
+		List<production_pictures> listproduction_pictures = productionManagementDao.getSpectialPic();
+		//遍历list并且设置顺序
+		for(int i=0;i<listproduction_pictures.size();i++) {
+			listproduction_pictures.get(i).setProduction_pictures_belong(productionId);
+			listproduction_pictures.get(i).setProduction_pictures_sequence(i+1);
+			productionManagementDao.saveOrUpdateObject(listproduction_pictures.get(i));
+		}
+	}
 }

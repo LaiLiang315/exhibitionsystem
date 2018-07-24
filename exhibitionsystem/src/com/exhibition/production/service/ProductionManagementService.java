@@ -72,5 +72,18 @@ public interface ProductionManagementService {
 	 * @return
 	 */
 	public String updateProdction(production_info productionInfo);
+/**
+ * 添加图集
+ * 
+ * @param production_picture
+ */
+	
+	public void addPictrues(production_pictures production_picture);
+/**
+ * 添加作品信息完善图集信息
+ * @param productionInfo
+ */
+	
+	public void addAndComplete(production_info productionInfo);
 
 }

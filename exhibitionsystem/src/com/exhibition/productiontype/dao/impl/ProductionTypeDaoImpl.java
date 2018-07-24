@@ -112,16 +112,30 @@ public class ProductionTypeDaoImpl implements ProductionTypeDao {
 		session.clear();
 		return list;
 	}
-
+/**
+ * 根据id查询作品类型
+ */
 	@Override
 	public production_type getTypeById( String trim) {
 		production_type type = new production_type();
 		Session session = getSession();
-		String hql ="from carousel where production_type_isdelete='0' and production_type_id= :ID";
+		String hql ="from production_type where production_type_isdelete='0' and production_type_id= :ID";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		type =(production_type) query.uniqueResult();
 		 return type;
 	}
-
+	/**
+	 * 根据id查询轮播图
+	 */
+	@Override
+	public carousel getCarouselById(String trim) {
+		carousel carousel = new carousel();
+		Session session = getSession();
+		String hql = "from carousel where  carousel_isdelete='0' and production_type_id= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		carousel = (carousel) query.uniqueResult();
+		return carousel;
+	}
 }

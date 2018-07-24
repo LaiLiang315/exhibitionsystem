@@ -16,6 +16,7 @@ public class production_info {
 	private String production_info_creationtime; // 创建时间
 	private String production_info_modifytime; // 修改时间
 	private Integer production_info_isdelete; // 是否删除
+	private Integer production_info_isdailywork; // 是否平时作业
 
 	public String getProduction_info_id() {
 		return production_info_id;
@@ -81,6 +82,14 @@ public class production_info {
 		this.production_info_isdelete = production_info_isdelete;
 	}
 
+	public Integer getProduction_info_isdailywork() {
+		return production_info_isdailywork;
+	}
+
+	public void setProduction_info_isdailywork(Integer production_info_isdailywork) {
+		this.production_info_isdailywork = production_info_isdailywork;
+	}
+
 	@Override
 	public String toString() {
 		return "production_info [production_info_id=" + production_info_id + ", production_info_name="
@@ -88,8 +97,6 @@ public class production_info {
 				+ ", production_info_discription=" + production_info_discription + ", production_info_type="
 				+ production_info_type + ", production_info_creationtime=" + production_info_creationtime
 				+ ", production_info_modifytime=" + production_info_modifytime + ", production_info_isdelete="
-				+ production_info_isdelete + "]";
+				+ production_info_isdelete + ", production_info_isdailywork=" + production_info_isdailywork + "]";
 	}
-
-	
 }

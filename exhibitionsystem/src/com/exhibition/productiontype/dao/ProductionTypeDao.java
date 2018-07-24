@@ -56,6 +56,12 @@ public interface ProductionTypeDao {
 	public List<?> listObject(String hql);
 
 	public production_type getTypeById(String id);
+/**
+ * 根据Id查询轮播图
+ * @param trim
+ * @return
+ */
+	public carousel getCarouselById(String trim);
 
 
 }
