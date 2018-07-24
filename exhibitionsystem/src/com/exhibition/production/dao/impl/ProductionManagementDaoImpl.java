@@ -249,6 +249,7 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 		return fistPicture;
 	}
 
+	
 	// 获取带有特殊标记的图集信息
 	@Override
 	public List<production_pictures> getSpectialPic() {
