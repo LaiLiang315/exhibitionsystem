@@ -4,8 +4,26 @@ $(document).ready(function(){
 	//获取分类信息
 	getProductionTypeInfo();
 });
+//定义键值对象
+function ObjData(key,value){
+	this.Key=key;
+	this.Value=value;
+}
 //添加作品
 function saveProductionInfo(){
+	var array=[];
+	var table = document.getElementById("pictrues");
+	var ROW = table.rows.length;
+	//遍历表格
+	for(var i=1;i<ROW;i++){
+		console.log(table.rows[i].cells[0].innerHTML)
+		var value= table.rows[i].cells[0].innerHTML;//将表格设置为值
+		console.log(table.rows[i].cells[1].innerHTML)
+		var key=table.rows[i].cells[1].innerHTML;//将文件名定义为键
+		var s = new ObjData(key,value);
+		array.push(s);
+	}
+	var pushData = JSON.stringify(array);//将数组转为json字符串
 	var formData = new FormData();
 	//放入作品信息
 	formData.append("productionInfo.production_info_name",$("input[name='production_info_name']").val());
@@ -14,6 +32,7 @@ function saveProductionInfo(){
 	formData.append("productionInfo.production_info_type",typeId);
 	formData.append("productionInfo.production_info_creationtime",$("input[name='production_info_creationtime']").val());
 	formData.append("productionInfo.production_info_discription",$("#proDiscription").val());
+	formData.append("pictrueMap",pushData);
 	$.ajax({
 		type:'POST',
 		data:formData,
@@ -21,12 +40,16 @@ function saveProductionInfo(){
 		cache: false,  
 	    processData: false,  
 	    contentType: false,
-	    error:function(){
-	    	alert("请求失败")
-	    },
-	    success:function(){
-	    	/*productionVO = JSON.parse(result);
-	    	putProductionInfo(productionVO);*/
+	    success:function(result){
+	    	var addResult = JSON.parse(result);
+	    	if(addResult=="success"){
+				toastr.success("作品添加成功!");
+				setTimeout(function(){
+					location.href="http://localhost:8080/exhibitionsystem/skip/skip_intoProductionList";
+				},1000);
+			}else{
+				toastr.error("作品添加失败!");
+			}
 	    }
 	})
 }
@@ -72,16 +95,28 @@ function putType(listCarouselDTO){
 		form.render();
 	});
 }
-
+//判断表单按钮是否为空!$("input[name='sex1']").checked&&!$("input[name='sex2']").checked
+function isNull(){
+	var table = document.getElementById("pictrues");
+	var ROW = table.rows.length;
+	if($("input[name='production_info_name']").val()==""||$("input[name='production_info_name']").val()==null){
+		toastr.error("请填写作品名!");
+	}else if($("input[name='production_info_author']").val()==""||$("input[name='production_info_author']").val()==null){
+		toastr.error("请填写作者!");
+	}else if(typeId==null||typeId==""){
+		toastr.error("请选择作品类型!");
+	}else if($("input[name='production_info_creationtime']").val()==""||$("input[name='production_info_creationtime']").val()==null){
+		toastr.error("请选创作时间!");
+	}else if($("#proDiscription").val()==null||$("#proDiscription").val()==""){
+		toastr.error("请填写作品描述!");
+	}else if(ROW<=1){
+		toastr.error("请上传作品图片!");
+	}
+}
 //图片上传
-var i=0;
+var i=1;
 var belongId="";
 layui.use('upload', function(){
-			/*var formData = new FormData();
-			//放入作品信息
-			formData.append("production_picture.production_pictures_sequence",i++);
-			formData.append("production_picture.production_pictures_belong",belongId);
-			formData.append("idList",belongId);*/
 		  var $ = layui.jquery
 		  ,upload = layui.upload;
 		  var demoListView = $('#demoList')

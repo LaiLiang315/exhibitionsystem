@@ -1,6 +1,7 @@
 package com.exhibition.production.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
@@ -82,7 +83,8 @@ public interface ProductionManagementService {
 /**
  * 添加作品信息完善图集信息
  * @param productionInfo
+ * @param listMap 
  */
-	public void addAndComplete(production_info productionInfo);
+	public String addAndComplete(production_info productionInfo, List<Map<String, Object>> listMap);
 
 }

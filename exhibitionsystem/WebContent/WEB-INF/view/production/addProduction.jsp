@@ -58,12 +58,17 @@
 		</div>
 		<div class="layui-form-item">
 		    <div class="layui-input-block">
-		      <input name="sex" value="0" title="毕业设计" checked="" type="radio">
-		      <input name="sex" value="1" title="平时作业" type="radio">
+		      <input name="sex1" value="0" title="毕业设计" checked="" type="radio">
+		      <input name="sex2" value="1" title="平时作业" type="radio">
 		    </div>
   		</div>
 		</div>
-		
+		<div class="layui-form-item">
+			<label class="layui-form-label">作品描述</label>
+			<div class="layui-input-block">
+				<textarea id="proDiscription" name="" placeholder="请输入作品描述" class="layui-textarea linksDesc"></textarea>
+			</div>
+		</div>
 		<div class="layui-upload">
 		<div class="layui-inline">
 		<button type="button" class="layui-btn layui-btn-normal" id="testList">添加作品图集</button>
@@ -86,21 +91,17 @@
 			</table>
 		</div>
 		<!-- <button type="button" class="layui-btn" id="testListAction">开始上传</button> -->
-		<input type="button" class="layui-btn" id="testListAction" value="开始上传" />
+		
+		<div style="margin:auto;width:200px">
+		<input type="button" class="layui-btn" id="testListAction" onclick="isNull()" value="提交作品" />
+		<button type="reset" class="layui-btn layui-btn-primary">重置</button></div>
 	</div>
-		 
-		<div class="layui-form-item">
-			<label class="layui-form-label">作品描述</label>
-			<div class="layui-input-block">
-				<textarea id="proDiscription" name="" placeholder="请输入作品描述" class="layui-textarea linksDesc"></textarea>
-			</div>
-		</div>
-		<div class="layui-form-item">
+		<!-- <div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn" id="addProduction" onclick="saveProductionInfo()" lay-filter="addUser">立即提交</button>
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 		    </div>
-		</div>
+		</div> -->
 	</div>
 		
 		
@@ -111,6 +112,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js" ></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/productionAdd.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/toastr.js"></script>
 	<%-- <script type="text/javascript" src="${pageContext.request.contextPath }/js/production/upload.js"></script> --%>
 </body>
 </html>

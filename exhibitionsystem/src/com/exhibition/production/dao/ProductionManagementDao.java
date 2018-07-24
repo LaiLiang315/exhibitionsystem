@@ -115,8 +115,8 @@ public interface ProductionManagementDao {
    public production_pictures getFistPictureById(String trim);
 /**
  * 获取带有特殊标记的图集
- * @return
+ * @param pictrueName 
  */
-  public List<production_pictures> getSpectialPic();
+  public List<production_pictures> getSpectialPic(String pictrueName);
 
 }
