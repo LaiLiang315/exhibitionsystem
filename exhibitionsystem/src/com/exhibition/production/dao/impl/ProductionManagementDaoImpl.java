@@ -243,5 +243,4 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 		}
 		 return fistPicture;
 	}
-	
 }

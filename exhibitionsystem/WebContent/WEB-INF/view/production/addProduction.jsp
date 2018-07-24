@@ -56,6 +56,12 @@
 				<input name="production_info_creationtime" class="layui-input" id="test1" placeholder="yyyy-MM-dd" type="text">
 			</div>
 		</div>
+		<div class="layui-form-item">
+		    <div class="layui-input-block">
+		      <input name="sex" value="毕业设计" title="毕业设计" checked="" type="radio">
+		      <input name="sex" value="平时作业" title="平时作业" type="radio">
+		    </div>
+  		</div>
 		</div>
 		
 		<div class="layui-upload">
@@ -66,7 +72,7 @@
 			<div class="layui-form-mid layui-word-aux">温馨提示: 上传作品图集时，上传顺序决定图集排列顺序，请注意！</div>
 		</div>
 		<div class="layui-upload-list">
-			<table class="layui-table">
+			<table class="layui-table" id="pictrues">
 				<thead>
 					<tr>
 						<th>顺序</th>
@@ -90,7 +96,7 @@
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<button class="layui-btn" id="addProduction" lay-filter="addUser">立即提交</button>
+				<button class="layui-btn" id="addProduction" onclick="saveProductionInfo()" lay-filter="addUser">立即提交</button>
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 		    </div>
 		</div>
@@ -104,6 +110,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js" ></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/productionAdd.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/upload.js"></script>
+	<%-- <script type="text/javascript" src="${pageContext.request.contextPath }/js/production/upload.js"></script> --%>
 </body>
 </html>
