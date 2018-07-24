@@ -246,9 +246,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					if (listPictures != null) {
 						productionInfoDTO.setListProductionPictures(listPictures);
 						productionInfoDTO.setProductionInfo(production_info);
-						System.out.println("AAAAAA" + productionInfoDTO);
 						listProductionInfoDTO.add(productionInfoDTO);
-						System.out.println("BBBBBBB" + listProductionInfoDTO);
 					}
 				}
 			}
