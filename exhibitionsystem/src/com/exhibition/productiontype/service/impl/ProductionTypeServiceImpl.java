@@ -32,18 +32,25 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 	public String addProductionType(production_type productionType, carousel carousel) {
 		String result = null;
 
-		if (productionType != null && carousel != null) {
+		if (productionType != null) {
 			productionType.setProduction_type_id(BuildUuid.getUuid());
 			productionType.setProduction_type_creationtime(TimeUtil.getStringSecond());
 			productionType.setProduction_type_isdelete(0);
+			productionTypeDao.saveOrUpdateObject(productionType);
+			result = "success";
+		} else {
+			result = "error";
+		}
+
+		if (carousel != null) {
 			carousel.setCarousel_creationtime(TimeUtil.getStringSecond());
 			carousel.setCarousel_id(BuildUuid.getUuid());
 			carousel.setCarousel_belong(productionType.getProduction_type_id());
 			carousel.setCarousel_isdelete(0);
-			productionTypeDao.saveOrUpdateObject(productionType);
-
-		}else {
-			
+			productionTypeDao.saveOrUpdateObject(carousel);
+			result = "success";
+		} else {
+			result = "error";
 		}
 		return result;
 	}
@@ -102,20 +109,21 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 		}
 		return null;
 	}
-/**
- * 查询所有类型
- */
+
+	/**
+	 * 查询所有类型
+	 */
 	@Override
-	public TypeCarouselDTO querryProductionType(TypeCarouselDTO typeCarouselDTO,production_type productionType) {
+	public TypeCarouselDTO querryProductionType(TypeCarouselDTO typeCarouselDTO, production_type productionType) {
 		TypeCarouselDTO TypeCarouselDTONew = new TypeCarouselDTO();
 		carousel carousel = new carousel();
 		production_type productionTypeNew = new production_type();
 		carousel = productionTypeDao.getCarouselById(productionType.getProduction_type_id());
-		if(carousel!=null) {
+		if (carousel != null) {
 			TypeCarouselDTONew.setCarousel(carousel);
 		}
 		productionTypeNew = productionTypeDao.getTypeById(productionType.getProduction_type_id());
-		if(productionTypeNew!=null) {
+		if (productionTypeNew != null) {
 			TypeCarouselDTONew.setType(productionTypeNew);
 		}
 		return TypeCarouselDTONew;
