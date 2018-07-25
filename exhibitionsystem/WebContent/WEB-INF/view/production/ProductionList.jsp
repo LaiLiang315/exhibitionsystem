@@ -12,12 +12,11 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/layui/css/layui.css" media="all" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/toastr.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/production/list.css" media="all" />
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/productionList.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js"></script>
 </head>
 <body class="childrenBody">
 	<blockquote class="layui-elem-quote news_search">
@@ -29,16 +28,16 @@
 				</div>
 		   </div>
 	<div class="layui-inline">
-		  <a class="layui-btn layui-btn-danger batchDel" onclick="batchDelete()")>批量删除</a>
+		  <a class="layui-btn layui-btn-danger batchDel">批量删除</a>
 		</div>
 		<div class="layui-inline">
 			  <div class="layui-input-inline">
-		    	<input type="text" value="" id="searchInfo" placeholder="请输入关键字" class="layui-input search_input" oninput="getProductionInfo()">
+		    	<input type="text" value="" id="searchInfo" placeholder="请输入关键字" class="layui-input search_input">
 		 	  </div>
 		<a class="layui-btn search_btn">查询</a>
 	</div>
 	</blockquote>
-	<div>
+	<div class="layui-form news_list">
 	  	<table class="layui-table">
 		    <colgroup>
 				<col width="9">
@@ -51,7 +50,7 @@
 		    </colgroup>
 		    <thead>
 				<tr>
-					<th><input type="checkbox" name="ioo" lay-skin="primary" onclick="allChoose();" lay-filter="allChoose"  id="checkboxallChoose"></th>
+					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
 					<th>作品名</th>
 					<th>作者</th>
 					<th>作品描述</th>
@@ -73,11 +72,10 @@
    	 			<button class="layui-btn" onclick="nextPage()"><i class="layui-icon"></i></button>
 				<button class="layui-btn" onclick="lastPage()">尾页<i
 					class="fa fa-angle-double-right"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="text" class="layui-input-xjc" id="go_input"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="text" class="layui-input-inline"  id="go_input"/>&nbsp;&nbsp;&nbsp;&nbsp;
 				<button class="layui-btn" onclick="goPage()">GO</button>	</div>
 			<p class='page-infomation'></p>					
 	</div>
 	<div id="page"></div>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/toastr.js"></script>
 </body>
 </html>
