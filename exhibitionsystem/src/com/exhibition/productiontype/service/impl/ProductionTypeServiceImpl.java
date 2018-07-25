@@ -26,6 +26,60 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 	}
 
 	/**
+	 * 添加类型
+	 */
+	@Override
+	public String addProductionType(production_type productionType, carousel carousel) {
+		String result = null;
+
+		if (productionType != null) {
+			productionType.setProduction_type_id(BuildUuid.getUuid());
+			productionType.setProduction_type_creationtime(TimeUtil.getStringSecond());
+			productionType.setProduction_type_isdelete(0);
+			productionTypeDao.saveOrUpdateObject(productionType);
+			result = "success";
+		} else {
+			result = "error";
+		}
+
+		if (carousel != null) {
+			carousel.setCarousel_creationtime(TimeUtil.getStringSecond());
+			carousel.setCarousel_id(BuildUuid.getUuid());
+			carousel.setCarousel_belong(productionType.getProduction_type_id());
+			carousel.setCarousel_isdelete(0);
+			productionTypeDao.saveOrUpdateObject(carousel);
+			result = "success";
+		} else {
+			result = "error";
+		}
+		return result;
+	}
+	
+	//单独添加轮播
+	@Override
+	public String addCarousel1(carousel carousel){
+		String result = null;
+		if (carousel != null) {
+			productionTypeDao.saveOrUpdateObject(carousel);
+			result="success";
+		}else{
+			result="error";
+		}
+		return result;
+	}
+	//单独添加类型
+	@Override
+	public String addProductionType1(production_type productionType){
+		String result = null;
+		if (productionType != null) {
+			productionTypeDao.saveOrUpdateObject(productionType);
+			result="success";
+		}else{
+			result="error";
+		}
+		return result;
+	}
+	/**
 	 * 删除成功deleteSuccess 删除失败error 删除类型
 	 */
 
@@ -37,7 +91,7 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 			 * 将多个对象id去掉分隔符转化为数组
 			 */
 			String[] deleteIdList = idList.split(",");
-			System.out.println(Arrays.toString(deleteIdList) + "uuuu" + deleteIdList[1]);
+			//System.out.println(Arrays.toString(deleteIdList) + "uuuu" + deleteIdList[1]);
 			/**
 			 * 遍历数组String id : deleteIdList
 			 */

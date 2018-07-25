@@ -1,7 +1,6 @@
 package com.exhibition.production.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
@@ -74,6 +73,7 @@ public interface ProductionManagementService {
 	 * @return
 	 */
 	public String updateProdction(production_info productionInfo);
+
 /**
  * 添加图集
  * 
@@ -92,5 +92,6 @@ public interface ProductionManagementService {
  * @return
  */
 	public PicTypeInfoDTO querySixproduction();
+
 
 }

@@ -2,19 +2,13 @@ package com.exhibition.production.action;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
@@ -31,8 +25,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import util.uploadFiles;
 
 /**
@@ -71,46 +63,19 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	private List<production_pictures> production_pictures;
 	/**
 	 * 上传图片
-	 * 
 	 * @return
 	 */
-	private File file;
-	private String fileFileName; // 文件名
-	private String fileContentType; // 文件类型
-	/**
-	 * 作品信息
-	 */
-	private production_info productionInfo;
-
-	private String idList;
-
-	// 定义按单个图集对象
-	private production_pictures production_picture;
-	
-	private String pictrueMap;
-
-	public String getPictrueMap() {
-		return pictrueMap;
-	}
-
-	public void setPictrueMap(String pictrueMap) {
-		this.pictrueMap = pictrueMap;
-	}
-
-	public production_pictures getProduction_picture() {
-		return production_picture;
-	}
-
-	public void setProduction_picture(production_pictures production_picture) {
-		this.production_picture = production_picture;
-	}
-
-	public ProductionManagementService getProductionManagementService() {
-		return productionManagementService;
-	}
-
-	private ProductionThreeFormDTO productionThreeFormDTO;
-
+	private File file;				
+	private String fileFileName;		//文件名
+	private String fileContentType;	//文件类型
+   /**
+    * 作品信息
+    */
+   private production_info productionInfo;
+   
+   private String idList;
+   
+   private ProductionThreeFormDTO productionThreeFormDTO;
 	public HttpServletResponse getResponse() {
 		return response;
 	}
@@ -181,6 +146,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		this.productionVO = productionVO;
 	}
 
+
 	public File getFile() {
 		return file;
 	}
@@ -209,10 +175,6 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		this.productionInfo = productionInfo;
 	}
 
-	public production_info getProductionInfo() {
-		return productionInfo;
-	}
-
 	public String getIdList() {
 		return idList;
 	}
@@ -228,7 +190,6 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	public void setProductionThreeFormDTO(ProductionThreeFormDTO productionThreeFormDTO) {
 		this.productionThreeFormDTO = productionThreeFormDTO;
 	}
-
 	/**
 	 * 实现request以及response结束
 	 */
@@ -249,11 +210,11 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		}
 
 	}
-
 	/**
 	 * 页面显示VO
 	 */
 	public void showPicturesVO() {
+		System.out.println("showAll"+showAll);
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -261,7 +222,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		ProductionVO productionVO = new ProductionVO();
 		productionVO.setSearch(search);
 		productionVO.setPageIndex(page);
-		productionVO = productionManagementService.showPicturesVO(showAll, productionVO);
+		productionVO = productionManagementService.showPicturesVO( showAll,productionVO);
 		try {
 			response.getWriter().write(gson.toJson(productionVO));
 		} catch (IOException e) {
@@ -269,85 +230,79 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			e.printStackTrace();
 		}
 	}
-
 	/**
 	 * 上传图片的方法
-	 * 
 	 * @return
 	 * @throws IOException
 	 */
-	// 添加图片
-	public void addPhoto() {
-
+	//添加图片
+	public void addPhoto(){
+		
 	}
-
-	// 图片转为二进制流输出
-	public String IoReadImage() throws IOException {
-		System.out.println("====ppp");
-		String linkurl = "D:\\Aupload\\test\\" + fileFileName;
-		FileInputStream in = new FileInputStream(new File(linkurl));
-		ServletOutputStream out = null;
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("image/png");
-		try {
-			out = response.getOutputStream();
-			// 读取文件流
+	
+	//图片转为二进制流输出
+		public String IoReadImage() throws IOException{
+			System.out.println("====ppp");
+			String linkurl="D:\\Aupload\\test\\"+fileFileName;
+			FileInputStream in = new FileInputStream(new File(linkurl));
+			ServletOutputStream out =null;
+			HttpServletResponse response=ServletActionContext.getResponse();
+			response.setContentType("image/png");
+			try {out = response.getOutputStream();
+			//读取文件流
 			int len = 0;
 			byte[] buffer = new byte[1024 * 10];
-			while ((len = in.read(buffer)) != -1) {
-				out.write(buffer, 0, len);
+			while ((len = in.read(buffer)) != -1){
+				out.write(buffer,0,len);
 			}
 			out.flush();
-		} catch (Exception e) {
+		}catch (Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally {
 			out.close();
 			in.close();
 		}
 		return null;
 	}
-
-	/**
-	 * 获取单个作品信息和图集
-	 */
-	public void getProductionInfoOne() {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		response.setContentType("text/html;charset=utf-8");
-		List<ProductionInfoDTO> listProductionInfoDTO = productionManagementService.getProductionInfo();
-		try {
-			response.getWriter().write(gson.toJson(listProductionInfoDTO));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+/**
+ * 获取单个作品信息和图集
+ */
+		public void getProductionInfo() {
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			List<ProductionInfoDTO> listProductionInfoDTO = productionManagementService.getProductionInfo();
+			try {
+				response.getWriter().write(gson.toJson(listProductionInfoDTO));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-	}
-
-	/**
-	 * 分页显示所有作品
-	 */
-	public void querryAllProduction() {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		response.setContentType("text/html;charset=utf-8");
-		ProductionVO productionVO = new ProductionVO();
-		productionVO.setSearch(search);
-		productionVO.setPageIndex(page);
-		productionVO = productionManagementService.querryAllProduction(productionVO);
-		try {
-			response.getWriter().write(gson.toJson(productionVO));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		/**
+		 * 分页显示所有作品
+		 */
+		public void querryAllProduction() {
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			ProductionVO productionVO = new ProductionVO();
+			productionVO.setSearch(search);
+			productionVO.setPageIndex(page);
+			productionVO = productionManagementService.querryAllProduction(productionVO);
+			try {
+				response.getWriter().write(gson.toJson(productionVO));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-	}
-
-	/**
-	 * 查询单个作品
-	 */
-	public void querryOneProduction() {
+		/**
+		 * 查询单个作品
+		 */
+		public void querryOneProduction() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -412,86 +367,24 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-	}
-
-	// 上传文件，及保存文件信息到数据库
-	public void uploadAndSavePic() {
-		String code = "";
-		String result = "";
-		String res = "";
-		try {
-			String folderpath = "D:\\\\Aupload\\\\test\\\\";
-			if (file != null) {
-				if (file.length() <= 50 * 1024 * 1024) {
-					String scrol_id = java.util.UUID.randomUUID().toString(); // 采用时间+UUID的方式
-					String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
-					String filename = path + File.separator + fileFileName;
-					fileFileName = scrol_id + "_" + fileFileName;
-					FileInputStream in = new FileInputStream(file);
-					FileOutputStream out = new FileOutputStream(filename);
-					byte[] b = new byte[1024];
-					int len = 0;
-					while ((len = in.read(b)) > 0) {
-						out.write(b, 0, len);
-					}
-					out.close();
-					System.out.println("filename==" + filename);
-					File folder = new File(folderpath);
-					if (!folder.exists() && !folder.isDirectory()) {
-						System.out.println("文件夹路径不存在，创建路径:" + folderpath);
-						folder.mkdirs();
-					} else {
-						System.out.println("文件夹路径存在:" + folderpath);
-					}
-					FileUtils.copyFile(file, new File(folderpath, fileFileName));
-					code = "0";
-					result = "uploadsuccess";
-				}
-			} else {
-				result = "uploaderror";
-				code = "1";
-				System.out.println("上传文件发生错误");
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String belongId = "";
-		System.out.println("给我输出这个对象" + production_picture);
-		System.out.println("输出下：" + idList);
-		System.out.println("belongId??:" + (production_picture.getProduction_pictures_belong().trim().length() <= 0));
-		/*
-		 * //判断belongid是否为空
-		 * if(production_picture.getProduction_pictures_belong()==null||
-		 * production_picture.getProduction_pictures_belong()==""||production_picture.
-		 * getProduction_pictures_belong().trim().length()<=0) { belongId =
-		 * java.util.UUID.randomUUID().toString();
-		 * production_picture.setProduction_pictures_belong(belongId);
-		 * System.out.println("有没有重置belongId"); }else { belongId =
-		 * production_picture.getProduction_pictures_belong(); }
+		
+		/**
+		 * 添加作品
 		 */
-		production_picture.setProduction_pictures_name(fileFileName);
-		System.out.println(production_picture);
-		productionManagementService.addPictrues(production_picture);
-		res = "{\"code\":\" " + code + " \",\"msg\":\"" + result + "\",\"belongId\":\" " + belongId + " \"}";
-		// 返回前端信息
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		response.setContentType("text/html;charset=utf-8");
-		try {
-			response.getWriter().write(gson.toJson(res));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		public void addProduction() {
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			try {
+				String res=uploadFiles.excuteUpload(file, fileFileName, fileContentType);
+				response.getWriter().write(gson.toJson(productionManagementService.addProduction(productionInfo,production_pictures)+","+res));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
-		System.out.println("CcdmwcC:" + production_picture);
-
-	}
 
 	//添加
 	public void addAndComplete() {
@@ -509,19 +402,6 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		         listMap.add(map); 
 		         }
 		}
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		response.setContentType("text/html;charset=utf-8");
-		// 同时添加作品信息和补充图集信息
-		String result = productionManagementService.addAndComplete(productionInfo,listMap);
-		try {
-			response.getWriter().write(gson.toJson(result));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	/**
 	 * 查询六个平时作业

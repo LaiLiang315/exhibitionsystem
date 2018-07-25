@@ -2,7 +2,6 @@ package com.exhibition.production.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
@@ -247,7 +246,9 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					if (listPictures != null) {
 						productionInfoDTO.setListProductionPictures(listPictures);
 						productionInfoDTO.setProductionInfo(production_info);
+						System.out.println("AAAAAA" + productionInfoDTO);
 						listProductionInfoDTO.add(productionInfoDTO);
+						System.out.println("BBBBBBB" + listProductionInfoDTO);
 					}
 				}
 			}
