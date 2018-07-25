@@ -289,7 +289,7 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
-		TypeCarouselDTO typeDTO =  productionTypeService.querryProductionType(typeCarouselDTO,productionType);
+		TypeCarouselDTO typeDTO =  productionTypeService.querryProductionType(productionType);
 		try {
 			response.getWriter().write(gson.toJson(typeDTO));
 		} catch (IOException e) {
@@ -297,5 +297,4 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 			e.printStackTrace();
 		}
 	}
-	
 }

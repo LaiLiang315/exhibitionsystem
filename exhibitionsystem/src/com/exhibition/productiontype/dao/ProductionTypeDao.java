@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.exhibition.domain.carousel;
 import com.exhibition.domain.production_type;
+import com.exhibition.productiontype.DTO.TypeCarouselDTO;
 
 /**
  * 作品类型管理的Dao层
@@ -62,6 +63,12 @@ public interface ProductionTypeDao {
  * @return
  */
 	public carousel getCarouselById(String trim);
+/**
+ * 根据i的查询类型和轮播图
+ * @param trim
+ * @return
+ */
+    public TypeCarouselDTO getNewCarouselById(String trim);
 
 
 }
