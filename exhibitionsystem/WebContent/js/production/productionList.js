@@ -169,11 +169,18 @@ layui.use('form', function(){
 						//截取前十二个字
 						singnalWord = discription.substr(0,25)+"...";
 					}
+					var typeOne = null;
+					if(infoList[j].production_info_isdailywork==1){
+						typeOne="平时作业";
+					}else{
+						typeOne="毕业设计";
+					}
 					str+='<tr>'+ 
 								'<td style="text-align:center;"><input type="checkbox" name="item" lay-skin="primary" lay-filter="choose" value="'+infoList[j].production_info_id+'"/></td>'+
 								'<td style="text-align:center;">'+limTitle+'</td>'+
 								'<td style="text-align:center;">'+infoList[j].production_info_author+'</td>'+
 								'<td style="text-align:center;">'+singnalWord+'</td>'+
+								'<td style="text-align:center;">'+typeOne+'</td>'+
 								'<td style="text-align:center;">'+productions[i].type.production_type_name+'</td>'+
 								'<td style="text-align:center;">'+
 									'<a class="layui-btn layui-btn-mini news_edit" href="http://localhost:8080/exhibitionsystem/skip/skip_intoProductionEdit?data_id='+infoList[j].production_info_id+'"><i class="iconfont icon-edit"></i> 编辑</a>'+
@@ -234,11 +241,18 @@ function putProductionInfo(productionVO){
 				//截取前十二个字
 				singnalWord = discription.substr(0,25)+"...";
 			}
+			var typeOne = null;
+			if(productions[j].info.production_info_isdailywork==1){
+				typeOne="平时作业";
+			}else{
+				typeOne="毕业设计";
+			}
 			str+='<tr>'+ 
 						'<td style="text-align:center;"><input type="checkbox" name="item" lay-skin="primary" lay-filter="choose" value="'+productions[j].info.production_info_id+'"/></td>'+
 						'<td style="text-align:center;">'+limTitle+'</td>'+
 						'<td style="text-align:center;">'+productions[j].info.production_info_author+'</td>'+
 						'<td style="text-align:center;">'+singnalWord+'</td>'+
+						'<td style="text-align:center;">'+typeOne+'</td>'+
 						'<td style="text-align:center;">'+productions[j].type.production_type_name+'</td>'+
 						'<td style="text-align:center;">'+
 							'<a class="layui-btn layui-btn-mini news_edit" href="http://localhost:8080/exhibitionsystem/skip/skip_intoProductionEdit?data_id='+productions[j].info.production_info_id+ '"><i class="iconfont icon-edit"></i> 编辑</a>'+

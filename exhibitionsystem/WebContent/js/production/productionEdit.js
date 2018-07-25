@@ -55,12 +55,21 @@ function oldProductionInfo(){
 	    contentType: false,
 	    success:function(result){
 	    	var productionThreeFormDTO = JSON.parse(result);
-	    	//putOneProInfo(productionThreeFormDTO);
+	    	console.log(JSON.stringify(productionThreeFormDTO));
+	    	putOneProInfo(productionThreeFormDTO);
 	    }
 	})
 }
 //放入旧信息
 function putOneProInfo(productionThreeFormDTO){
+	document.getElementById("productionInfoName").value = productionThreeFormDTO.productionDTO.info.production_info_name;
+	document.getElementById("productionInfoAuthor").value = productionThreeFormDTO.productionDTO.info.production_info_author;
+	var select = 'dd[lay-value='+productionThreeFormDTO.productionDTO.info.production_info_type+']';
+	$('#selectTypes').siblings("div.layui-form-select").find('dl').find(select).click();
+	document.getElementById("test1").value = productionThreeFormDTO.productionDTO.info.production_info_creationtime;
+	$("input[name=sex][value=0]").attr("checked", productionThreeFormDTO.productionDTO.info.production_info_isdailywork == 0 ? true : false)
+	$("input[name=sex][value=1]").attr("checked", productionThreeFormDTO.productionDTO.info.production_info_isdailywork == 1 ? true : false)
+	document.getElementById("proDiscription").value = productionThreeFormDTO.productionDTO.info.production_info_discription;
 	
 }
 //获取url指定参数值

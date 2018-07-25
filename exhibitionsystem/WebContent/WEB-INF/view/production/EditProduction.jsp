@@ -28,14 +28,14 @@
 			<div class="layui-inline">
 			<label class="layui-form-label">作品名</label>
 			<div class="layui-input-block">
-				<input type="text" name="production_info_name" class="layui-input userName"  lay-verify="required" placeholder="请输入作品名">
+				<input type="text" id="productionInfoName" name="production_info_name" class="layui-input userName"  lay-verify="required" placeholder="请输入作品名">
 			</div>
 			</div>
 		<div class="layui-inline">
 	
 			<label class="layui-form-label">作者</label>
 			<div class="layui-input-block">
-				<input type="text" name="production_info_author" class="layui-input userEmail"  lay-verify="email" placeholder="请输入作者">
+				<input type="text" id="productionInfoAuthor" name="production_info_author" class="layui-input userEmail"  lay-verify="email" placeholder="请输入作者">
 			</div>
 		</div>
 		</div>
@@ -58,8 +58,8 @@
 		</div>
 		<div class="layui-form-item">
 		    <div class="layui-input-block">
-		      <input name="sex1" value="0" title="毕业设计" checked="" type="radio">
-		      <input name="sex2" value="1" title="平时作业" type="radio">
+		      <input name="sex" value="0" title="毕业设计" type="radio">
+		      <input name="sex" value="1" title="平时作业" type="radio">
 		    </div>
   		</div>
 		</div>
