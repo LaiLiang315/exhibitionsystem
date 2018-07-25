@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
+import com.exhibition.production.DTO.PicTypeInfoDTO;
 import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.DTO.ProductionThreeFormDTO;
@@ -72,6 +73,25 @@ public interface ProductionManagementService {
 	 * @return
 	 */
 	public String updateProdction(production_info productionInfo);
+
+/**
+ * 添加图集
+ * 
+ * @param production_picture
+ */
+	
+	public void addPictrues(production_pictures production_picture);
+/**
+ * 添加作品信息完善图集信息
+ * @param productionInfo
+ * @param listMap 
+ */
+	public String addAndComplete(production_info productionInfo, List<Map<String, Object>> listMap);
+/**
+ * 查询六个平时作业DTO
+ * @return
+ */
+	public PicTypeInfoDTO querySixproduction();
 
 
 }

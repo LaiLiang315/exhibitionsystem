@@ -247,7 +247,6 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 				e.printStackTrace();
 			}
 		}
-
 	/**
 	 * 修改作品类型
 	 */

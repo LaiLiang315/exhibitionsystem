@@ -15,6 +15,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
+import com.exhibition.production.DTO.PicTypeInfoDTO;
 import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.DTO.ProductionThreeFormDTO;
@@ -307,6 +308,64 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
 		ProductionThreeFormDTO productionThreeFormDTO = productionManagementService.querryOneProduction(productionInfo);
+		try {
+			response.getWriter().write(gson.toJson(productionThreeFormDTO));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 添加作品
+	 */
+	public void addProduction() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		try {
+			String res = uploadFiles.excuteUpload(file, fileFileName, fileContentType);
+			response.getWriter().write(gson.toJson(
+					productionManagementService.addProduction(productionInfo, production_pictures) + "," + res));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * 批量删除作品
+	 */
+	public void deleteProduction() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		String prodctions = productionManagementService.deleteProduction(idList);
+		try {
+			response.getWriter().write(gson.toJson(prodctions));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 更改作品信息
+	 */
+	public void updateProdction() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		String result = productionManagementService.updateProdction(productionInfo);
+		try {
+			response.getWriter().write(gson.toJson(result));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		/**
@@ -326,37 +385,39 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			}
 			
 		}
-		/**
-		 * 批量删除作品
-		 */
-		public void deleteProduction() {
-			GsonBuilder gsonBuilder = new GsonBuilder();
-			gsonBuilder.setPrettyPrinting();// 格式化json数据
-			Gson gson = gsonBuilder.create();
-			response.setContentType("text/html;charset=utf-8");
-			String prodctions = productionManagementService.deleteProduction(idList);
-			try {
-				response.getWriter().write(gson.toJson(prodctions));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+	//添加
+	public void addAndComplete() {
+		JSONArray json=JSONArray.fromObject(pictrueMap); //使用net.sf.json.JSONObject对象来解析json
+		JSONObject jsonOne;
+		Map<String,Object> map=null;
+		List<Map<String, Object>> listMap=new ArrayList<Map<String,Object>>(); 
+		for(int i=0;i<json.size();i++){
+		map = new HashMap<String,Object>();
+		         jsonOne = json.getJSONObject(i); 
+		         map.put("key", (String) jsonOne.get("Key"));
+		         map.put("value", (String) jsonOne.get("Value"));
+		         //只保留不为空的 键值对
+		         if( (String) jsonOne.get("Value")!=""&&!"".equals( (String) jsonOne.get("Value"))){
+		         listMap.add(map); 
+		         }
 		}
-		/**
-		 * 更改作品信息
-		 */
-		public void updateProdction() {
-			GsonBuilder gsonBuilder = new GsonBuilder();
-			gsonBuilder.setPrettyPrinting();// 格式化json数据
-			Gson gson = gsonBuilder.create();
-			response.setContentType("text/html;charset=utf-8");
-			String result = productionManagementService.updateProdction(productionInfo);
-			try {
-				response.getWriter().write(gson.toJson(result));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+	
+	/**
+	 * 查询六个平时作业
+	 */
+	public void querySixproduction() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		PicTypeInfoDTO picTypeInfoDTO = productionManagementService.querySixproduction();
+		try {
+			response.getWriter().write(gson.toJson(picTypeInfoDTO));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
+	
 }
