@@ -24,7 +24,7 @@
 </head>
 <body class="childrenBody">
 	<form class="layui-form" style="width:100%;">
-	<div style="width:60%;">
+	<div style="width:50%;">
 		<div class="layui-form-item">
 			<div class="layui-inline">
 			<label class="layui-form-label">类别名称</label>
@@ -49,6 +49,7 @@
 	</div>	
 <!-- ================================控制首页轮播图模块上传==================================== -->
 <!-- ===========轮播背景图上传======= -->
+
 <div id="imggg">
 
 </div>
