@@ -22,7 +22,7 @@ function getProductionTypeInfo() {
 function putType(listCarouselDTO){
 	var strStart = '<option value=""></option>';
 	var str="";
-	var typeNames= document.querySelector("#selectTypes");// 定位放入的位置
+	var typeNames= document.querySelector("#selectTypes");//定位放入的位置
 	var length = listCarouselDTO.length;
 	//遍历对象
 	for(var i=0;i<length;i++){

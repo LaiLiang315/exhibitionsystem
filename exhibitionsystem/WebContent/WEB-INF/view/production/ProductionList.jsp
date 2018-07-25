@@ -75,7 +75,7 @@
 					class="fa fa-angle-double-right"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="text" class="layui-input-xjc" id="go_input"/>&nbsp;&nbsp;&nbsp;&nbsp;
 				<button class="layui-btn" onclick="goPage()">GO</button>	</div>
-			<p class='page-infomation'></p>					
+				<p class='page-infomation'></p>					
 	</div>
 	<div id="page"></div>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/toastr.js"></script>
