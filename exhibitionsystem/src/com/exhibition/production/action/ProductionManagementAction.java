@@ -21,6 +21,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
+import com.exhibition.production.DTO.PicTypeInfoDTO;
 import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.DTO.ProductionThreeFormDTO;
@@ -521,4 +522,22 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 查询六条平时作业
+	 */
+	public void querrySixProduction() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		List<PicTypeInfoDTO> listPicTypeInfoDTO = productionManagementService.querrySixProduction();
+		try {
+			response.getWriter().write(gson.toJson(listPicTypeInfoDTO));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
