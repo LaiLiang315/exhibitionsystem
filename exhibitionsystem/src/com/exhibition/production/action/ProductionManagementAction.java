@@ -284,8 +284,9 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	// 图片转为二进制流输出
 	public String IoReadImage() throws IOException {
 		System.out.println("====ppp");
+		fileFileName = new String(fileFileName.getBytes("ISO8859-1"), "UTF-8");//解决图片中文路径乱码
 		String linkurl = "D:\\Aupload\\test\\" + fileFileName;
-		FileInputStream in = new FileInputStream(new File(linkurl));
+		FileInputStream in = new FileInputStream(linkurl);
 		ServletOutputStream out = null;
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("image/png");
@@ -307,22 +308,6 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		return null;
 	}
 
-	/**
-	 * 获取单个作品信息和图集
-	 */
-	public void getProductionInfoOne() {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		response.setContentType("text/html;charset=utf-8");
-		List<ProductionInfoDTO> listProductionInfoDTO = productionManagementService.getProductionInfo();
-		try {
-			response.getWriter().write(gson.toJson(listProductionInfoDTO));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * 分页显示所有作品
@@ -426,6 +411,13 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 				if (file.length() <= 50 * 1024 * 1024) {
 					String scrol_id = java.util.UUID.randomUUID().toString(); // 采用时间+UUID的方式
 					String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
+					File uploadFile = new File(path);
+					if (!uploadFile.exists() && !uploadFile.isDirectory()) {
+						System.out.println("文件夹路径不存在，创建路径:" + folderpath);
+						uploadFile.mkdirs();
+					} else {
+						System.out.println("文件夹路径存在:" + uploadFile);
+					}
 					String filename = path + File.separator + fileFileName;
 					fileFileName = scrol_id + "_" + fileFileName;
 					FileInputStream in = new FileInputStream(file);

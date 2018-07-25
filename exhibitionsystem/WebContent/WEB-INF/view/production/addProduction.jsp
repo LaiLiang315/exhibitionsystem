@@ -94,7 +94,7 @@
 		
 		<div style="margin:auto;width:200px">
 		<input type="button" class="layui-btn" id="testListAction" onclick="isNull()" value="提交作品" />
-		<button type="reset" class="layui-btn layui-btn-primary">重置</button></div>
+		<button type="reset" class="layui-btn layui-btn-primary">重置信息</button></div>
 	</div>
 		<!-- <div class="layui-form-item">
 			<div class="layui-input-block">
