@@ -26,36 +26,6 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 	}
 
 	/**
-	 * 添加类型
-	 */
-	@Override
-	public String addProductionType(production_type productionType, carousel carousel) {
-		String result = null;
-
-		if (productionType != null) {
-			productionType.setProduction_type_id(BuildUuid.getUuid());
-			productionType.setProduction_type_creationtime(TimeUtil.getStringSecond());
-			productionType.setProduction_type_isdelete(0);
-			productionTypeDao.saveOrUpdateObject(productionType);
-			result = "success";
-		} else {
-			result = "error";
-		}
-
-		if (carousel != null) {
-			carousel.setCarousel_creationtime(TimeUtil.getStringSecond());
-			carousel.setCarousel_id(BuildUuid.getUuid());
-			carousel.setCarousel_belong(productionType.getProduction_type_id());
-			carousel.setCarousel_isdelete(0);
-			productionTypeDao.saveOrUpdateObject(carousel);
-			result = "success";
-		} else {
-			result = "error";
-		}
-		return result;
-	}
-
-	/**
 	 * 删除成功deleteSuccess 删除失败error 删除类型
 	 */
 

@@ -113,22 +113,6 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 	/**
 	 * 实现request以及response结束
 	 */
-	/**
-	 * 添加作品类型
-	 */
-	public void addProductionType() {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		response.setContentType("text/html;charset=utf-8");
-		String type = productionTypeService.addProductionType(productionType,carousel);
-		try {
-			response.getWriter().write(gson.toJson(type));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * 修改作品类型

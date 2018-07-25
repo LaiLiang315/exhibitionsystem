@@ -14,19 +14,6 @@ import com.exhibition.productiontype.DTO.TypeCarouselDTO;
  *
  */
 public interface ProductionTypeService {
-	/**
-	 * 添加作品类型
-	 * 
-	 * @param productionType
-	 * @param carousel
-	 * @return
-	 */
-	/*
-	 * public production_type addProductionType(production_type productionType,
-	 * List<carousel> ListCarousel);
-	 */
-
-	String addProductionType(production_type productionType, carousel carousel);
 
 	/**
 	 * 批量删除类型
