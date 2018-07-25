@@ -12,6 +12,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import com.exhibition.carousel.DTO.CarouselManagementDTO;
 import com.exhibition.carousel.service.CarouselManagementService;
 import com.exhibition.domain.carousel;
+import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_type;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -40,6 +41,10 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 	 * 批量删除idList
 	 */
 	private String idList;
+/**
+ * 删除图片
+ */
+	private String pictures;
 	/**
 	 * 实现request以及response
 	 */
@@ -105,6 +110,15 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 		this.idList = idList;
 	}
 
+	public String getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
+	}
+
+
 	/**
 	 * 查看轮播图
 	 */
@@ -137,6 +151,7 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 添加轮播图
 	 */
@@ -151,17 +166,25 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	/**
+	 * 删除成功"deleteSuccess"
+	 * 删除失败"error"
+	 * 删除单个图片
+	 */
+	public void deletePictures() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		String delete = carouselManagementService.deletePictures(pictures);
+		try {
+			response.getWriter().write(pictures);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

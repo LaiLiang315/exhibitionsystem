@@ -3,6 +3,7 @@ package com.exhibition.carousel.dao;
 import java.util.List;
 
 import com.exhibition.domain.carousel;
+import com.exhibition.domain.production_pictures;
 
 /**
  * 轮播图管理的Dao层接口
@@ -64,5 +65,13 @@ public interface CarouselManagementDao {
 	 * @return
 	 */
 	public carousel getCarouselPictureById(String trim);
+/**
+ * 根据id的查询图片
+ * @param trim
+ * @return
+ */
+	 public production_pictures getPictureById(String trim);
+  
 
+	List<production_pictures> getLaterPicturesById(String trim);
 }

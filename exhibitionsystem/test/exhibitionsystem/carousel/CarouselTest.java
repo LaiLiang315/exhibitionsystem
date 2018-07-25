@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.exhibition.carousel.DTO.CarouselManagementDTO;
 import com.exhibition.carousel.service.CarouselManagementService;
+import com.exhibition.domain.production_info;
+import com.exhibition.domain.production_pictures;
 
 
 /**
@@ -47,5 +49,11 @@ public class CarouselTest {
     public void deleteCarousel() {
     	String idList = "C001,C002,C003";
     	carouselManagementService.deleteCarousel(idList);
+    }
+    @Test
+    public void deletePicturesTest() {
+    	production_pictures productionPictures = new production_pictures();
+    	String pictures = "B001";
+    	carouselManagementService.deletePictures(pictures);
     }
 }

@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 
 import com.exhibition.carousel.dao.CarouselManagementDao;
 import com.exhibition.domain.carousel;
+import com.exhibition.domain.production_pictures;
 
 /**
  * 轮播图管理的Dao层实现层
@@ -118,6 +119,7 @@ public class CarouselManagementDaoImpl implements CarouselManagementDao {
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		List<carousel> carousel = (List<carousel>) query.list();
+		session.clear();
 		return carousel;
 	}
 	/**
@@ -133,5 +135,36 @@ public class CarouselManagementDaoImpl implements CarouselManagementDao {
 		carousel =(carousel) query.uniqueResult();
 		 return carousel;
 	}
-	
+	/**
+	 * 根据Id查询图片
+	 */
+	@Override
+	public production_pictures getPictureById(String trim) {
+		production_pictures pictures = new production_pictures();
+		Session session = getSession();
+		String hql ="from production_pictures where production_pictures_isdelete='0' and production_pictures_id= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		pictures =(production_pictures) query.uniqueResult();
+		 return pictures;
+	}
+	/**
+	 * 根据信息id查询图集
+	 * @return
+	 */
+	@Override
+	public List<production_pictures> getLaterPicturesById(String trim){
+		List<production_pictures> listPictures = new ArrayList<>();
+		production_pictures productionPictures = new production_pictures();
+		Session session = getSession();
+		String hql = "from production_pictures where production_pictures_isdelete='0' and production_pictures_belong= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		query.setFirstResult(productionPictures.getProduction_pictures_sequence());
+		if(!listPictures.isEmpty()) {
+			listPictures =(List<production_pictures>) query.list();
+		}
+		return listPictures;
+	}
+
 }
