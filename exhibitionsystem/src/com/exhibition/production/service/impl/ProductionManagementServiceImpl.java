@@ -2,6 +2,7 @@ package com.exhibition.production.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
@@ -246,9 +247,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					if (listPictures != null) {
 						productionInfoDTO.setListProductionPictures(listPictures);
 						productionInfoDTO.setProductionInfo(production_info);
-						System.out.println("AAAAAA" + productionInfoDTO);
 						listProductionInfoDTO.add(productionInfoDTO);
-						System.out.println("BBBBBBB" + listProductionInfoDTO);
 					}
 				}
 			}
@@ -493,21 +492,12 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		return result;
 	}
 /**
- * 查询六个平时作业的方法
+ * 查询六条平时作业
  */
 @Override
-public PicTypeInfoDTO querySixproduction() {
-	List<PictureInfoDTO> listPictureInfoDTO = new ArrayList<>();
-	PicTypeInfoDTO picTypeInfoDTO = new PicTypeInfoDTO();
-	production_pictures firstPicture = new production_pictures();
-	production_info info = new production_info();
-	firstPicture = productionManagementDao.getFistPictureById(info.getProduction_info_id());
+public PicTypeInfoDTO querrySixProduction() {
+	List<PicTypeInfoDTO> listPicTypeInfoDTO = new ArrayList<>();
 	
-	
-	
-	
-	
-	
-	return picTypeInfoDTO;
+	return null;
 }
 }

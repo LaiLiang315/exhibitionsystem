@@ -134,7 +134,7 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	@Override
 	public List<production_info> getProductionsInfoById(String trim) {
 		Session session = getSession();
-		String hql = "from production_info where production_info_isdelete ='0' and production_info_isdailywork ='1' and production_info_type= :ID";
+		String hql = "from production_info where production_info_isdelete ='0' and production_info_type= :ID";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		List<production_info> productionInfo = (List<production_info>) query.list();
@@ -247,6 +247,18 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 			fistPicture = (production_pictures) query.list().get(0);
 		}
 		return fistPicture;
+	}
+
+	
+	// 获取带有特殊标记的图集信息
+	@Override
+	public List<production_pictures> getSpectialPic(String pictrueName) {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		String hql = "from production_pictures where production_pictures_sequence='9999' and production_pictures_name like '%"+pictrueName+"%'";
+		Query query = session.createQuery(hql);
+		List<production_pictures> production_pictures = (List<production_pictures>) query.list();
+		return production_pictures;
 	}
 
 }
