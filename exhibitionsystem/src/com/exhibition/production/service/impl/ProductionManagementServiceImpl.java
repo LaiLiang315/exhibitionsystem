@@ -491,4 +491,13 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		}
 		return result;
 	}
+/**
+ * 查询六条平时作业
+ */
+@Override
+public PicTypeInfoDTO querrySixProduction() {
+	List<PicTypeInfoDTO> listPicTypeInfoDTO = new ArrayList<>();
+	
+	return null;
+}
 }
