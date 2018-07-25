@@ -152,26 +152,27 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					 * 查询每个类型的作品的集合
 					 */
 					listInfo = productionManagementDao.getProductionInfoById(production_type.getProduction_type_id());
-					
-					
+
 					if (!listInfo.isEmpty()) {
 						for (production_info info : listInfo) {
 							PictureInfoDTO pictureInfoDTO = new PictureInfoDTO();
-							production_pictures PicureOne =  productionManagementDao.getFistPictureById(info.getProduction_info_id());
-							System.out.println("firstPicure"+PicureOne);
-							if(PicureOne!=null) {
+							production_pictures PicureOne = productionManagementDao
+									.getFistPictureById(info.getProduction_info_id());
+							System.out.println("firstPicure" + PicureOne);
+							if (PicureOne != null) {
 								pictureInfoDTO.setProinfo(info);
 								pictureInfoDTO.setPropicture(PicureOne);
 								listPictureInfoDTO.add(pictureInfoDTO);
 							}
-							
+
 						}
 						PicTypeInfoDTO PicTypeInfoDTO = new PicTypeInfoDTO();
 						PicTypeInfoDTO.setType(production_type);
 						PicTypeInfoDTO.setListPictureInfoDTO(listPictureInfoDTO);
 						listPicTypeInfoDTO.add(PicTypeInfoDTO);
-						/*productionDTO.setListInfo(listInfo);
-						productionDTO.setType(production_type);*/
+						/*
+						 * productionDTO.setListInfo(listInfo); productionDTO.setType(production_type);
+						 */
 						System.out.println("zzzzzz" + productionDTO);
 
 					} else {
@@ -440,7 +441,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 添加图片
 	 */
@@ -448,33 +449,34 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 	public void addPictrues(production_pictures production_picture) {
 		// TODO Auto-generated method stub
 		production_picture.setProduction_pictures_id(BuildUuid.getUuid());
-		//将图集顺序设置为特殊值，便去后面补充信息是重置
+		// 将图集顺序设置为特殊值，便去后面补充信息是重置
 		production_picture.setProduction_pictures_sequence(9999);
 		production_picture.setProduction_pictures_creationtime(TimeUtil.getStringSecond());
 		production_picture.setProduction_pictures_isdelete(0);
 		productionManagementDao.saveOrUpdateObject(production_picture);
 	}
-/**
- * 添加作品信息完善图集信息
- */
+
+	/**
+	 * 添加作品信息完善图集信息
+	 */
 	@Override
 	public String addAndComplete(production_info productionInfo, List<Map<String, Object>> listMap) {
 		// TODO Auto-generated method stub
-		//首先添加作品信息
-		//生成uuid
+		// 首先添加作品信息
+		// 生成uuid
 		String result = null;
 		String productionId = BuildUuid.getUuid();
 		productionInfo.setProduction_info_id(productionId);
 		productionInfo.setProduction_info_isdelete(0);
 		productionManagementDao.saveOrUpdateObject(productionInfo);
-		for(int i=0;i<listMap.size();i++) {
+		for (int i = 0; i < listMap.size(); i++) {
 			String pictrueName = (String) listMap.get(i).get("key");
 			String sequence = (String) listMap.get(i).get("value");
 			int se = Integer.parseInt(sequence);
-			//查询出带有特殊标记的图集信息
+			// 查询出带有特殊标记的图集信息
 			List<production_pictures> listproduction_pictures = productionManagementDao.getSpectialPic(pictrueName);
-			if(listproduction_pictures.size()>0) {
-				production_pictures mypicture= listproduction_pictures.get(0);
+			if (listproduction_pictures.size() > 0) {
+				production_pictures mypicture = listproduction_pictures.get(0);
 				mypicture.setProduction_pictures_belong(productionId);
 				mypicture.setProduction_pictures_sequence(se);
 				try {
@@ -485,19 +487,40 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					e.printStackTrace();
 					result = "error";
 				}
-			}else {
+			} else {
 				result = "error";
 			}
 		}
 		return result;
 	}
-/**
- * 查询六条平时作业
- */
-@Override
-public PicTypeInfoDTO querrySixProduction() {
-	List<PicTypeInfoDTO> listPicTypeInfoDTO = new ArrayList<>();
-	
-	return null;
-}
+
+	/**
+	 * 查询六条平时作业
+	 */
+	@Override
+	public List<PicTypeInfoDTO> querrySixProduction() {
+		List<PicTypeInfoDTO> listPicTypeInfoDTO = new ArrayList<>();
+		PicTypeInfoDTO picTypeInfoDTO = new PicTypeInfoDTO();
+		List<production_type> listType = new ArrayList<>();
+		listType = (List<production_type>) productionManagementDao.listObject("from production_type where 1=1");
+		if (!listType.isEmpty()) {
+
+			for (production_type production_type : listType) {
+				List<production_info> listInfo = new ArrayList<>();
+				listInfo = (List<production_info>) productionManagementDao
+						.getSixProductionInfoById(production_type.getProduction_type_id());
+				if (!listInfo.isEmpty()) {
+					for (production_info production_info : listInfo) {
+
+						
+						
+					}
+
+				}
+
+			}
+		}
+
+		return listPicTypeInfoDTO;
+	}
 }

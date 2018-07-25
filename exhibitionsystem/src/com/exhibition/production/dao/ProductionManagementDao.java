@@ -65,58 +65,84 @@ public interface ProductionManagementDao {
 	 * @return
 	 */
 	public List<production_info> getProductionInfoById(String trim);
-/**
- * 根据id查图集
- * @param trim
- * @return
- */
-	public List<production_pictures> getPictureInfoById(String trim);
-/**
- * 根据id查信息
- * @param trim
- * @return
- */
-	
-	public List<production_info> getProductionsInfoById(String trim);
-/**
- * 根据id查询单条信息
- * @param trim
- * @return
- */
 
-    public ProductionDTO getOnePrductionInfo(String trim);
+	/**
+	 * 根据id查图集
+	 * 
+	 * @param trim
+	 * @return
+	 */
+	public List<production_pictures> getPictureInfoById(String trim);
+
+	/**
+	 * 根据id查信息
+	 * 
+	 * @param trim
+	 * @return
+	 */
+
+	public List<production_info> getProductionsInfoById(String trim);
+
+	/**
+	 * 根据id查询单条信息
+	 * 
+	 * @param trim
+	 * @return
+	 */
+
+	public ProductionDTO getOnePrductionInfo(String trim);
+
+	/**
+	 * 根据id查询信息和类型
+	 * 
+	 * @return
+	 */
+	public List<ProductionDTO> getInfoAndTypeById(String trim);
+
+	/**
+	 * 根据id查询
+	 * 
+	 * @return
+	 */
+	public List<production_pictures> getPicturesById(String trim);
+
+	/**
+	 * 根据作品id查询作品信息
+	 * 
+	 * @param trim
+	 * @return
+	 */
+	public production_info getInfoById(String trim);
+
+	/**
+	 * 根据id查询类型
+	 * 
+	 * @param trim
+	 * @return
+	 */
+	public production_type getTypeById(String trim);
+
+	/**
+	 * 根据id查询图集表中第一条
+	 * 
+	 * @param trim
+	 * @return
+	 */
+	public production_pictures getFistPictureById(String trim);
+
+	/**
+	 * 获取带有特殊标记的图集
+	 * 
+	 * @param pictrueName
+	 */
+	public List<production_pictures> getSpectialPic(String pictrueName);
 /**
- * 根据id查询信息和类型
- * @return
- */
-   public List<ProductionDTO> getInfoAndTypeById(String trim);
-/**
- * 根据id查询
- * @return
- */
-   public List<production_pictures> getPicturesById(String trim);
-/**
- * 根据作品id查询作品信息
+ * 查询前六条信息
  * @param trim
  * @return
  */
-   public production_info getInfoById(String trim);
-/**
- * 根据id查询类型
- * @param trim
- * @return
- */
-   public production_type getTypeById(String trim);
-/**
- * 根据id查询图集表中第一条
- * @param trim
- * @return
- */
-   public production_pictures getFistPictureById(String trim);
-/**
- * 获取带有特殊标记的图集
- * @param pictrueName 
- */
-  public List<production_pictures> getSpectialPic(String pictrueName);
+	public List<production_info> getSixProductionInfoById(String trim);
+
+   public production_info getPicById(String trim);
 
 }

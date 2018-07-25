@@ -530,9 +530,9 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
-		PicTypeInfoDTO picTypeInfoDTO = productionManagementService.querrySixProduction();
+		List<PicTypeInfoDTO> listPicTypeInfoDTO = productionManagementService.querrySixProduction();
 		try {
-			response.getWriter().write(gson.toJson(picTypeInfoDTO));
+			response.getWriter().write(gson.toJson(listPicTypeInfoDTO));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
