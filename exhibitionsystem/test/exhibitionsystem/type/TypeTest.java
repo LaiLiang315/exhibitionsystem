@@ -34,8 +34,6 @@ public class TypeTest {
 	public void deleteTest() {
 		String idList = "Type001,Type002";
 		productionTypeService.deleteProductionType(idList);
-		
-		
 	}
 	
 }
