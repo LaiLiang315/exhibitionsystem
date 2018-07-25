@@ -43,7 +43,8 @@
 				<col width="9">
 				<col width="15%">
 				<col width="12%">
-				<col width="40%">
+				<col width="35%">
+				<col width="9%">
 				<col width="9%">
 				<col width="20%">
 		    </colgroup>
@@ -53,7 +54,8 @@
 					<th>作品名</th>
 					<th>作者</th>
 					<th>作品描述</th>
-					<th>作品类型</th>
+					<th>一级分类</th>
+					<th>二级分类</th>
 					<th>操作</th>
 				</tr>
 		    </thead>
