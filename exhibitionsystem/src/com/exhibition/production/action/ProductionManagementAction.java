@@ -86,7 +86,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 
 	// 定义按单个图集对象
 	private production_pictures production_picture;
-	
+
 	private String pictrueMap;
 
 	public String getPictrueMap() {
@@ -485,28 +485,28 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 
 	}
 
-	//添加
+	// 添加
 	public void addAndComplete() {
-		JSONArray json=JSONArray.fromObject(pictrueMap); //使用net.sf.json.JSONObject对象来解析json
+		JSONArray json = JSONArray.fromObject(pictrueMap); // 使用net.sf.json.JSONObject对象来解析json
 		JSONObject jsonOne;
-		Map<String,Object> map=null;
-		List<Map<String, Object>> listMap=new ArrayList<Map<String,Object>>(); 
-		for(int i=0;i<json.size();i++){
-		map = new HashMap<String,Object>();
-		         jsonOne = json.getJSONObject(i); 
-		         map.put("key", (String) jsonOne.get("Key"));
-		         map.put("value", (String) jsonOne.get("Value"));
-		         //只保留不为空的 键值对
-		         if( (String) jsonOne.get("Value")!=""&&!"".equals( (String) jsonOne.get("Value"))){
-		         listMap.add(map); 
-		         }
+		Map<String, Object> map = null;
+		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
+		for (int i = 0; i < json.size(); i++) {
+			map = new HashMap<String, Object>();
+			jsonOne = json.getJSONObject(i);
+			map.put("key", (String) jsonOne.get("Key"));
+			map.put("value", (String) jsonOne.get("Value"));
+			// 只保留不为空的 键值对
+			if ((String) jsonOne.get("Value") != "" && !"".equals((String) jsonOne.get("Value"))) {
+				listMap.add(map);
+			}
 		}
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
 		// 同时添加作品信息和补充图集信息
-		String result = productionManagementService.addAndComplete(productionInfo,listMap);
+		String result = productionManagementService.addAndComplete(productionInfo, listMap);
 		try {
 			response.getWriter().write(gson.toJson(result));
 		} catch (IOException e) {
@@ -514,6 +514,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 查询六条平时作业
 	 */
@@ -529,7 +530,5 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
-	
 }

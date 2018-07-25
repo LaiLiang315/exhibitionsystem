@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 
 import com.exhibition.domain.carousel;
 import com.exhibition.domain.production_type;
+import com.exhibition.productiontype.DTO.TypeCarouselDTO;
 import com.exhibition.productiontype.dao.ProductionTypeDao;
 
 /**
@@ -138,4 +139,18 @@ public class ProductionTypeDaoImpl implements ProductionTypeDao {
 		carousel = (carousel) query.uniqueResult();
 		return carousel;
 	}
+	/**
+	 * 根据类型id查询轮播图
+	 */
+	@Override
+	public TypeCarouselDTO getNewCarouselById(String trim) {
+		TypeCarouselDTO typeCarouselDTO = new TypeCarouselDTO();
+		Session session = getSession();
+		String hql = "select new com.exhibition.productiontype.DTO.TypeCarouselDTO(carousel,type) from carousel carousel, production_type type where carousel_isdelete='0' and carousel_belong=production_type_id and production_type_id= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		typeCarouselDTO = (TypeCarouselDTO) query.uniqueResult();
+		return typeCarouselDTO;
+	}
+	/*/exhibitionsystem/src/com/exhibition/productiontype/DTO/TypeCarouselDTO.java*/
 }

@@ -25,7 +25,7 @@
 				</div>
 		   </div>
 	<div class="layui-inline">
-		  <a class="layui-btn layui-btn-danger batchDel">批量删除</a>
+		  <a class="layui-btn layui-btn-danger batchDel" onclick="deleteMore()">批量删除</a>
 		</div>
 		<div class="layui-inline">
 			  <div class="layui-input-inline">

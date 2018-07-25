@@ -500,8 +500,10 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 	@Override
 	public List<PicTypeInfoDTO> querrySixProduction() {
 		List<PicTypeInfoDTO> listPicTypeInfoDTO = new ArrayList<>();
+		List<ProductionInfoDTO> listProductionInfoDTO = new ArrayList<>();
 		PicTypeInfoDTO picTypeInfoDTO = new PicTypeInfoDTO();
 		List<production_type> listType = new ArrayList<>();
+		ProductionInfoDTO productionInfoDTO = new ProductionInfoDTO();
 		listType = (List<production_type>) productionManagementDao.listObject("from production_type where 1=1");
 		if (!listType.isEmpty()) {
 
@@ -509,18 +511,23 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 				List<production_info> listInfo = new ArrayList<>();
 				listInfo = (List<production_info>) productionManagementDao
 						.getSixProductionInfoById(production_type.getProduction_type_id());
+				
 				if (!listInfo.isEmpty()) {
 					for (production_info production_info : listInfo) {
-
-						
-						
+						List<production_pictures> pictureFirst = new ArrayList<>();
+						pictureFirst =(List<production_pictures>) productionManagementDao.getFistPictureById(production_info.getProduction_info_id());
+						if(!pictureFirst.isEmpty()) {
+							productionInfoDTO.setListProductionPictures(pictureFirst);
+							productionInfoDTO.setProductionInfo(production_info);
+							listProductionInfoDTO.add(productionInfoDTO);
+						}
 					}
-
+					picTypeInfoDTO.setListProductionInfoDTO(listProductionInfoDTO);
+					picTypeInfoDTO.setType(production_type);
 				}
-
 			}
 		}
-
+		listPicTypeInfoDTO.add(picTypeInfoDTO);
 		return listPicTypeInfoDTO;
 	}
 }

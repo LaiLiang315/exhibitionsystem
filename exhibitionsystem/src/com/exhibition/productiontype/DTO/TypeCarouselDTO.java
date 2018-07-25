@@ -35,6 +35,16 @@ public class TypeCarouselDTO {
 		this.type = type;
 	}
 
+	public TypeCarouselDTO() {
+		super();
+	}
+
+	public TypeCarouselDTO(com.exhibition.domain.carousel carousel, production_type type) {
+		super();
+		this.carousel = carousel;
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
 		return "TypeCarouselDTO [carousel=" + carousel + ", type=" + type + "]";

@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.exhibition.domain.production_type;
+import com.exhibition.productiontype.DTO.TypeCarouselDTO;
 import com.exhibition.productiontype.service.ProductionTypeService;
 
 /**
@@ -35,5 +37,14 @@ public class TypeTest {
 		String idList = "Type001,Type002";
 		productionTypeService.deleteProductionType(idList);
 	}
-	
+	/**
+	 *查询所有类型测试 
+	 */
+	@Test
+	public void querryProductionTypeTest() {
+		TypeCarouselDTO typeCarouselDTO = new TypeCarouselDTO();
+		production_type productionType = new production_type();
+		productionType.setProduction_type_id("Type001");
+ 		productionTypeService.querryProductionType(productionType);
+	}
 }

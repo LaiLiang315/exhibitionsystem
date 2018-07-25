@@ -45,10 +45,11 @@ public interface ProductionTypeService {
 
 	public String updateProductionType(production_type productionType);
 
-	public TypeCarouselDTO querryProductionType(TypeCarouselDTO typeCarouselDTO, production_type productionType);
+	public TypeCarouselDTO querryProductionType(production_type productionType);
 
 	String addCarousel1(carousel carousel);
 
 	String addProductionType1(production_type productionType);
+
 
 }

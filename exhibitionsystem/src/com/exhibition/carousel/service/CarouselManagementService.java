@@ -5,6 +5,7 @@ import java.util.List;
 import com.exhibition.carousel.DTO.CarouselDTO;
 import com.exhibition.carousel.DTO.CarouselManagementDTO;
 import com.exhibition.domain.carousel;
+import com.exhibition.domain.production_info;
 
 /**
  * 轮播图管理的Service层接口
@@ -30,6 +31,12 @@ public interface CarouselManagementService {
  * @return
  */
 	public String addCarousel(carousel carousel);
+/**
+ * 删除作品图片
+ * @param pictures
+ * @return
+ */
+	public String deletePictures(String pictures);
 
 	
 

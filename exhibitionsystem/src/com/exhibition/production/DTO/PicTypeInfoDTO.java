@@ -19,6 +19,8 @@ public class PicTypeInfoDTO {
 	 * PictureInfoDTO
 	 */
 	private List<PictureInfoDTO> listPictureInfoDTO;
+	
+	private List<ProductionInfoDTO> listProductionInfoDTO;
 
 	public production_type getType() {
 		return type;
@@ -36,9 +38,18 @@ public class PicTypeInfoDTO {
 		this.listPictureInfoDTO = listPictureInfoDTO;
 	}
 
+	public List<ProductionInfoDTO> getListProductionInfoDTO() {
+		return listProductionInfoDTO;
+	}
+
+	public void setListProductionInfoDTO(List<ProductionInfoDTO> listProductionInfoDTO) {
+		this.listProductionInfoDTO = listProductionInfoDTO;
+	}
+
 	@Override
 	public String toString() {
-		return "PicTypeInfoDTO [type=" + type + ", listPictureInfoDTO=" + listPictureInfoDTO + "]";
+		return "PicTypeInfoDTO [type=" + type + ", listPictureInfoDTO=" + listPictureInfoDTO
+				+ ", listProductionInfoDTO=" + listProductionInfoDTO + "]";
 	}
 
 }
