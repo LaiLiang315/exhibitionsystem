@@ -486,7 +486,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 
 	}
 
-	// 测试添加
+	//添加
 	public void addAndComplete() {
 		JSONArray json=JSONArray.fromObject(pictrueMap); //使用net.sf.json.JSONObject对象来解析json
 		JSONObject jsonOne;

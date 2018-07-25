@@ -176,7 +176,7 @@ layui.use('form', function(){
 								'<td style="text-align:center;">'+singnalWord+'</td>'+
 								'<td style="text-align:center;">'+productions[i].type.production_type_name+'</td>'+
 								'<td style="text-align:center;">'+
-									'<a class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 编辑</a>'+
+									'<a class="layui-btn layui-btn-mini news_edit" href="http://localhost:8080/exhibitionsystem/skip/skip_intoProductionEdit?data_id='+infoList[j].production_info_id+'"><i class="iconfont icon-edit"></i> 编辑</a>'+
 									'<a class="layui-btn layui-btn-danger layui-btn-mini news_del" onclick="deleteProduction(this)" data_id="'+infoList[j].production_info_id+ '" ><i class="layui-icon">&#xe640;</i> 删除</a>'+
 								'</td>'+
 							'</tr>';
@@ -190,7 +190,6 @@ layui.use('form', function(){
 			form.render();
 		});
 	}
-
 //查询分类下拉菜单
 function putType(listCarouselDTO){
 	var strStart = '<option value=""></option>';
@@ -242,7 +241,7 @@ function putProductionInfo(productionVO){
 						'<td style="text-align:center;">'+singnalWord+'</td>'+
 						'<td style="text-align:center;">'+productions[j].type.production_type_name+'</td>'+
 						'<td style="text-align:center;">'+
-							'<a class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 编辑</a>'+
+							'<a class="layui-btn layui-btn-mini news_edit" href="http://localhost:8080/exhibitionsystem/skip/skip_intoProductionEdit?data_id='+productions[j].info.production_info_id+ '"><i class="iconfont icon-edit"></i> 编辑</a>'+
 							'<a class="layui-btn layui-btn-danger layui-btn-mini news_del" onclick="deleteProduction(this)" data_id="'+productions[j].info.production_info_id+ '" ><i class="layui-icon">&#xe640;</i> 删除</a>'+
 						'</td>'+
 					'</tr>';
