@@ -1413,7 +1413,7 @@ a cite {
 	padding: 15px
 }
 
-.layui-btn, .layui-input, .layui-select, .layui-textarea,
+.layui-btn, .layui-input, .layui-select, .layui-textarea, .layui-input-xjc,
 	.layui-upload-button {
 	outline: 0;
 	-webkit-appearance: none;
@@ -1639,7 +1639,7 @@ a cite {
 	.layui-collapse, .layui-elem-field, .layui-form-pane .layui-form-item[pane],
 	.layui-form-pane .layui-form-label, .layui-input, .layui-layedit,
 	.layui-layedit-tool, .layui-quote-nm, .layui-select, .layui-tab-bar,
-	.layui-tab-card, .layui-tab-title, .layui-tab-title .layui-this:after,
+	.layui-tab-card, .layui-tab-title, .layui-tab-title .layui-this:after, .layui-input-xjc,
 	.layui-textarea {
 	border-color: #e6e6e6
 }
@@ -1859,7 +1859,7 @@ a cite {
 	width: 100%
 }
 
-.layui-input, .layui-select, .layui-textarea {
+.layui-input, .layui-select, .layui-textarea, .layui-input-xjc {
 	height: 38px;
 	line-height: 1.3;
 	line-height: 38px\9;
@@ -1869,7 +1869,7 @@ a cite {
 	border-radius: 2px
 }
 
-.layui-input::-webkit-input-placeholder, .layui-select::-webkit-input-placeholder,
+.layui-input::-webkit-input-placeholder, .layui-select::-webkit-input-placeholder, .layui-input-xjc::-webkit-input-placeholder, 
 	.layui-textarea::-webkit-input-placeholder {
 	line-height: 1.3
 }
@@ -1880,11 +1880,11 @@ a cite {
 	padding-left: 10px
 }
 
-.layui-input:hover, .layui-textarea:hover {
+.layui-input:hover, .layui-input-xjc:hover, .layui-textarea:hover {
 	border-color: #D2D2D2 !important
 }
 
-.layui-input:focus, .layui-textarea:focus {
+.layui-input:focus, .layui-input-xjc:focus, .layui-textarea:focus {
 	border-color: #C9C9C9 !important
 }
 
@@ -1974,12 +1974,12 @@ a cite {
 	margin-right: 10px
 }
 
-.layui-form-danger+.layui-form-select .layui-input, .layui-form-danger:focus
+.layui-form-danger+.layui-form-select .layui-input, .layui-input-xjc, .layui-form-danger:focus
 	{
 	border-color: #FF5722 !important
 }
 
-.layui-form-select .layui-input {
+.layui-form-select .layui-input .layui-input-xjc {
 	padding-right: 30px;
 	cursor: pointer
 }
@@ -2339,7 +2339,7 @@ a cite {
 	left: -1px
 }
 
-.layui-form-pane .layui-input {
+.layui-form-pane .layui-input .layui-input-xjc {
 	border-radius: 0 2px 2px 0
 }
 

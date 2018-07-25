@@ -182,5 +182,5 @@ layui.use('upload', function(){
 		    		saveProductionInfo();
 		    	}
 		    }
-		})	    
-});
+		    
+});})

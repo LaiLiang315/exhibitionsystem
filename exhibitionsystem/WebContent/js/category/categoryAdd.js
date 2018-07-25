@@ -58,11 +58,15 @@ function upload(){
      				var res=result.split(",");	//祛痘大法好啊！！！去他妈的逗号
      				console.log("获取后台的返回结果"+res[0]);
      				if (res[0] == "uploadsuccess") {
-     					console.log("===添加成功....===");
      					toastr.success("信息添加成功！");
+     					setTimeout(function(){
+    						location.href="/exhibitionsystem/skip/skip_intoCategoryList";
+    					},500);
      				} else {
-     					console.log("===添加失败....===");
      					toastr.error("信息添加失败！");
+     					setTimeout(function(){
+    						location.href="/exhibitionsystem/skip/skip_intoCategoryList";
+    					},500);
      				}
      			},
      		});

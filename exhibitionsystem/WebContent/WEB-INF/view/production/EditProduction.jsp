@@ -99,6 +99,7 @@
 	</div>
 	</form>
 	
+	
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js" ></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/productionEdit.js"></script>
