@@ -24,9 +24,20 @@ function show_categoryInfo (){
 		success : function(productionType) {
 			if(productionType.success=true){
 				var vo=JSON.parse(productionType);
-				console.log("vo======"+productionType);
-				show_info(vo);
 			}
+			console.log("vo-------------"+productionType);
+				str+='<tr>'+ 
+				'<td style="text-align:center;"><input type="checkbox" name="item" lay-skin="primary" lay-filter="choose" value="'+votypee.production_type_id+'"/></td>'+
+				'<td style="text-align:center;">'+typename+'</td>'+
+				'<td style="text-align:center;">'+limitypetitle+'</td>'+
+				'<td style="text-align:center;">'+limitypediscription+'</td>'+
+				'<td style="text-align:center;">'+
+					'<a class="layui-btn layui-btn-mini news_edit" href="/exhibitionsystem/skip/skip_intoCategoryEdit?data_id='+votypee.production_type_id+'" data_id="'+votypee.production_type_id+'"><i class="iconfont icon-edit"></i>编辑</a>'+
+					'<a class="layui-btn layui-btn-danger layui-btn-mini news_del" onclick="category_delete(this)" data_id="'+votypee.production_type_id+ '" ><i class="layui-icon">&#xe640;</i> 删除</a>'+
+				'</td>'+
+			'</tr>';
+			console.log("fd:"+str)
+			category_table_info.innerHTML=str;
 			layui.use('form', function(){
 				var form = layui.form; 
 				form.render();
@@ -74,5 +85,6 @@ function show_info(vo){
 "</div>"+
 "</div>"
 category_table_info.innerHTML=str;
-}
-
+}				
+	}
+	});
