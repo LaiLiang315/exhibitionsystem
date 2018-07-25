@@ -112,6 +112,6 @@ public interface ProductionManagementService {
 	 * 查询六条平时作业
 	 * @return
 	 */
-	public PicTypeInfoDTO querrySixProduction();
+	public List<PicTypeInfoDTO> querrySixProduction();
 
 }

@@ -281,7 +281,6 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 
 	}
 
-	// 图片转为二进制流输出
 	public String IoReadImage() throws IOException {
 		System.out.println("====ppp");
 		fileFileName = new String(fileFileName.getBytes("ISO8859-1"), "UTF-8");//解决图片中文路径乱码
@@ -298,15 +297,8 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			while ((len = in.read(buffer)) != -1) {
 				out.write(buffer, 0, len);
 			}
-			out.flush();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			out.close();
-			in.close();
+			return null;
 		}
-		return null;
-	}
 
 	/**
 	 * 获取单个作品信息和图集
@@ -531,9 +523,9 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
-		PicTypeInfoDTO picTypeInfoDTO = productionManagementService.querrySixProduction();
+		List<PicTypeInfoDTO> listPicTypeInfoDTO = productionManagementService.querrySixProduction();
 		try {
-			response.getWriter().write(gson.toJson(picTypeInfoDTO));
+			response.getWriter().write(gson.toJson(listPicTypeInfoDTO));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -22,7 +22,7 @@ function getProductionTypeInfo() {
 function putType(listCarouselDTO){
 	var strStart = '<option value=""></option>';
 	var str="";
-	var typeNames= document.querySelector("#selectTypes");// 定位放入的位置
+	var typeNames= document.querySelector("#selectTypes");//定位放入的位置
 	var length = listCarouselDTO.length;
 	//遍历对象
 	for(var i=0;i<length;i++){
@@ -70,7 +70,6 @@ function putOneProInfo(productionThreeFormDTO){
 	$("input[name=sex][value=0]").attr("checked", productionThreeFormDTO.productionDTO.info.production_info_isdailywork == 0 ? true : false)
 	$("input[name=sex][value=1]").attr("checked", productionThreeFormDTO.productionDTO.info.production_info_isdailywork == 1 ? true : false)
 	document.getElementById("proDiscription").value = productionThreeFormDTO.productionDTO.info.production_info_discription;
-	
 }
 //获取url指定参数值
 function GetQueryString(name) {
