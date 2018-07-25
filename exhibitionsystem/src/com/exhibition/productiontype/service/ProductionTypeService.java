@@ -47,4 +47,8 @@ public interface ProductionTypeService {
 
 	public TypeCarouselDTO querryProductionType(TypeCarouselDTO typeCarouselDTO, production_type productionType);
 
+	String addCarousel1(carousel carousel);
+
+	String addProductionType1(production_type productionType);
+
 }

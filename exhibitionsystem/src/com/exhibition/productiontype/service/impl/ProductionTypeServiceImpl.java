@@ -54,7 +54,31 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 		}
 		return result;
 	}
-
+	
+	//单独添加轮播
+	@Override
+	public String addCarousel1(carousel carousel){
+		String result = null;
+		if (carousel != null) {
+			productionTypeDao.saveOrUpdateObject(carousel);
+			result="success";
+		}else{
+			result="error";
+		}
+		return result;
+	}
+	//单独添加类型
+	@Override
+	public String addProductionType1(production_type productionType){
+		String result = null;
+		if (productionType != null) {
+			productionTypeDao.saveOrUpdateObject(productionType);
+			result="success";
+		}else{
+			result="error";
+		}
+		return result;
+	}
 	/**
 	 * 删除成功deleteSuccess 删除失败error 删除类型
 	 */
@@ -67,7 +91,7 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 			 * 将多个对象id去掉分隔符转化为数组
 			 */
 			String[] deleteIdList = idList.split(",");
-			System.out.println(Arrays.toString(deleteIdList) + "uuuu" + deleteIdList[1]);
+			//System.out.println(Arrays.toString(deleteIdList) + "uuuu" + deleteIdList[1]);
 			/**
 			 * 遍历数组String id : deleteIdList
 			 */
