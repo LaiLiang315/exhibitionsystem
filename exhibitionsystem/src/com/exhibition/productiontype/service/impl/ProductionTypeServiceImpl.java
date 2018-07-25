@@ -10,6 +10,7 @@ import com.exhibition.productiontype.service.ProductionTypeService;
 
 import util.BuildUuid;
 import util.TimeUtil;
+import util.uploadFiles;
 
 /**
  * 作品类型管理Service层实现层
@@ -136,6 +137,13 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 	public String updateProductionType(production_type productionType) {
 		if (productionType != null) {
 			productionType.setProduction_type_modifytime(TimeUtil.getStringSecond());
+			carousel carousel = new carousel();
+			carousel = productionTypeDao.getCarouselById(productionType.getProduction_type_id());
+			if(carousel!=null) {
+				carousel.setCarousel_isshow(1);
+				carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
+				carousel.setCarousel_isdelete(0);
+			}
 			productionTypeDao.saveOrUpdateObject(productionType);
 		}
 		return null;
