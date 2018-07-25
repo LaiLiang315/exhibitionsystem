@@ -5,7 +5,6 @@ $(document).ready(function(){
 	//获取作品信息
 	getProductionInfo();
 });
-
 //首页查询分类信息
 function getProductionTypeInfo() {
 	$.ajax({
