@@ -352,6 +352,12 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
 		ProductionThreeFormDTO productionThreeFormDTO = productionManagementService.querryOneProduction(productionInfo);
+		try {
+			response.getWriter().write(gson.toJson(productionThreeFormDTO));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
