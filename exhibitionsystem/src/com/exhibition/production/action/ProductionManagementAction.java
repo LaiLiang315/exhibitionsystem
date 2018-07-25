@@ -284,8 +284,9 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	// 图片转为二进制流输出
 	public String IoReadImage() throws IOException {
 		System.out.println("====ppp");
+		fileFileName = new String(fileFileName.getBytes("ISO8859-1"), "UTF-8");//解决图片中文路径乱码
 		String linkurl = "D:\\Aupload\\test\\" + fileFileName;
-		FileInputStream in = new FileInputStream(new File(linkurl));
+		FileInputStream in = new FileInputStream(linkurl);
 		ServletOutputStream out = null;
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("image/png");

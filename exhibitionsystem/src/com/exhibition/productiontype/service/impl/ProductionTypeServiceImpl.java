@@ -142,21 +142,15 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 	}
 
 	/**
-	 * 查询所有类型
+	 * 查询单个类型和轮播图
 	 */
 	@Override
-	public TypeCarouselDTO querryProductionType(TypeCarouselDTO typeCarouselDTO, production_type productionType) {
+	public TypeCarouselDTO querryProductionType(production_type productionType) {
 		TypeCarouselDTO TypeCarouselDTONew = new TypeCarouselDTO();
-		carousel carousel = new carousel();
 		production_type productionTypeNew = new production_type();
-		carousel = productionTypeDao.getCarouselById(productionType.getProduction_type_id());
-		if (carousel != null) {
-			TypeCarouselDTONew.setCarousel(carousel);
-		}
-		productionTypeNew = productionTypeDao.getTypeById(productionType.getProduction_type_id());
-		if (productionTypeNew != null) {
-			TypeCarouselDTONew.setType(productionTypeNew);
-		}
+		TypeCarouselDTONew = productionTypeDao.getNewCarouselById(productionType.getProduction_type_id());
+		System.out.println("AAAAAAA"+TypeCarouselDTONew);
 		return TypeCarouselDTONew;
 	}
+
 }
