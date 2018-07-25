@@ -2,6 +2,7 @@ package com.exhibition.production.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.exhibition.domain.production_info;
 import com.exhibition.domain.production_pictures;
@@ -457,21 +458,37 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
  * 添加作品信息完善图集信息
  */
 	@Override
-	public void addAndComplete(production_info productionInfo) {
+	public String addAndComplete(production_info productionInfo, List<Map<String, Object>> listMap) {
 		// TODO Auto-generated method stub
 		//首先添加作品信息
 		//生成uuid
+		String result = null;
 		String productionId = BuildUuid.getUuid();
 		productionInfo.setProduction_info_id(productionId);
 		productionInfo.setProduction_info_isdelete(0);
 		productionManagementDao.saveOrUpdateObject(productionInfo);
-		//查询出带有特殊标记的图集信息
-		List<production_pictures> listproduction_pictures = productionManagementDao.getSpectialPic();
-		//遍历list并且设置顺序
-		for(int i=0;i<listproduction_pictures.size();i++) {
-			listproduction_pictures.get(i).setProduction_pictures_belong(productionId);
-			listproduction_pictures.get(i).setProduction_pictures_sequence(i+1);
-			productionManagementDao.saveOrUpdateObject(listproduction_pictures.get(i));
+		for(int i=0;i<listMap.size();i++) {
+			String pictrueName = (String) listMap.get(i).get("key");
+			String sequence = (String) listMap.get(i).get("value");
+			int se = Integer.parseInt(sequence);
+			//查询出带有特殊标记的图集信息
+			List<production_pictures> listproduction_pictures = productionManagementDao.getSpectialPic(pictrueName);
+			if(listproduction_pictures.size()>0) {
+				production_pictures mypicture= listproduction_pictures.get(0);
+				mypicture.setProduction_pictures_belong(productionId);
+				mypicture.setProduction_pictures_sequence(se);
+				try {
+					productionManagementDao.saveOrUpdateObject(mypicture);
+					result = "success";
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					result = "error";
+				}
+			}else {
+				result = "error";
+			}
 		}
+		return result;
 	}
 }

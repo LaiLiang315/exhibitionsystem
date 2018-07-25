@@ -5,7 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +30,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import util.uploadFiles;
 
 /**
@@ -80,6 +85,16 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 
 	// 定义按单个图集对象
 	private production_pictures production_picture;
+	
+	private String pictrueMap;
+
+	public String getPictrueMap() {
+		return pictrueMap;
+	}
+
+	public void setPictrueMap(String pictrueMap) {
+		this.pictrueMap = pictrueMap;
+	}
 
 	public production_pictures getProduction_picture() {
 		return production_picture;
@@ -473,7 +488,31 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 
 	// 测试添加
 	public void addAndComplete() {
+		JSONArray json=JSONArray.fromObject(pictrueMap); //使用net.sf.json.JSONObject对象来解析json
+		JSONObject jsonOne;
+		Map<String,Object> map=null;
+		List<Map<String, Object>> listMap=new ArrayList<Map<String,Object>>(); 
+		for(int i=0;i<json.size();i++){
+		map = new HashMap<String,Object>();
+		         jsonOne = json.getJSONObject(i); 
+		         map.put("key", (String) jsonOne.get("Key"));
+		         map.put("value", (String) jsonOne.get("Value"));
+		         //只保留不为空的 键值对
+		         if( (String) jsonOne.get("Value")!=""&&!"".equals( (String) jsonOne.get("Value"))){
+		         listMap.add(map); 
+		         }
+		}
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
 		// 同时添加作品信息和补充图集信息
-		productionManagementService.addAndComplete(productionInfo);
+		String result = productionManagementService.addAndComplete(productionInfo,listMap);
+		try {
+			response.getWriter().write(gson.toJson(result));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

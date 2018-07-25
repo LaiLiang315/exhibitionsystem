@@ -252,10 +252,10 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	
 	// 获取带有特殊标记的图集信息
 	@Override
-	public List<production_pictures> getSpectialPic() {
+	public List<production_pictures> getSpectialPic(String pictrueName) {
 		// TODO Auto-generated method stub
 		Session session = getSession();
-		String hql = "from production_pictures where production_pictures_sequence='9999'";
+		String hql = "from production_pictures where production_pictures_sequence='9999' and production_pictures_name like '%"+pictrueName+"%'";
 		Query query = session.createQuery(hql);
 		List<production_pictures> production_pictures = (List<production_pictures>) query.list();
 		return production_pictures;

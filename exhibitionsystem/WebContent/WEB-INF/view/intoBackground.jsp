@@ -115,6 +115,7 @@ request.setAttribute("path", basePath);
 	<script type="text/javascript" src="<%=basePath %>js/toastr.js"></script>
 	<script type="text/javascript" src="<%=basePath %>js/login/login.js"></script>
 	<script type="text/javascript" src="<%=basePath %>layui/lay/modules/layer.js" ></script>
+	<script type="text/javascript" src="<%=basePath %>js/login/show_time.js"></script>
 	<script type="text/javascript">
 	layui.use('element', function(){
 		  var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
