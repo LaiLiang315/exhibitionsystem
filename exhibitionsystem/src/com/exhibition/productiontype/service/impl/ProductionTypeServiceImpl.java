@@ -54,31 +54,33 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 		}
 		return result;
 	}
-	
-	//单独添加轮播
+
+	// 单独添加轮播
 	@Override
-	public String addCarousel1(carousel carousel){
+	public String addCarousel1(carousel carousel) {
 		String result = null;
 		if (carousel != null) {
 			productionTypeDao.saveOrUpdateObject(carousel);
-			result="success";
-		}else{
-			result="error";
+			result = "success";
+		} else {
+			result = "error";
 		}
 		return result;
 	}
-	//单独添加类型
+
+	// 单独添加类型
 	@Override
-	public String addProductionType1(production_type productionType){
+	public String addProductionType1(production_type productionType) {
 		String result = null;
 		if (productionType != null) {
 			productionTypeDao.saveOrUpdateObject(productionType);
-			result="success";
-		}else{
-			result="error";
+			result = "success";
+		} else {
+			result = "error";
 		}
 		return result;
 	}
+
 	/**
 	 * 删除成功deleteSuccess 删除失败error 删除类型
 	 */
@@ -91,7 +93,7 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 			 * 将多个对象id去掉分隔符转化为数组
 			 */
 			String[] deleteIdList = idList.split(",");
-			//System.out.println(Arrays.toString(deleteIdList) + "uuuu" + deleteIdList[1]);
+			// System.out.println(Arrays.toString(deleteIdList) + "uuuu" + deleteIdList[1]);
 			/**
 			 * 遍历数组String id : deleteIdList
 			 */
@@ -99,14 +101,19 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 				System.out.println("111111" + deleteIdList);
 				production_type type = new production_type();
 				type = productionTypeDao.getTypeById(id);
-
 				System.out.println("AAAAA" + type);
 				if (type != null) {
 					type.setProduction_type_isdelete(1);
 					type.setProduction_type_modifytime(TimeUtil.getStringSecond());
-					System.out.println("DDDDDD" + type);
+
+					carousel carousel = new carousel();
+					carousel = productionTypeDao.getCarouselById(id);
+					if (carousel != null) {
+						carousel.setCarousel_isdelete(1);
+						productionTypeDao.saveOrUpdateObject(carousel);
+					}
+
 					productionTypeDao.saveOrUpdateObject(type);
-					System.out.println("=======");
 					result = "deleteSuccess";
 				} else {
 					result = "error";
