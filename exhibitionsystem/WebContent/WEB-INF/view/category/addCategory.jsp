@@ -24,26 +24,26 @@
 </head>
 <body class="childrenBody">
 	<form class="layui-form" style="width:100%;">
-	<div style="width:60%;">
+	<div style="width:50%;">
 		<div class="layui-form-item">
 			<div class="layui-inline">
 			<label class="layui-form-label">类别名称</label>
 			<div class="layui-input-block">
-				<input type="text" name="production_type_name" class="layui-input userName" lay-verify="required" placeholder="请输入类别名">
+				<input type="text" name="production_info_name" class="layui-input userName" lay-verify="required" placeholder="请输入作品名">
 			</div>
 			</div>
-		</div>
-		<div class="layui-form-item">	
+		<div class="layui-inline">
 			<label class="layui-form-label">类别标题</label>
 			<div class="layui-input-block">
-				<input type="text" name="production_type_title" class="layui-input userEmail" lay-verify="email" placeholder="请输入类别标题">
+				<input type="text" name="production_info_author" class="layui-input userEmail" lay-verify="email" placeholder="请输入作者">
 			</div>
+		</div>
 		</div>
 
 		<div class="layui-form-item">
 			<label class="layui-form-label">类别描述</label>
 			<div class="layui-input-block">
-				<textarea name="production_type_discription" placeholder="请输入类别描述" class="layui-textarea linksDesc"></textarea>
+				<textarea name="" placeholder="请输入作品描述" class="layui-textarea linksDesc"></textarea>
 			</div>
 		</div>
 	</div>	
@@ -51,47 +51,46 @@
 <!-- ===========轮播背景图上传======= -->
 <div class="layui-upload" style="margin-left:40px;">
 <div id="upload1" >
-  <button type="button" class="layui-btn" onclick="file1.click()">点击上传轮播背景图</button>
-  <input type="file" class="file" id="file1" name="file1" style="display:none"/><br/>
+  <button type="button" class="layui-btn" id="test1">点击上传轮播背景图</button>
   <div class="layui-upload-list">
     <img class="layui-upload-img" id="demo1" style="width:288px;height:130px;">
     <p id="demoText"></p>
   </div>
+<button type="button" class="layui-btn" id="testListAction1">立即上传</button>
 </div>
 
 <!-- ===========分类LOGO图上传======= -->
 <div id="upload2-3">
 <div id="upload2" >
-  <button type="button" class="layui-btn" onclick="file2.click()">上传分类LOGO图</button>
-  <input type="file" class="file" id="file2" name="file2" style="display:none"/><br/>
+  <button type="button" class="layui-btn" id="test2">上传分类LOGO图</button>
   <div class="layui-upload-list">
     <img class="layui-upload-img" id="demo2" style="width:115px;height:122px;">
     <p id="demoText"></p>
   </div>
+<button type="button" class="layui-btn" id="testListAction2">立即上传</button>
 </div>
 
 <!-- ==========作品代表图上传======= -->
 <div id="upload3">
-  <button type="button" class="layui-btn" onclick="file3.click()">上传作品代表图</button>
-  <input type="file" class="file" id="file3" name="file3" style="display:none"/><br/>
+  <button type="button" class="layui-btn" id="test3">上传作品代表图</button>
   <div class="layui-upload-list">
     <img class="layui-upload-img" id="demo3" style="width:115px;height:122px;">
     <p id="demoText"></p>
   </div>
+<button type="button" class="layui-btn" id="testListAction3">立即上传</button>  
 </div>
 </div>
 
 </div>
 	<div class="layui-form-item" style="margin-top:40px;">
 			<div class="layui-input-block">
-				<input type="button" class="layui-btn" id="addCategory" onclick="upload()" lay-filter="addUser" value="立即提交">
+				<button class="layui-btn" id="addProduction" lay-filter="addUser">立即提交</button>
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 		    </div>
 	</div>
 	</form>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/category/form.js" ></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/category/categoryAdd.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/toastr.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/category/upload.js"></script>
 </body>
 </html>

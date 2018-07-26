@@ -24,7 +24,7 @@
 </head>
 <body class="childrenBody">
 	<form class="layui-form" style="width:100%;">
-	<div style="width:60%;">
+	<div style="width:50%;">
 		<div class="layui-form-item">
 			<div class="layui-inline">
 			<label class="layui-form-label">类别名称</label>
@@ -73,6 +73,7 @@
     <p id="demoText"></p>
   </div>
 </div>
+
 
 <!-- ==========作品代表图上传======= -->
 <div id="upload3">

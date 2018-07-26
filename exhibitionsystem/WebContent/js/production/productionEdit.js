@@ -94,6 +94,7 @@ function putOneProInfo(productionThreeFormDTO){
         '<td>已上传</td>'+
         '<td>'+
           '<input type="button" class="layui-btn layui-btn-xs layui-btn-danger" deletePictureId="'+pictrues[i].production_pictures_id+'" onclick="deletePictrue(this);" value="删除" />'+
+
         '</td>'+
       '</tr>'
 	}
@@ -127,6 +128,7 @@ function deletePictrue(deleteObj){
 				setTimeout(function(){
 					location.href="http://localhost:8080/exhibitionsystem/skip/skip_intoProductionEdit?data_id="+productionId+"";
 				},500);
+
 			}else{
 				toastr.error("删除失败!");
 			}
@@ -140,11 +142,13 @@ function checkNull(){
 	if($("input[name='production_info_name']").val()==""||$("input[name='production_info_name']").val()==null){
 		toastr.error("请填写作品名!");
 		return false;
+
 	}else if($("input[name='production_info_author']").val()==""||$("input[name='production_info_author']").val()==null){
 		toastr.error("请填写作者!");
 	}else if(typeId==null||typeId==""){
 		toastr.error("请选择作品类型!");
 		return false;
+
 	}else if($("input[name='production_info_creationtime']").val()==""||$("input[name='production_info_creationtime']").val()==null){
 		toastr.error("请选创作时间!");
 	}else if($("#proDiscription").val()==null||$("#proDiscription").val()==""){
@@ -153,6 +157,7 @@ function checkNull(){
 		toastr.error("请上传作品图片!");
 	}else{
 		changeProInfo();
+
 	}
 }
 //修改作品信息
@@ -220,6 +225,7 @@ layui.use('upload', function(){
 		    elem: '#addPic'			//指向容器选择器，如：elem: '#id'
 		    ,url: '/exhibitionsystem/productionManagement/productionManagement_uploadAndSavePic'
 		    ,accept: 'images'
+
 		    ,data:{'production_picture.production_pictures_belong':belongId}
 		    ,multiple: true
 		    ,auto: false
@@ -271,6 +277,7 @@ layui.use('upload', function(){
 	    			throw SyntaxError();
 	    		}
 		    }
+
 		    ,done: function(res, index, upload){
 		      if(res.code == 0){ //上传成功
 		        var tr = demoListView.find('tr#upload-'+ index)
