@@ -191,6 +191,7 @@ function show_scrolList(currentType) {
 			if(result.success=true){
 				console.log("result"+JSON.parse(result));
 				var vo=JSON.parse(result);
+				//console.log("vo"+JSON.stringify(vo));
 				// 显示article信息列表
 				var card_table_info =  document.querySelector("#productionList");		//获取文档元素
 				card_table_info.innerHTML;

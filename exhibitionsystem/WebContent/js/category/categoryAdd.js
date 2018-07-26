@@ -98,7 +98,8 @@ function upload(){
 			formData.append('production_type_name', production_type_name);
 			formData.append('production_type_title', production_type_title);
 			formData.append('production_type_discription', production_type_discription);
-		if(file1.files[0] != null &&file2.files[0]!=null&&file3.files[0]!=null&&production_type_name!="" && production_type_title!="" && production_type_discription!=""){
+			console.log("file1.files[0]="+file1.files[0]+"file2.files[0]="+file2.files[0]+"production_type_name="+production_type_name);
+		if(file1.files[0] != null &&file2.files[0]!=null&&production_type_name!="" ){
 			
 			$.ajax({
 				url:"/exhibitionsystem/productionTypeManagement/productionManagement_addProductionType",

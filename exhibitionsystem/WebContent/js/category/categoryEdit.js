@@ -159,7 +159,7 @@ function upload2(){
 			formData.append('production_type_id', pp_id);
 			formData.append('production_type_title', production_type_title);
 			formData.append('production_type_discription', production_type_discription);
-		if(production_type_name!="" && production_type_title!="" && production_type_discription!=""){
+		if(production_type_name!=""){
 			$.ajax({
 				url:"/exhibitionsystem/productionTypeManagement/productionManagement_editProductionTypeCarousel",
 				type : "POST",

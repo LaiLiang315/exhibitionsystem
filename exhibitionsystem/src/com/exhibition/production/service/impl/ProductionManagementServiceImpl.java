@@ -141,8 +141,6 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 			List<production_type> listproductiontype = (List<production_type>) productionManagementDao.queryForPage(
 					"from production_type where production_type_isdelete='0' order by production_type_modifytime desc",
 					productionVO.getPageIndex(), productionVO.getPageSize());
-			System.out.println("22222"+listproductiontype);
-			
 			// 遍历类型表
 			for (production_type production_type : listproductiontype) {
 				System.out.println("HHHHHHH");
@@ -154,32 +152,37 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					 * 查询每个类型的作品的集合
 					 */
 					listInfo = productionManagementDao.getProductionInfoById(production_type.getProduction_type_id());
+
 					if (!listInfo.isEmpty()) {
 						for (production_info info : listInfo) {
 							PictureInfoDTO pictureInfoDTO = new PictureInfoDTO();
 							production_pictures PicureOne = productionManagementDao
 									.getFistPictureById(info.getProduction_info_id());
+							System.out.println("firstPicure" + PicureOne);
 							if (PicureOne.getProduction_pictures_id() != null) {
 								pictureInfoDTO.setProinfo(info);
 								pictureInfoDTO.setPropicture(PicureOne);
-								System.out.println("??????"+pictureInfoDTO);
 								listPictureInfoDTO.add(pictureInfoDTO);
-								System.out.println("LLLLLLL"+listPictureInfoDTO);
 							}
 
 						}
 						PicTypeInfoDTO PicTypeInfoDTO = new PicTypeInfoDTO();
 						PicTypeInfoDTO.setType(production_type);
 						PicTypeInfoDTO.setListPictureInfoDTO(listPictureInfoDTO);
-						System.out.println("wwwwww"+PicTypeInfoDTO);
 						listPicTypeInfoDTO.add(PicTypeInfoDTO);
-						System.out.println("MMMMMMMM"+listPicTypeInfoDTO);
 						/*
 						 * productionDTO.setListInfo(listInfo); productionDTO.setType(production_type);
 						 */
-					} 
+						System.out.println("zzzzzz" + productionDTO);
+
+					} else {
+						return null;
+					}
 				}
 			}
+			/**
+			 * 分页获取单位列表
+			 */
 			productionVO.setList(listPicTypeInfoDTO);
 			System.out.println("--------------" + productionVO);
 			return productionVO;
@@ -508,13 +511,12 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 				List<production_info> listInfo = new ArrayList<>();
 				listInfo = (List<production_info>) productionManagementDao
 						.getSixProductionInfoById(production_type.getProduction_type_id());
-
+				
 				if (!listInfo.isEmpty()) {
 					for (production_info production_info : listInfo) {
 						List<production_pictures> pictureFirst = new ArrayList<>();
-						pictureFirst = (List<production_pictures>) productionManagementDao
-								.getFistPictureById(production_info.getProduction_info_id());
-						if (!pictureFirst.isEmpty()) {
+						pictureFirst =(List<production_pictures>) productionManagementDao.getFistPictureById(production_info.getProduction_info_id());
+						if(!pictureFirst.isEmpty()) {
 							productionInfoDTO.setListProductionPictures(pictureFirst);
 							productionInfoDTO.setProductionInfo(production_info);
 							listProductionInfoDTO.add(productionInfoDTO);
