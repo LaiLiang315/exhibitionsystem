@@ -86,7 +86,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 
 	// 定义按单个图集对象
 	private production_pictures production_picture;
-	
+
 	private String pictrueMap;
 
 	public String getPictrueMap() {
@@ -308,22 +308,6 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		return null;
 	}
 
-	/**
-	 * 获取单个作品信息和图集
-	 */
-	public void getProductionInfoOne() {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		response.setContentType("text/html;charset=utf-8");
-		List<ProductionInfoDTO> listProductionInfoDTO = productionManagementService.getProductionInfo();
-		try {
-			response.getWriter().write(gson.toJson(listProductionInfoDTO));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * 分页显示所有作品
@@ -435,7 +419,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 						System.out.println("文件夹路径存在:" + uploadFile);
 					}
 					String filename = path + File.separator + fileFileName;
-					fileFileName = scrol_id + "_" + fileFileName;
+					fileFileName = scrol_id + fileFileName;
 					FileInputStream in = new FileInputStream(file);
 					FileOutputStream out = new FileOutputStream(filename);
 					byte[] b = new byte[1024];
@@ -471,7 +455,6 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		String belongId = "";
 		System.out.println("给我输出这个对象" + production_picture);
 		System.out.println("输出下：" + idList);
-		System.out.println("belongId??:" + (production_picture.getProduction_pictures_belong().trim().length() <= 0));
 		/*
 		 * //判断belongid是否为空
 		 * if(production_picture.getProduction_pictures_belong()==null||
@@ -501,28 +484,28 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 
 	}
 
-	//添加
+	// 添加
 	public void addAndComplete() {
-		JSONArray json=JSONArray.fromObject(pictrueMap); //使用net.sf.json.JSONObject对象来解析json
+		JSONArray json = JSONArray.fromObject(pictrueMap); // 使用net.sf.json.JSONObject对象来解析json
 		JSONObject jsonOne;
-		Map<String,Object> map=null;
-		List<Map<String, Object>> listMap=new ArrayList<Map<String,Object>>(); 
-		for(int i=0;i<json.size();i++){
-		map = new HashMap<String,Object>();
-		         jsonOne = json.getJSONObject(i); 
-		         map.put("key", (String) jsonOne.get("Key"));
-		         map.put("value", (String) jsonOne.get("Value"));
-		         //只保留不为空的 键值对
-		         if( (String) jsonOne.get("Value")!=""&&!"".equals( (String) jsonOne.get("Value"))){
-		         listMap.add(map); 
-		         }
+		Map<String, Object> map = null;
+		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
+		for (int i = 0; i < json.size(); i++) {
+			map = new HashMap<String, Object>();
+			jsonOne = json.getJSONObject(i);
+			map.put("key", (String) jsonOne.get("Key"));
+			map.put("value", (String) jsonOne.get("Value"));
+			// 只保留不为空的 键值对
+			if ((String) jsonOne.get("Value") != "" && !"".equals((String) jsonOne.get("Value"))) {
+				listMap.add(map);
+			}
 		}
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
 		// 同时添加作品信息和补充图集信息
-		String result = productionManagementService.addAndComplete(productionInfo,listMap);
+		String result = productionManagementService.addAndComplete(productionInfo, listMap);
 		try {
 			response.getWriter().write(gson.toJson(result));
 		} catch (IOException e) {
@@ -530,6 +513,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 查询六条平时作业
 	 */
@@ -545,7 +529,51 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
-	
+	//作品修改方法（仅修改作品信息）
+	public void updateProductionInfo() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		System.out.println("productionInfo=="+productionInfo);
+		// 同时添加作品信息和补充图集信息
+		String result = productionManagementService.updateProductionInfo(productionInfo);
+		try {
+			response.getWriter().write(gson.toJson(result));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	//作品修改方法
+	public void updateProductionAndPicInfo() {
+		JSONArray json = JSONArray.fromObject(pictrueMap); // 使用net.sf.json.JSONObject对象来解析json
+		JSONObject jsonOne;
+		Map<String, Object> map = null;
+		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
+		for (int i = 0; i < json.size(); i++) {
+			map = new HashMap<String, Object>();
+			jsonOne = json.getJSONObject(i);
+			map.put("key", (String) jsonOne.get("Key"));
+			map.put("value", (String) jsonOne.get("Value"));
+			// 只保留不为空的 键值对
+			if ((String) jsonOne.get("Value") != "" && !"".equals((String) jsonOne.get("Value"))) {
+				listMap.add(map);
+			}
+		}
+		System.out.println("listMap"+listMap);
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		// 同时添加作品信息和补充图集信息
+		String result = productionManagementService.updateProductionAndPicInfo(productionInfo, listMap);
+		try {
+			response.getWriter().write(gson.toJson(result));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

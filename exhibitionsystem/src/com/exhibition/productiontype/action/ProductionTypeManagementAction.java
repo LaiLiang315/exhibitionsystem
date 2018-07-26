@@ -53,7 +53,16 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 	private String production_type_name;
 	private String production_type_discription;
 	private String production_type_title;
+	private String production_type_id;
 	
+	
+	public String getProduction_type_id() {
+		return production_type_id;
+	}
+
+	public void setProduction_type_id(String production_type_id) {
+		this.production_type_id = production_type_id;
+	}
 	private TypeCarouselDTO typeCarouselDTO;
 	/**
 	 * 批量删除idlist
@@ -196,12 +205,18 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 				for(int i=0;i<file.size();i++){
 					if(file.size()<= 50 * 1024 * 1024){
 						String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
+						File uploadFile = new File(path);
+						if (!uploadFile.exists() && !uploadFile.isDirectory()) {
+							uploadFile.mkdirs();
+						} else {
+							System.out.println("文件夹路径存在:" + uploadFile);
+						}
 						System.out.println("fileFileName====="+fileFileName.get(i));
 						name1=scrol_id+fileFileName.get(0);	//背景图
 						name2=scrol_id+fileFileName.get(1);	//logo
 						name3=scrol_id+fileFileName.get(2);	//作品图
 						String filename = path+File.separator+file.get(i).getName();
-						RTMfileFileName=scrol_id+"_"+fileFileName.get(i);
+						RTMfileFileName=scrol_id+fileFileName.get(i);
 						FileInputStream in = new FileInputStream(file.get(i));
 						FileOutputStream out = new FileOutputStream(filename);
 						byte[]b = new byte[1024];
@@ -297,30 +312,119 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 			e.printStackTrace();
 		}
 	}
-	public void updateType() {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		response.setContentType("text/html;charset=utf-8");
-		String type = productionTypeService.updateType(productionType);
-		try {
-			response.getWriter().write(type);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
+
+//修改类型和轮播
+		public void editProductionTypeCarousel(){
+			HttpServletResponse response = ServletActionContext.getResponse();
+			response.setContentType("application/json;charset=utf-8");
+			System.out.println("productionType.getProduction_type_id()===="+production_type_id);
+			int GOBO=0;		//定义GOBO；判断file数组里面的对象是否为空;
+			if(file.get(0)!=null){
+				GOBO=1;
+			}
+			if(file.get(1)!=null){
+				GOBO=2;
+			}
+			if(file.get(2)!=null){
+				GOBO=3;
+			}
+			carousel carousel=productionTypeService.carousel(production_type_id);
+			production_type production_type=productionTypeService.production_type(production_type_id);
+			String scrol_id = production_type_id; // 采用时间+UUID的方式
+			System.out.println("carousel===="+carousel);
+			System.out.println("production_type===="+production_type);
+			try {
+				PrintWriter pw=response.getWriter();
+				String name1="";
+				String name2="";
+				String name3="";
+				String RTMfileFileName="";
+				String filename = "";
+				FileInputStream in =null;
+				if(GOBO!=0){	//GOBO为0，则传过来的文件为空/反之不为空
+				for(int i=0;i<file.size();i++){
+					if(file.size()<= 50 * 1024 * 1024){
+						String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
+						File uploadFile = new File(path);
+						if (!uploadFile.exists() && !uploadFile.isDirectory()) {
+							uploadFile.mkdirs();
+						} else {
+							System.out.println("文件夹路径存在:" + uploadFile);
+						}
+						if(GOBO==1){
+						name1=scrol_id+fileFileName.get(0);	//背景图	
+						filename = path+File.separator+file.get(0).getName();
+						RTMfileFileName=scrol_id+fileFileName.get(0);
+						in = new FileInputStream(file.get(0));
+						FileUtils.copyFile(file.get(0),new File("D:\\Aupload\\test\\",RTMfileFileName));
+						}
+						if(GOBO==2){
+						name2=scrol_id+fileFileName.get(1);	//logo
+						filename = path+File.separator+file.get(1).getName();
+						RTMfileFileName=scrol_id+fileFileName.get(1);
+						in = new FileInputStream(file.get(1));
+						FileUtils.copyFile(file.get(1),new File("D:\\Aupload\\test\\",RTMfileFileName));
+						}
+						if(GOBO==3){
+						name3=scrol_id+fileFileName.get(2);	//作品图	
+						filename = path+File.separator+file.get(2).getName();
+						RTMfileFileName=scrol_id+fileFileName.get(2);
+						in = new FileInputStream(file.get(2));
+						FileUtils.copyFile(file.get(2),new File("D:\\Aupload\\test\\",RTMfileFileName));
+						}
+						FileOutputStream out = new FileOutputStream(filename);
+						byte[]b = new byte[1024];
+						int len = 0;
+						while((len=in.read(b))>0){
+							out.write(b,0,len);
+						}
+						out.close();
+						String linkurl="D:\\Aupload\\test\\"+fileFileName;
+						System.out.println("上传成功,路径为"+path);
+					}else{
+						System.out.println("图片文件过大，无法上传！");
+					}
+				}	
+				production_type.setProduction_type_name(production_type_name);
+				production_type.setProduction_type_title(production_type_title);
+				production_type.setProduction_type_discription(production_type_discription);
+				production_type.setProduction_type_id(scrol_id);
+				production_type.setProduction_type_modifytime(TimeUtil.getStringSecond());
+				production_type.setProduction_type_isdelete(0);
+				if(GOBO==2){
+					production_type.setProduction_type_logo(name2);
+				}
+				if(GOBO==3){
+					production_type.setProduction_type_picture(name3);
+				}
+				carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
+				carousel.setCarousel_isdelete(0);
+				carousel.setCarousel_isshow(1);
+				carousel.setCarousel_belong(scrol_id);
+				if(GOBO==1){
+					carousel.setCarousel_picture(name1);	
+				}
+				productionTypeService.updateCarousel(carousel);
+				productionTypeService.updateType(production_type);
+				pw.write("uploadsuccess"+","+name1+","+name2+","+name3);
+				}else{
+					production_type.setProduction_type_name(production_type_name);
+					production_type.setProduction_type_title(production_type_title);
+					production_type.setProduction_type_discription(production_type_discription);
+					production_type.setProduction_type_id(scrol_id);
+					production_type.setProduction_type_modifytime(TimeUtil.getStringSecond());
+					production_type.setProduction_type_isdelete(0);
+					productionTypeService.updateType(production_type);
+					System.out.println("本次编辑未对图片进行修改操作~！！！");	
+					pw.write("uploadsuccess"+","+"updataType");
+				}
+				System.out.println("程序执行完毕，1111111111111");	
+//				pw.write(new Gson().toJson(res));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-	}
-	public void updateCarousel() {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
-		response.setContentType("text/html;charset=utf-8");
-		String type = productionTypeService.updateCarousel(productionType);
-		try {
-			response.getWriter().write(type);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-}
+}		
+

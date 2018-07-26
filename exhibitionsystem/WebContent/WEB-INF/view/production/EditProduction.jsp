@@ -71,7 +71,7 @@
 		</div>
 		<div class="layui-upload">
 		<div class="layui-inline">
-		<button type="button" class="layui-btn layui-btn-normal" id="testList">添加作品图集</button>
+		<button type="button" class="layui-btn layui-btn-normal" id="addPic">添加作品图集</button>
 		</div>
 		<div class="layui-inline">
 			<div class="layui-form-mid layui-word-aux">温馨提示: 上传作品图集时，上传顺序决定图集排列顺序，请注意！</div>
@@ -87,21 +87,23 @@
 						<th>操作</th>
 					</tr>
 				</thead>
-				<tbody id="demoList"></tbody>
+				<tbody id="pics"></tbody>
 			</table>
 		</div>
 		<!-- <button type="button" class="layui-btn" id="testListAction">开始上传</button> -->
 		
-		<div style="margin:auto;width:200px">
-		<input type="button" class="layui-btn" id="testListAction" onclick="isNull()" value="提交作品" />
-		<button type="reset" class="layui-btn layui-btn-primary">重置</button></div>
+		<div style="margin:auto;width:250px">
+		<input type="button" class="layui-btn" id="excuteUpload" onclick="checkNull();" value="提交作品" />
+		<button type="reset" class="layui-btn layui-btn-primary">重置信息</button></div>
 	</div>
 	</div>
 	</form>
+	
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js" ></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/productionEdit.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/upload.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/toastr.js"></script>
 </body>
 </html>
