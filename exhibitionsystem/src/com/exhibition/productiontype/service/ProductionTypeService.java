@@ -51,5 +51,9 @@ public interface ProductionTypeService {
 
 	String addProductionType1(production_type productionType);
 
+	String updateType(production_type productionType);
+
+	String updateCarousel(production_type productionType);
+
 
 }

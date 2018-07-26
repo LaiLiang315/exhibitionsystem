@@ -297,4 +297,30 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 			e.printStackTrace();
 		}
 	}
+	public void updateType() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		String type = productionTypeService.updateType(productionType);
+		try {
+			response.getWriter().write(type);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void updateCarousel() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		String type = productionTypeService.updateCarousel(productionType);
+		try {
+			response.getWriter().write(type);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

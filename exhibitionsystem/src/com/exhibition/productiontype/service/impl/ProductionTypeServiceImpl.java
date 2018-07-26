@@ -137,18 +137,20 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 	public String updateProductionType(production_type productionType) {
 		if (productionType != null) {
 			productionType.setProduction_type_modifytime(TimeUtil.getStringSecond());
-			carousel carousel = new carousel();
-			carousel = productionTypeDao.getCarouselById(productionType.getProduction_type_id());
-			if(carousel!=null) {
-				carousel.setCarousel_isshow(1);
-				carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
-				carousel.setCarousel_isdelete(0);
-			}
 			productionTypeDao.saveOrUpdateObject(productionType);
+		}
+		carousel carousel = new carousel();
+		carousel = productionTypeDao.getCarouselById(productionType.getProduction_type_id());
+		if(carousel!=null) {
+			carousel.setCarousel_isshow(1);
+			carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
+			carousel.setCarousel_isdelete(0);
 		}
 		return null;
 	}
+		
 
+	
 	/**
 	 * 查询单个类型和轮播图
 	 */
@@ -159,6 +161,28 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 		TypeCarouselDTONew = productionTypeDao.getNewCarouselById(productionType.getProduction_type_id());
 		System.out.println("AAAAAAA"+TypeCarouselDTONew);
 		return TypeCarouselDTONew;
+	}
+
+	@Override
+	public String updateType(production_type productionType) {
+		if (productionType != null) {
+			productionType.setProduction_type_modifytime(TimeUtil.getStringSecond());
+			productionTypeDao.saveOrUpdateObject(productionType);
+		}
+		
+		return null;
+	}
+
+	@Override
+	public String updateCarousel(production_type productionType) {
+		carousel carousel = new carousel();
+		carousel = productionTypeDao.getCarouselById(productionType.getProduction_type_id());
+		if(carousel!=null) {
+			carousel.setCarousel_isshow(1);
+			carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
+			carousel.setCarousel_isdelete(0);
+		}
+		return null;
 	}
 
 }
