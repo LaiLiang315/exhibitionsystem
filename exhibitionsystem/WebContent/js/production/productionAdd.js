@@ -123,7 +123,7 @@ layui.use('upload', function(){
 		  ,uploadListIns = upload.render({
 		    elem: '#testList'			//指向容器选择器，如：elem: '#id'
 		    ,url: '/exhibitionsystem/productionManagement/productionManagement_uploadAndSavePic'
-		    ,accept: 'file'
+		    ,accept: 'images'
 		    ,data:{'production_picture.production_pictures_belong':belongId}
 		    ,multiple: true
 		    ,auto: false

@@ -44,7 +44,7 @@ public class TypeTest {
 	public void querryProductionTypeTest() {
 		TypeCarouselDTO typeCarouselDTO = new TypeCarouselDTO();
 		production_type productionType = new production_type();
-		productionType.setProduction_type_id("Type001");
+		productionType.setProduction_type_id("cdc956cf-4498-4d75-953d-ae9258b48ae9");
  		productionTypeService.querryProductionType(productionType);
 	}
 }

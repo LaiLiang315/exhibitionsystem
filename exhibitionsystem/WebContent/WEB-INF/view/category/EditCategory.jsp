@@ -49,9 +49,44 @@
 	</div>	
 <!-- ================================控制首页轮播图模块上传==================================== -->
 <!-- ===========轮播背景图上传======= -->
+<div class="layui-upload" style="margin-left:40px;">
+<div id="upload1" >
+  <button type="button" class="layui-btn" onclick="file1.click()">点击修改轮播背景图</button>
+  <input type="file" class="file" id="file1" name="file1" style="display:none"/><br/>
+  <div class="layui-upload-list">
+  <div id="imggg1">
+  <img class="layui-upload-img" id="demo1" style="width:115px;height:122px;">
+  </div> 
+    <p id="demoText"></p>
+  </div>
+</div>
 
-<div id="imggg">
+<!-- ===========分类LOGO图上传======= -->
+<div id="upload2-3">
+<div id="upload2" >
+  <button type="button" class="layui-btn" onclick="file2.click()">点击修改分类LOGO图</button>
+  <input type="file" class="file" id="file2" name="file2" style="display:none"/><br/>
+  <div class="layui-upload-list">
+    <div id="imggg2">
+    <img class="layui-upload-img" id="demo2" style="width:115px;height:122px;">
+  	</div> 
+    <p id="demoText"></p>
+  </div>
+</div>
 
+
+<!-- ==========作品代表图上传======= -->
+<div id="upload3">
+  <button type="button" class="layui-btn" onclick="file3.click()">点击修改作品代表图</button>
+  <input type="file" class="file" id="file3" name="file3" style="display:none"/><br/>
+  <div class="layui-upload-list">
+    <div id="imggg3">
+    <img class="layui-upload-img" id="demo3" style="width:115px;height:122px;">
+ 	</div> 
+    <p id="demoText"></p>
+  </div>
+</div>
+</div>
 </div>
 	<div class="layui-form-item" style="margin-top:40px;">
 			<div class="layui-input-block">

@@ -528,4 +528,51 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 		listPicTypeInfoDTO.add(picTypeInfoDTO);
 		return listPicTypeInfoDTO;
 	}
+	//作品修改方法（仅修改作品信息）
+	@Override
+	public String updateProductionInfo(production_info productionInfo) {
+		// TODO Auto-generated method stub
+		productionInfo.setProduction_info_modifytime(TimeUtil.getStringSecond());
+		try {
+			productionManagementDao.saveOrUpdateObject(productionInfo);
+			return "success";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "error";
+		}
+	}
+
+	@Override
+	public String updateProductionAndPicInfo(production_info productionInfo, List<Map<String, Object>> listMap) {
+		// 首先添加作品信息
+				// 生成uuid
+				String result = null;
+				productionInfo.setProduction_info_isdelete(0);
+				productionInfo.setProduction_info_modifytime(TimeUtil.getStringSecond());
+				productionManagementDao.saveOrUpdateObject(productionInfo);
+				for (int i = 0; i < listMap.size(); i++) {
+					String pictrueName = (String) listMap.get(i).get("key");
+					String sequence = (String) listMap.get(i).get("value");
+					int se = Integer.parseInt(sequence);
+					// 查询出带有特殊标记的图集信息
+					List<production_pictures> listproduction_pictures = productionManagementDao.getSpectialPic(pictrueName);
+					if (listproduction_pictures.size() > 0) {
+						production_pictures mypicture = listproduction_pictures.get(0);
+						mypicture.setProduction_pictures_belong(productionInfo.getProduction_info_id());
+						mypicture.setProduction_pictures_sequence(se);
+						try {
+							productionManagementDao.saveOrUpdateObject(mypicture);
+							result = "success";
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							result = "error";
+						}
+					} else {
+						result = "error";
+					}
+				}
+				return result;
+	}
 }

@@ -183,8 +183,9 @@ layui.use('form', function(){
 								'<td style="text-align:center;">'+typeOne+'</td>'+
 								'<td style="text-align:center;">'+productions[i].type.production_type_name+'</td>'+
 								'<td style="text-align:center;">'+
-									'<a class="layui-btn layui-btn-mini news_edit" href="http://localhost:8080/exhibitionsystem/skip/skip_intoProductionEdit?data_id='+infoList[j].production_info_id+'"><i class="layui-icon">&#xe642;</i> 编辑</a>'+
-									'<a class="layui-btn layui-btn-danger layui-btn-mini news_del" onclick="deleteProduction(this)" data_id="'+infoList[j].production_info_id+ '" ><i class="layui-icon">&#xe640;</i> 删除</a>'+
+									'<a class="layui-btn layui-btn-mini news_edit" href="/exhibitionsystem/skip/skip_intoProductionEdit?data_id='+infoList[j].production_info_id+'"><i class="layui-icon">&#xe642;</i> 编辑</a>'+
+									'<a class="layui-btn layui-btn-danger layui-btn-mini news_del" onclick="deleteProduction(this)" data_id="'+infoList[j].production_info_id+'" ><i class="layui-icon">&#xe640;</i> 删除</a>'+
+
 								'</td>'+
 							'</tr>';
 				}

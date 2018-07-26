@@ -26,8 +26,8 @@ function listCategory_ajax(){
 				var typediscription=votypee.production_type_discription;
 				var limitypetitle=typetitle;
 				var limitypediscription=typediscription;
-				if(limitypetitle.length>8){
-					limitypetitle=limitypetitle.substr(0,8)+"...";
+				if(limitypetitle.length>6){
+					limitypetitle=limitypetitle.substr(0,6)+"...";
 				}
 				if(limitypediscription.length>25){
 					limitypediscription=limitypediscription.substr(0,8)+"...";
@@ -38,7 +38,7 @@ function listCategory_ajax(){
 				'<td style="text-align:center;">'+limitypetitle+'</td>'+
 				'<td style="text-align:center;">'+limitypediscription+'</td>'+
 				'<td style="text-align:center;">'+
-					'<a href="/exhibitionsystem/skip/skip_intoCategoryEdit?data_id='+votypee.production_type_id+'" class="layui-btn layui-btn-mini news_edit"  data_id="'+votypee.production_type_id+'"><i class="iconfont icon-edit"></i> 编辑</a>'+
+					'<a href="/exhibitionsystem/skip/skip_intoCategoryEdit?data_id='+votypee.production_type_id+'" class="layui-btn layui-btn-mini news_edit"  data_id="'+votypee.production_type_id+'"><i class="layui-icon">&#xe642;</i> 编辑</a>'+
 					'<a class="layui-btn layui-btn-danger layui-btn-mini news_del" onclick="category_delete(this)" data_id="'+votypee.production_type_id+ '" ><i class="layui-icon">&#xe640;</i> 删除</a>'+
 				'</td>'+
 			'</tr>';
@@ -89,7 +89,7 @@ function deleteMore(){
 					toastr.success("文章删除成功了哦!");
 					setTimeout(function(){
 						location.href="/exhibitionsystem/skip/skip_intoCategoryList";
-					},1000);
+					},100);
 				}else{
 					toastr.error("删除失败33131!");
 				}}

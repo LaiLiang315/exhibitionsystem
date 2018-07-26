@@ -159,6 +159,7 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 	public TypeCarouselDTO querryProductionType(production_type productionType) {
 		TypeCarouselDTO TypeCarouselDTONew = new TypeCarouselDTO();
 		production_type productionTypeNew = new production_type();
+		System.out.println("ppppppp==="+productionType.getProduction_type_id());
 		TypeCarouselDTONew = productionTypeDao.getNewCarouselById(productionType.getProduction_type_id());
 		System.out.println("AAAAAAA"+TypeCarouselDTONew);
 		return TypeCarouselDTONew;

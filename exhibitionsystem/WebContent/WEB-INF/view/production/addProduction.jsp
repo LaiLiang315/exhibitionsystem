@@ -92,7 +92,8 @@
 		</div>
 		<!-- <button type="button" class="layui-btn" id="testListAction">开始上传</button> -->
 		
-		<div style="margin:auto;width:200px">
+		<div style="margin:auto;width:250px">
+
 		<input type="button" class="layui-btn" id="testListAction" onclick="isNull()" value="提交作品" />
 		<button type="reset" class="layui-btn layui-btn-primary">重置信息</button></div>
 	</div>

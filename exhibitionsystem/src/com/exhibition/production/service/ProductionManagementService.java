@@ -114,4 +114,8 @@ public interface ProductionManagementService {
 	 */
 	public List<PicTypeInfoDTO> querrySixProduction();
 
+	public String updateProductionInfo(production_info productionInfo);
+
+	public String updateProductionAndPicInfo(production_info productionInfo, List<Map<String, Object>> listMap);
+
 }
