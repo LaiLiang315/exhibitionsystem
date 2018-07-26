@@ -178,7 +178,7 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 		response.setContentType("text/html;charset=utf-8");
 		String delete = carouselManagementService.deletePictures(pictures);
 		try {
-			response.getWriter().write(pictures);
+			response.getWriter().write(delete);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
