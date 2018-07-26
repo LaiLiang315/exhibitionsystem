@@ -10,8 +10,6 @@ import com.exhibition.carousel.DTO.CarouselManagementDTO;
 import com.exhibition.carousel.dao.CarouselManagementDao;
 import com.exhibition.carousel.service.CarouselManagementService;
 import com.exhibition.domain.carousel;
-import com.exhibition.domain.production_info;
-import com.exhibition.domain.production_pictures;
 import com.exhibition.domain.production_type;
 
 import util.BuildUuid;
@@ -71,7 +69,9 @@ public class CarouselManageMentServiceImpl implements CarouselManagementService 
 	}
 
 	/**
-	 * 删除成功deleteSuccess 删除失败error 批量删除轮播图
+	 * 删除成功deleteSuccess
+	 * 删除失败error
+	 * 批量删除轮播图
 	 */
 	@Override
 	public String deleteCarousel(String idList) {
@@ -123,42 +123,5 @@ public class CarouselManageMentServiceImpl implements CarouselManagementService 
 		}
 
 		return null;
-	}
-
-	/**
-	 * 删除作品图片 根据信息id查询图集 选择需要删除的图片 重新排序图集顺序
-	 * 
-	 */
-	@Override
-	public String deletePictures(String pictures) {
-		String result = null;
-		if (pictures != null && pictures.trim().length() > 0) {
-			/**
-			 * 将多个对象id去掉分隔符转化为数组
-			 */
-			production_pictures productionPictures = new production_pictures();
-			productionPictures = carouselManagementDao.getPictureById(pictures);
-			if (productionPictures != null) {
-				productionPictures.setProduction_pictures_isdelete(1);
-				productionPictures.setProduction_pictures_modifytime(TimeUtil.getStringSecond());
-				List<production_pictures> listPictures = new ArrayList<>();
-				listPictures = (List<production_pictures>) carouselManagementDao.listObject("from production_pictures where production_pictures_sequence>'"+productionPictures.getProduction_pictures_sequence()+"' and production_pictures_isdelete='0' and production_pictures_belong='"+productionPictures.getProduction_pictures_belong()+"'");
-				System.out.println("MMMMMMMM"+listPictures);
-				if(!listPictures.isEmpty()) {
-					for (production_pictures production_pictures : listPictures) {
-						production_pictures.setProduction_pictures_sequence(production_pictures.getProduction_pictures_sequence()-1);
-						System.out.println("NNNNNN"+production_pictures);
-						carouselManagementDao.saveOrUpdateObject(production_pictures);
-					}
-				}
-				carouselManagementDao.saveOrUpdateObject(productionPictures);
-				result = "deleteSuccess";
-			} else {
-				result = "error";
-			}
-		} else {
-			result = "error";
-		}
-		return result;
 	}
 }

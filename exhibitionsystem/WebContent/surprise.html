@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>创新包装解读</title>
+	<meta name="keywords" content="创新包装解读" />
+	<meta name="description" content="Card Expansion Effect with SVG clipPath" />
+	<meta name="keywords" content="clipPath, svg, effect, layout, expansion, images, grid, polygon" />
+	<meta name="author" content="Claudio Calautti for Codrops" />
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/xiangce/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/xiangce/demo.css" />
+	<link rel="stylesheet" type="text/css" href="css/xiangce/card.css" />
+	<link rel="stylesheet" type="text/css" href="css/xiangce/pattern.css" />
+	<script>
+	if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+		var root = document.getElementsByTagName('html')[0];
+		root.setAttribute('class', 'ff');
+	};
+	</script>
+</head>
+<body class="demo-1">
+	<div class="container">
+		<div class="content" style="">
+			<div class="pattern pattern--hidden"></div>
+			<!-- cards -->
+			<div class="wrapper">
+			
+				<div class="card">
+					<div class="card__container card__container--closed">
+						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+							<defs>
+								<clipPath id="clipPath1">
+									<circle class="clip" cx="960" cy="250" r="992"></circle>
+								</clipPath>
+							</defs>
+							<image clip-path="url(#clipPath1)" width="1920" height="500" xlink:href="/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName=e6c4936d-82bb-4f6b-bd1c-83c4ecb6bff5pshens61.jpg"></image>
+						</svg>
+						<div class="card__content">
+							<i class="card__btn-close fa fa-times"></i>
+							<div class="card__caption">
+								<h2 class="card__title">作品名称</h2>
+								<p class="card__subtitle">所属类型：食品包装</p>
+							</div>
+							<div class="card__copy">
+								<div class="meta">
+									<img class="meta__avatar" src='/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName=e6c4936d-82bb-4f6b-bd1c-83c4ecb6bff520300542906611142302766585653_s.jpg' alt="author01" />
+									<span class="meta__author">作者</span>
+									<span class="meta__date">06/19/2015</span>
+								</div>
+								<p>这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>		
+	
+	<script src="js/xiangce/vendors/trianglify.min.js"></script>
+	<script src="js/xiangce/vendors/TweenMax.min.js"></script>
+	<script src="js/xiangce/vendors/ScrollToPlugin.min.js"></script>
+	<script src="js/xiangce/vendors/cash.min.js"></script>
+	<script src="js/xiangce/Card-circle.js"></script>
+	<script src="js/xiangce/demo.js"></script>
+</body>
+
+</html>

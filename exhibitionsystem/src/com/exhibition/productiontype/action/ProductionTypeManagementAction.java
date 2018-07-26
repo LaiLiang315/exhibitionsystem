@@ -194,6 +194,10 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 		public void addProductionType(){
 			HttpServletResponse response = ServletActionContext.getResponse();
 			response.setContentType("application/json;charset=utf-8");
+			int GOBO=0;		//定义GOBO；判断file数组里面的对象是否为空;
+			if(file.get(2)==null){
+				GOBO=3;
+			}
 			try {
 				PrintWriter pw=response.getWriter();
 				String name1="";
@@ -202,36 +206,68 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 				String RTMfileFileName="";
 				String scrol_id = java.util.UUID.randomUUID().toString(); // 采用时间+UUID的方式
 				if(file!=null){
-				for(int i=0;i<file.size();i++){
-					if(file.size()<= 50 * 1024 * 1024){
-						String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
-						File uploadFile = new File(path);
-						if (!uploadFile.exists() && !uploadFile.isDirectory()) {
-							uploadFile.mkdirs();
-						} else {
-							System.out.println("文件夹路径存在:" + uploadFile);
+				if(GOBO==0){
+					for(int i=0;i<file.size();i++){
+						if(file.size()<= 50 * 1024 * 1024){
+							String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
+							File uploadFile = new File(path);
+							if (!uploadFile.exists() && !uploadFile.isDirectory()) {
+								uploadFile.mkdirs();
+							} else {
+								System.out.println("文件夹路径存在:" + uploadFile);
+							}
+							System.out.println("fileFileName====="+fileFileName.get(i));
+							name1=scrol_id+fileFileName.get(0);	//背景图
+							name2=scrol_id+fileFileName.get(1);	//logo
+							name3=scrol_id+fileFileName.get(2);	//作品图
+							String filename = path+File.separator+file.get(i).getName();
+							RTMfileFileName=scrol_id+fileFileName.get(i);
+							FileInputStream in = new FileInputStream(file.get(i));
+							FileOutputStream out = new FileOutputStream(filename);
+							byte[]b = new byte[1024];
+							int len = 0;
+							while((len=in.read(b))>0){
+								out.write(b,0,len);
+							}
+							out.close();
+							FileUtils.copyFile(file.get(i),new File("D:\\Aupload\\test\\",RTMfileFileName));
+							String linkurl="D:\\Aupload\\test\\"+fileFileName;
+							System.out.println("上传成功,路径为"+path);
+						}else{
+							System.out.println("上传文件发生错误");
 						}
-						System.out.println("fileFileName====="+fileFileName.get(i));
-						name1=scrol_id+fileFileName.get(0);	//背景图
-						name2=scrol_id+fileFileName.get(1);	//logo
-						name3=scrol_id+fileFileName.get(2);	//作品图
-						String filename = path+File.separator+file.get(i).getName();
-						RTMfileFileName=scrol_id+fileFileName.get(i);
-						FileInputStream in = new FileInputStream(file.get(i));
-						FileOutputStream out = new FileOutputStream(filename);
-						byte[]b = new byte[1024];
-						int len = 0;
-						while((len=in.read(b))>0){
-							out.write(b,0,len);
-						}
-						out.close();
-						FileUtils.copyFile(file.get(i),new File("D:\\Aupload\\test\\",RTMfileFileName));
-						String linkurl="D:\\Aupload\\test\\"+fileFileName;
-						System.out.println("上传成功,路径为"+path);
-					}else{
-						System.out.println("上传文件发生错误");
 					}
-				}	
+				}else{
+					for(int i=0;i<file.size()-1;i++){
+						if(file.size()<= 50 * 1024 * 1024){
+							String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
+							File uploadFile = new File(path);
+							if (!uploadFile.exists() && !uploadFile.isDirectory()) {
+								uploadFile.mkdirs();
+							} else {
+								System.out.println("文件夹路径存在:" + uploadFile);
+							}
+							System.out.println("fileFileName====="+fileFileName.get(i));
+							name1=scrol_id+fileFileName.get(0);	//背景图
+							name2=scrol_id+fileFileName.get(1);	//logo
+							String filename = path+File.separator+file.get(i).getName();
+							RTMfileFileName=scrol_id+fileFileName.get(i);
+							FileInputStream in = new FileInputStream(file.get(i));
+							FileOutputStream out = new FileOutputStream(filename);
+							byte[]b = new byte[1024];
+							int len = 0;
+							while((len=in.read(b))>0){
+								out.write(b,0,len);
+							}
+							out.close();
+							FileUtils.copyFile(file.get(i),new File("D:\\Aupload\\test\\",RTMfileFileName));
+							String linkurl="D:\\Aupload\\test\\"+fileFileName;
+							System.out.println("上传成功,路径为"+path);
+						}else{
+							System.out.println("上传文件发生错误");
+						}
+					}
+				}
 				carousel carousel=new carousel();
 				production_type production_type=new production_type();
 				production_type.setProduction_type_name(production_type_name);
