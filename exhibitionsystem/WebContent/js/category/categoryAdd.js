@@ -6,6 +6,7 @@ $('#file1').on('change', function (e) {
 	var file1 = document.getElementById("file1")
 	if(file1.files[0]!=null){
 	document.getElementById("demo1").innerHTML=file1.files[0].name;
+	console.log("第一个文件框获取的文件名是===="+$("#file1").val());
 	}
 	
 });
@@ -64,9 +65,6 @@ function upload(){
     					},500);
      				} else {
      					toastr.error("信息添加失败！");
-     					setTimeout(function(){
-    						location.href="/exhibitionsystem/skip/skip_intoCategoryList";
-    					},500);
      				}
      			},
      		});
