@@ -53,7 +53,13 @@ public interface ProductionTypeService {
 
 	String updateType(production_type productionType);
 
-	String updateCarousel(production_type productionType);
+	String updateCarousel(carousel carousel);
+	
+	//得到单个类型
+	public production_type production_type(String production_type_id);
+	
+	//得到轮播图类型
+	public carousel carousel(String carousel_id);
 
 
 }

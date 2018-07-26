@@ -168,27 +168,28 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
  */
 	@Override
 	public String updateType(production_type productionType) {
-		if (productionType != null) {
-			productionType.setProduction_type_modifytime(TimeUtil.getStringSecond());
 			productionTypeDao.saveOrUpdateObject(productionType);
-		}
-		
 		return null;
 	}
 /**
  * 修改轮播图
  */
 	@Override
-	public String updateCarousel(production_type productionType) {
-		carousel carousel = new carousel();
-		carousel = productionTypeDao.getCarouselById(productionType.getProduction_type_id());
-		if(carousel!=null) {
-			carousel.setCarousel_isshow(1);
-			carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
-			carousel.setCarousel_isdelete(0);
-			productionTypeDao.saveOrUpdateObject(carousel);
-		}
+	public String updateCarousel(carousel carousel) {
+		productionTypeDao.saveOrUpdateObject(carousel);
 		return null;
 	}
+
+@Override
+public production_type production_type(String production_type_id) {
+	// TODO Auto-generated method stub
+	return productionTypeDao.getTypeById(production_type_id);
+}
+
+@Override
+public carousel carousel(String carousel_id) {
+	// TODO Auto-generated method stub
+	return productionTypeDao.getCarouselById(carousel_id);
+}
 
 }
