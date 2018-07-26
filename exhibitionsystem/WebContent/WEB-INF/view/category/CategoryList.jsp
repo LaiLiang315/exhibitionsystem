@@ -13,6 +13,7 @@
 	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/layui/css/layui.css" media="all" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/production/list.css" media="all" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/toastr.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.1.1.min.js"></script>
 </head>
 <body class="childrenBody">
@@ -27,7 +28,7 @@
 		<a class="layui-btn search_btn" onclick="search_cate()">查询</a>
 	</div>
 	</blockquote>
-	<div class="layui-form news_list">
+	<div class=" news_list">
 	  	<table class="layui-table">
 		    <colgroup>
 				<col width="9">
@@ -35,36 +36,26 @@
 				<col width="12%">
 				<col width="30%">
 				<col width="25%">
-
-				<col width="15%">
+				<col width="20%">
 		    </colgroup>
 		    <thead>
 				<tr>
-					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
+					<th><input type="checkbox" name="" onclick="allChoose();" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
 					<th>分类名称</th>
 					<th>分类标题</th>
-					<th style="text-align:left;">分类描述</th>
+					<th style="text-align:center;">分类描述</th>
 					<th>操作</th>
 				</tr> 
 		    </thead>
-		    <tbody class="news_content"></tbody>
+		    <tbody class="categoryli"></tbody>
 		</table>
 	</div>
 	<div class="page-footer">
-			<div class="page_info">
-				&nbsp;&nbsp;&nbsp;&nbsp; <button class="layui-btn" onclick="firstPage()"><i
-				class="fa fa-angle-double-left">首页</i></button>&nbsp;&nbsp;&nbsp;&nbsp;
-				 <button class="layui-btn"  onclick="prePage()"><i class="layui-icon"></i></button>
-   	 			<button class="layui-btn" onclick="nextPage()"><i class="layui-icon"></i></button>
-				<button class="layui-btn" onclick="lastPage()">尾页<i
-					class="fa fa-angle-double-right"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="text" class="layui-input-inline"  id="go_input"/>&nbsp;&nbsp;&nbsp;&nbsp;
-				<button class="layui-btn" onclick="goPage()">GO</button>	</div>
-			<p class='page-infomation'></p>					
 	</div>
 	<div id="page"></div>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/toastr.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/form.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/production/productionList.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/category/categoryList.js"></script>
 </body>
 </html>

@@ -592,5 +592,4 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			e.printStackTrace();
 		}
 	}
-
 }
