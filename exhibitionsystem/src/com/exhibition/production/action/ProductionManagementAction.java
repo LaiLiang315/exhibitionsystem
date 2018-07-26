@@ -308,6 +308,27 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		return null;
 	}
 
+	/**
+	 * 获取单个作品信息和图集
+	 */
+	public void getProductionInfoOne() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		List<ProductionInfoDTO> listProductionInfoDTO = productionManagementService.getProductionInfo();
+		try {
+			response.getWriter().write(gson.toJson(listProductionInfoDTO));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			out.close();
+			in.close();
+		}
+		return null;
+	}
+
 
 	/**
 	 * 分页显示所有作品
