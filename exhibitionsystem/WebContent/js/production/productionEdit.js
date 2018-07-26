@@ -96,7 +96,6 @@ function putOneProInfo(productionThreeFormDTO){
           '<input type="button" class="layui-btn layui-btn-xs layui-btn-danger" deletePictureId="'+pictrues[i].production_pictures_id+'" onclick="deletePictrue(this);" value="删除" />'+
         '</td>'+
       '</tr>'
-        console.log("怎么说"+pictrues[i].production_pictures_id);
 	}
 	typeNames.innerHTML=str;// 插入标签
 	tableNum=pictruesLength+1;
@@ -121,13 +120,13 @@ function deletePictrue(deleteObj){
 	    processData: false,  
 	    contentType: false,
 	    success:function(resultWord){
-	    	//var deleteResult = JSON.parse(result);
-	    	console.log("ddd"+resultWord)
-	    	if(result=="deleteSuccess"){
+	    	oldNum = oldNum-1;
+	    	var deleteResult = JSON.parse(resultWord);
+	    	if(deleteResult=="deleteSuccess"){
 				toastr.success("删除成功!");
 				setTimeout(function(){
 					location.href="http://localhost:8080/exhibitionsystem/skip/skip_intoProductionEdit?data_id="+productionId+"";
-				},1000);
+				},500);
 			}else{
 				toastr.error("删除失败!");
 			}
@@ -140,10 +139,12 @@ function checkNull(){
 	var ROW = table.rows.length;
 	if($("input[name='production_info_name']").val()==""||$("input[name='production_info_name']").val()==null){
 		toastr.error("请填写作品名!");
+		return false;
 	}else if($("input[name='production_info_author']").val()==""||$("input[name='production_info_author']").val()==null){
 		toastr.error("请填写作者!");
 	}else if(typeId==null||typeId==""){
 		toastr.error("请选择作品类型!");
+		return false;
 	}else if($("input[name='production_info_creationtime']").val()==""||$("input[name='production_info_creationtime']").val()==null){
 		toastr.error("请选创作时间!");
 	}else if($("#proDiscription").val()==null||$("#proDiscription").val()==""){
@@ -156,15 +157,43 @@ function checkNull(){
 }
 //修改作品信息
 function changeProInfo(){
-	//首先查询
-	/*//根据判断是否删除过图片选择是否补充图片信息
-	if((tableNum-1)==oldNum){
-		//未删除过图片
-		console.log("未删除过图片");
+	//当前未删除图片数量：oldNum
+	//当前表格图片行数：(tableNum-1)
+	//如果当前未删除图片数量等于当前表格图片行数，说明图片无新增此时执行方法
+	if(oldNum==(tableNum-1)){
+		//执行保存信息方法
+		var formData = new FormData();
+		//放入作品信息
+		formData.append("productionInfo.production_info_id",productionId);
+		formData.append("productionInfo.production_info_name",$("input[name='production_info_name']").val());
+		formData.append("productionInfo.production_info_author",$("input[name='production_info_author']").val());
+		formData.append("productionInfo.production_info_isdailywork",$("input[type='radio']:checked").val());
+		formData.append("productionInfo.production_info_type",typeId);
+		formData.append("productionInfo.production_info_creationtime",$("input[name='production_info_creationtime']").val());
+		formData.append("productionInfo.production_info_discription",$("#proDiscription").val());
+		formData.append("productionInfo.production_info_isdelete",0);
+		$.ajax({
+			type:'POST',
+			data:formData,
+			url:'/exhibitionsystem/productionManagement/productionManagement_updateProductionInfo',
+			cache: false,  
+		    processData: false,  
+		    contentType: false,
+		    success:function(result){
+		    	var addResult = JSON.parse(result);
+		    	if(addResult=="success"){
+					toastr.success("作品修改成功!");
+					setTimeout(function(){
+						location.href="http://localhost:8080/exhibitionsystem/skip/skip_intoProductionList";
+					},500);
+				}else{
+					toastr.error("作品修改失败!");
+				}
+		    }
+		})
 	}else{
-		//删除过图片
-		console.log("删除过图片");
-	}*/
+		console.log("没走我")
+	}
 }
 //获取url指定参数值
 function GetQueryString(name) {
@@ -190,7 +219,7 @@ layui.use('upload', function(){
 			,uploadListIns = upload.render({
 		    elem: '#addPic'			//指向容器选择器，如：elem: '#id'
 		    ,url: '/exhibitionsystem/productionManagement/productionManagement_uploadAndSavePic'
-		    ,accept: 'file'
+		    ,accept: 'images'
 		    ,data:{'production_picture.production_pictures_belong':belongId}
 		    ,multiple: true
 		    ,auto: false
@@ -224,6 +253,24 @@ layui.use('upload', function(){
 		        demoListView.append(tr);
 		      });
 		    }
+		    ,before: function(obj){
+		    	if($("input[name='production_info_name']").val()==""||$("input[name='production_info_name']").val()==null){
+	    			toastr.error("请填写作品名!");
+	    			throw SyntaxError();
+	    		}else if($("input[name='production_info_author']").val()==""||$("input[name='production_info_author']").val()==null){
+	    			toastr.error("请填写作者!");
+	    			throw SyntaxError();
+	    		}else if(typeId==null||typeId==""){
+	    			toastr.error("请选择作品类型!");
+	    			throw SyntaxError();
+	    		}else if($("input[name='production_info_creationtime']").val()==""||$("input[name='production_info_creationtime']").val()==null){
+	    			toastr.error("请选创作时间!");
+	    			throw SyntaxError();
+	    		}else if($("#proDiscription").val()==null||$("#proDiscription").val()==""){
+	    			toastr.error("请填写作品描述!");
+	    			throw SyntaxError();
+	    		}
+		    }
 		    ,done: function(res, index, upload){
 		      if(res.code == 0){ //上传成功
 		        var tr = demoListView.find('tr#upload-'+ index)
@@ -245,9 +292,79 @@ layui.use('upload', function(){
 		        console.log(obj.successful); //请求成功的文件数
 		        console.log(obj.aborted); //请求失败的文件数
 		        //如果文件全部上传成功，执行作品添加操作
-		    	/*if(obj.total==obj.successful){
-		    		saveProductionInfo();
-		    	}*/
+		    	if(obj.total==obj.successful){
+		    		/*if($("input[name='production_info_name']").val()==""||$("input[name='production_info_name']").val()==null){
+		    			toastr.error("请填写作品名!");
+		    			return false;
+		    		}else if($("input[name='production_info_author']").val()==""||$("input[name='production_info_author']").val()==null){
+		    			toastr.error("请填写作者!");
+		    			return false;
+		    		}else if(typeId==null||typeId==""){
+		    			toastr.error("请选择作品类型!");
+		    			return false;
+		    		}else if($("input[name='production_info_creationtime']").val()==""||$("input[name='production_info_creationtime']").val()==null){
+		    			toastr.error("请选创作时间!");
+		    			return false;
+		    		}else if($("#proDiscription").val()==null||$("#proDiscription").val()==""){
+		    			toastr.error("请填写作品描述!");
+		    			return false;
+		    		}else if(ROW<=1){
+		    			toastr.error("请上传作品图片!");
+		    			return false;
+		    		}else{*/
+		    			updateProductionAndPicInfo();
+		    		/*}*/
+		    	}
 		    }
 		  })	    
 });
+//定义键值对象
+function ObjData(key,value){
+	this.Key=key;
+	this.Value=value;
+}
+//添加图片且修改作品信息
+function updateProductionAndPicInfo(){
+	var array=[];
+	var table = document.getElementById("pictrues");
+	var ROW = table.rows.length;
+	//遍历表格
+	for(var i=(oldNum+1);i<ROW;i++){
+		console.log(table.rows[i].cells[0].innerHTML)
+		var value= table.rows[i].cells[0].innerHTML;//将表格设置为值
+		console.log(table.rows[i].cells[1].innerHTML)
+		var key=table.rows[i].cells[1].innerHTML;//将文件名定义为键
+		var s = new ObjData(key,value);
+		array.push(s);
+	}
+	var pushData = JSON.stringify(array);//将数组转为json字符串
+	var formData = new FormData();
+	//放入作品信息
+	formData.append("productionInfo.production_info_id",productionId);
+	formData.append("productionInfo.production_info_name",$("input[name='production_info_name']").val());
+	formData.append("productionInfo.production_info_author",$("input[name='production_info_author']").val());
+	formData.append("productionInfo.production_info_isdailywork",$("input[type='radio']:checked").val());
+	formData.append("productionInfo.production_info_type",typeId);
+	formData.append("productionInfo.production_info_creationtime",$("input[name='production_info_creationtime']").val());
+	formData.append("productionInfo.production_info_discription",$("#proDiscription").val());
+	formData.append("pictrueMap",pushData);
+	$.ajax({
+		type:'POST',
+		data:formData,
+		url:'/exhibitionsystem/productionManagement/productionManagement_updateProductionAndPicInfo',
+		cache: false,  
+	    processData: false,  
+	    contentType: false,
+	    success:function(result){
+	    	var addResult = JSON.parse(result);
+	    	if(addResult=="success"){
+				toastr.success("作品修改成功!");
+				setTimeout(function(){
+					location.href="http://localhost:8080/exhibitionsystem/skip/skip_intoProductionList";
+				},1000);
+			}else{
+				toastr.error("作品修改失败!");
+			}
+	    }
+	})
+}
