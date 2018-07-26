@@ -1,6 +1,6 @@
 var tableNum=0;//当前表格信息数
-var oldNum = 0;//当前作品原有图片总数
-var productionId = "";//当前作品id
+var oldNum=0;//当前作品原有图片总数
+var productionId = '';//当前作品id
 var typeId = null;//筛选类型
 $(document).ready(function(){
 	//获取分类信息
@@ -93,9 +93,10 @@ function putOneProInfo(productionThreeFormDTO){
         '<td>未知大小</td>'+
         '<td>已上传</td>'+
         '<td>'+
-          '<button class="layui-btn layui-btn-xs layui-btn-danger" onclick="deletePictrue('+pictrues[i].production_pictures_id+');">删除</button>'+
+          '<input type="button" class="layui-btn layui-btn-xs layui-btn-danger" deletePictureId="'+pictrues[i].production_pictures_id+'" onclick="deletePictrue(this);" value="删除" />'+
         '</td>'+
       '</tr>'
+        console.log("怎么说"+pictrues[i].production_pictures_id);
 	}
 	typeNames.innerHTML=str;// 插入标签
 	tableNum=pictruesLength+1;
@@ -108,20 +109,22 @@ function putOneProInfo(productionThreeFormDTO){
 }
 //删除单个作品的单个图片
 function deletePictrue(deleteObj){
+	var pictureId=$(deleteObj).attr('deletePictureId');//定义id
 	var formData = new FormData();
 	//放入作品信息
-	formData.append("",deleteObj);
+	formData.append("pictures",pictureId);
 	$.ajax({
 		type:'POST',
 		data:formData,
-		url:'/exhibitionsystem/productionManagement/productionManagement_querryOneProduction',
+		url:'/exhibitionsystem/carouselManagement/carouselManagement_deletePictures',
 		cache: false,  
 	    processData: false,  
 	    contentType: false,
-	    success:function(result){
-	    	if(deleteResult=="deleteSuccess"){
+	    success:function(resultWord){
+	    	//var deleteResult = JSON.parse(result);
+	    	console.log("ddd"+resultWord)
+	    	if(result=="deleteSuccess"){
 				toastr.success("删除成功!");
-				oldNum = oldNum-1;//每删除一张图片数减一，行数包括表头
 				setTimeout(function(){
 					location.href="http://localhost:8080/exhibitionsystem/skip/skip_intoProductionEdit?data_id="+productionId+"";
 				},1000);
@@ -148,19 +151,20 @@ function checkNull(){
 	}else if(ROW<=1){
 		toastr.error("请上传作品图片!");
 	}else{
-		//changeProInfo();
+		changeProInfo();
 	}
 }
 //修改作品信息
 function changeProInfo(){
-	//根据判断是否删除过图片选择是否补充图片信息
+	//首先查询
+	/*//根据判断是否删除过图片选择是否补充图片信息
 	if((tableNum-1)==oldNum){
 		//未删除过图片
-		console.log("未删除过图片")
+		console.log("未删除过图片");
 	}else{
 		//删除过图片
-		console.log("删除过图片")
-	}
+		console.log("删除过图片");
+	}*/
 }
 //获取url指定参数值
 function GetQueryString(name) {
