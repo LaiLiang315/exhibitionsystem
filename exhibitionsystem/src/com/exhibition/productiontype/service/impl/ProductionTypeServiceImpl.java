@@ -10,6 +10,7 @@ import com.exhibition.productiontype.service.ProductionTypeService;
 
 import util.BuildUuid;
 import util.TimeUtil;
+import util.uploadFiles;
 
 /**
  * 作品类型管理Service层实现层
@@ -138,9 +139,19 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 			productionType.setProduction_type_modifytime(TimeUtil.getStringSecond());
 			productionTypeDao.saveOrUpdateObject(productionType);
 		}
+		carousel carousel = new carousel();
+		carousel = productionTypeDao.getCarouselById(productionType.getProduction_type_id());
+		if(carousel!=null) {
+			carousel.setCarousel_isshow(1);
+			carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
+			carousel.setCarousel_isdelete(0);
+			productionTypeDao.saveOrUpdateObject(carousel);
+		}
 		return null;
 	}
+		
 
+	
 	/**
 	 * 查询单个类型和轮播图
 	 */
@@ -148,9 +159,38 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 	public TypeCarouselDTO querryProductionType(production_type productionType) {
 		TypeCarouselDTO TypeCarouselDTONew = new TypeCarouselDTO();
 		production_type productionTypeNew = new production_type();
+		System.out.println("ppppppp==="+productionType.getProduction_type_id());
 		TypeCarouselDTONew = productionTypeDao.getNewCarouselById(productionType.getProduction_type_id());
 		System.out.println("AAAAAAA"+TypeCarouselDTONew);
 		return TypeCarouselDTONew;
 	}
+/**
+ * 修改类型
+ */
+	@Override
+	public String updateType(production_type productionType) {
+			productionTypeDao.saveOrUpdateObject(productionType);
+		return null;
+	}
+/**
+ * 修改轮播图
+ */
+	@Override
+	public String updateCarousel(carousel carousel) {
+		productionTypeDao.saveOrUpdateObject(carousel);
+		return null;
+	}
+
+@Override
+public production_type production_type(String production_type_id) {
+	// TODO Auto-generated method stub
+	return productionTypeDao.getTypeById(production_type_id);
+}
+
+@Override
+public carousel carousel(String carousel_id) {
+	// TODO Auto-generated method stub
+	return productionTypeDao.getCarouselById(carousel_id);
+}
 
 }
