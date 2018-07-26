@@ -281,6 +281,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 
 	}
 
+	// 图片转为二进制流输出
 	public String IoReadImage() throws IOException {
 		System.out.println("====ppp");
 		fileFileName = new String(fileFileName.getBytes("ISO8859-1"), "UTF-8");//解决图片中文路径乱码
@@ -297,8 +298,15 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			while ((len = in.read(buffer)) != -1) {
 				out.write(buffer, 0, len);
 			}
-			return null;
+			out.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			out.close();
+			in.close();
 		}
+		return null;
+	}
 
 	/**
 	 * 获取单个作品信息和图集
@@ -419,6 +427,13 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 				if (file.length() <= 50 * 1024 * 1024) {
 					String scrol_id = java.util.UUID.randomUUID().toString(); // 采用时间+UUID的方式
 					String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
+					File uploadFile = new File(path);
+					if (!uploadFile.exists() && !uploadFile.isDirectory()) {
+						System.out.println("文件夹路径不存在，创建路径:" + folderpath);
+						uploadFile.mkdirs();
+					} else {
+						System.out.println("文件夹路径存在:" + uploadFile);
+					}
 					String filename = path + File.separator + fileFileName;
 					fileFileName = scrol_id + "_" + fileFileName;
 					FileInputStream in = new FileInputStream(file);

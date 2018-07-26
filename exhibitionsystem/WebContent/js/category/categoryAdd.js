@@ -6,6 +6,17 @@ $('#file1').on('change', function (e) {
 	var file1 = document.getElementById("file1")
 	if(file1.files[0]!=null){
 	document.getElementById("demo1").innerHTML=file1.files[0].name;
+	var a1=$("#file1").val();
+	var a2=a1.split('\\'); //分割
+	var a3=a2[a2.length-1];//去掉 // 获取图片名
+	var a4=a3.lastIndexOf('.'); //获取 . 出现的位置
+    var ext = a3.substring(a4, a3.length).toUpperCase();  //切割 . 获取文件后缀
+	
+	console.log("第一个文件框获取的文件名是===="+a1);
+	console.log("第2个文件框获取的文件名是===="+a2);
+	console.log("第3个文件框获取的文件名是===="+a3);
+	console.log("第4个文件框获取的文件名是===="+a4);
+	console.log("第5个文件框获取的文件名是===="+ext);
 	}
 	
 });
@@ -64,9 +75,6 @@ function upload(){
     					},500);
      				} else {
      					toastr.error("信息添加失败！");
-     					setTimeout(function(){
-    						location.href="/exhibitionsystem/skip/skip_intoCategoryList";
-    					},500);
      				}
      			},
      		});

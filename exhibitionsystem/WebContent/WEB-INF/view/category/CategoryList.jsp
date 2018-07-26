@@ -18,21 +18,14 @@
 </head>
 <body class="childrenBody">
 	<blockquote class="layui-elem-quote news_search">
-			<div class="layui-inline layui-form layui-form-item">
-			    <label class="layui-form-label">分类名称</label>
-				<div class="layui-input-block">
-					<select name="userGrade" class="userGrade" lay-filter="userGrade">
-				    </select>
-				</div>
-		   </div>
 	<div class="layui-inline">
 		  <a class="layui-btn layui-btn-danger batchDel" onclick="deleteMore()">批量删除</a>
 		</div>
 		<div class="layui-inline">
 			  <div class="layui-input-inline">
-		    	<input type="text" value="" placeholder="请输入关键字" class="layui-input search_input">
+		    	<input type="text" id="keyword2" placeholder="请输入关键字" class="layui-input search_input">
 		 	  </div>
-		<a class="layui-btn search_btn">查询</a>
+		<a class="layui-btn search_btn" onclick="search_cate()">查询</a>
 	</div>
 	</blockquote>
 	<div class=" news_list">
