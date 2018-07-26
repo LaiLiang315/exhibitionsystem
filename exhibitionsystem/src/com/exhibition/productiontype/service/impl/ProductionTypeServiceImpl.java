@@ -145,6 +145,7 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 			carousel.setCarousel_isshow(1);
 			carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
 			carousel.setCarousel_isdelete(0);
+			productionTypeDao.saveOrUpdateObject(carousel);
 		}
 		return null;
 	}
@@ -162,7 +163,9 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 		System.out.println("AAAAAAA"+TypeCarouselDTONew);
 		return TypeCarouselDTONew;
 	}
-
+/**
+ * 修改类型
+ */
 	@Override
 	public String updateType(production_type productionType) {
 		if (productionType != null) {
@@ -172,7 +175,9 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 		
 		return null;
 	}
-
+/**
+ * 修改轮播图
+ */
 	@Override
 	public String updateCarousel(production_type productionType) {
 		carousel carousel = new carousel();
@@ -181,6 +186,7 @@ public class ProductionTypeServiceImpl implements ProductionTypeService {
 			carousel.setCarousel_isshow(1);
 			carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
 			carousel.setCarousel_isdelete(0);
+			productionTypeDao.saveOrUpdateObject(carousel);
 		}
 		return null;
 	}
