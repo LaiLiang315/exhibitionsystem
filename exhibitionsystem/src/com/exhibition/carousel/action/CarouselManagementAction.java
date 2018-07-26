@@ -41,9 +41,9 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 	 * 批量删除idList
 	 */
 	private String idList;
-/**
- * 删除图片
- */
+	/**
+	 * 删除图片
+	 */
 	private String pictures;
 	/**
 	 * 实现request以及response
@@ -118,7 +118,6 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 		this.pictures = pictures;
 	}
 
-
 	/**
 	 * 查看轮播图
 	 */
@@ -170,9 +169,7 @@ public class CarouselManagementAction extends ActionSupport implements ServletRe
 	}
 
 	/**
-	 * 删除成功"deleteSuccess"
-	 * 删除失败"error"
-	 * 删除单个图片
+	 * 删除成功"deleteSuccess" 删除失败"error" 删除单个图片
 	 */
 	public void deletePictures() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
