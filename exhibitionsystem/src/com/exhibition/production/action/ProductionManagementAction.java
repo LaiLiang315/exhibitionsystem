@@ -315,20 +315,15 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("textml;charset=utf-8");
 		List<ProductionInfoDTO> listProductionInfoDTO = productionManagementService.getProductionInfo();
 		try {
 			response.getWriter().write(gson.toJson(listProductionInfoDTO));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			out.close();
-			in.close();
 		}
-		return null;
 	}
-
 
 	/**
 	 * 分页显示所有作品
@@ -440,7 +435,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 						System.out.println("文件夹路径存在:" + uploadFile);
 					}
 					String filename = path + File.separator + fileFileName;
-					fileFileName = scrol_id + "_" + fileFileName;
+					fileFileName = scrol_id + fileFileName;
 					FileInputStream in = new FileInputStream(file);
 					FileOutputStream out = new FileOutputStream(filename);
 					byte[] b = new byte[1024];

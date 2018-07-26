@@ -201,7 +201,7 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 						name2=scrol_id+fileFileName.get(1);	//logo
 						name3=scrol_id+fileFileName.get(2);	//作品图
 						String filename = path+File.separator+file.get(i).getName();
-						RTMfileFileName=scrol_id+"_"+fileFileName.get(i);
+						RTMfileFileName=scrol_id+fileFileName.get(i);
 						FileInputStream in = new FileInputStream(file.get(i));
 						FileOutputStream out = new FileOutputStream(filename);
 						byte[]b = new byte[1024];
