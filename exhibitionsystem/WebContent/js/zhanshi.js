@@ -33,7 +33,7 @@ function putProductionTypeInfo(listCarouselDTO){
 	for(var i=0;i<length;i++){
 		var logo = listCarouselDTO[i].type.production_type_logo;// 获取logo
 		var typename = listCarouselDTO[i].type.production_type_name;// 获取分类名称
-		str=str+'<li style="background-image: url('+logo+');">'+typename+'</li>';// 生成中间层菜单
+		str=str+'<li style="background-image: url(/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName='+logo+');">'+typename+'</li>';// 生成中间层菜单
 	}
 	var strAll=strStart+str+strOver;// 拼接三层li
 	typeInfo.innerHTML=strAll;// 插入标签
@@ -50,16 +50,16 @@ function putCarouselInfo(listCarouselDTO){
 		// 判断该分类是否有轮播图
 		if(listCarouselDTO[i].listcarouselpicture.length>0){
 			if(i==0){									
-				str=str+'<li style="background-image:url('+listCarouselDTO[i].listcarouselpicture[0].carousel_picture+'); display:block;">';}
+				str=str+'<li style="background-image:url(/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName='+listCarouselDTO[i].listcarouselpicture[0].carousel_picture+'); display:block;">';}
 			else{
-				str=str+'<li style="background-image:url('+listCarouselDTO[i].listcarouselpicture[0].carousel_picture+'); display:none;">';
+				str=str+'<li style="background-image:url(/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName='+listCarouselDTO[i].listcarouselpicture[0].carousel_picture+'); display:none;">';
 			}
 		      str+='<div class="wrapper">'+
 		        '<div class="ad_txt">'+
 		          '<h2>'+listCarouselDTO[i].type.production_type_title+'</h2>'+
 		          '<p>'+listCarouselDTO[i].type.production_type_discription+'</p>'+
 		        '</div>'+
-		        '<div class="ad_img"> <img src="'+listCarouselDTO[i].type.production_type_picture+'"  width="506" height="404" alt="" /> </div>'+
+		        '<div class="ad_img"> <img src="/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName='+listCarouselDTO[i].type.production_type_picture+'"  width="506" height="404" alt="" /> </div>'+
 		      '</div>'+
 		    '</li>';// 生成中间层菜单
 		}
@@ -191,7 +191,6 @@ function show_scrolList(currentType) {
 			if(result.success=true){
 				console.log("result"+JSON.parse(result));
 				var vo=JSON.parse(result);
-				//console.log("vo"+JSON.stringify(vo));
 				// 显示article信息列表
 				var card_table_info =  document.querySelector("#productionList");		//获取文档元素
 				card_table_info.innerHTML;

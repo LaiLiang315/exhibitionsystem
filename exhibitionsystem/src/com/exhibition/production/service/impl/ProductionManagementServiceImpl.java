@@ -136,56 +136,51 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 			productionVO.setHaveNextPage(true);
 		}
 		// 如果showAll=0，默认显示前六条
-		if (showAll.equals("0")) {
-			// 查询所有类型
-			List<production_type> listproductiontype = (List<production_type>) productionManagementDao.queryForPage(
-					"from production_type where production_type_isdelete='0' order by production_type_modifytime desc",
-					productionVO.getPageIndex(), productionVO.getPageSize());
-			// 遍历类型表
-			for (production_type production_type : listproductiontype) {
-				System.out.println("HHHHHHH");
-				listInfo = new ArrayList<>();
-				productionDTO = new ProductionDTO();
-				if (production_type.getProduction_type_id() != null
-						&& production_type.getProduction_type_id().trim().length() > 0) {
-					/**
-					 * 查询每个类型的作品的集合
-					 */
-					listInfo = productionManagementDao.getProductionInfoById(production_type.getProduction_type_id());
-
-					if (!listInfo.isEmpty()) {
-						for (production_info info : listInfo) {
-							PictureInfoDTO pictureInfoDTO = new PictureInfoDTO();
-							production_pictures PicureOne = productionManagementDao
-									.getFistPictureById(info.getProduction_info_id());
-							System.out.println("firstPicure" + PicureOne);
-							if (PicureOne.getProduction_pictures_id() != null) {
-								pictureInfoDTO.setProinfo(info);
-								pictureInfoDTO.setPropicture(PicureOne);
-								listPictureInfoDTO.add(pictureInfoDTO);
-							}
-
+				if (showAll.equals("0")) {
+					// 查询所有类型
+					List<production_type> listproductiontype = (List<production_type>) productionManagementDao.queryForPage(
+							"from production_type where production_type_isdelete='0' order by production_type_modifytime desc",
+							productionVO.getPageIndex(), productionVO.getPageSize());
+					System.out.println("22222"+listproductiontype);
+					// 遍历类型表
+					for (production_type production_type : listproductiontype) {
+						List<PictureInfoDTO> newlistPictureInfoDTO = new ArrayList<>();
+						System.out.println("HHHHHHH");
+						listInfo = new ArrayList<>();
+						productionDTO = new ProductionDTO();
+						if (production_type.getProduction_type_id() != null
+								&& production_type.getProduction_type_id().trim().length() > 0) {
+							/**
+							 * 查询每个类型的作品的集合
+							 */
+							listInfo = productionManagementDao.getProductionInfoById(production_type.getProduction_type_id());
+							System.out.println("PPPPPPP"+listInfo);
+							if (!listInfo.isEmpty()) {
+								for (production_info info : listInfo) {
+									PictureInfoDTO pictureInfoDTO = new PictureInfoDTO();
+									System.out.println("type="+production_type.getProduction_type_name()+"===="+"info="+info.getProduction_info_name());
+									production_pictures PicureOne = productionManagementDao
+											.getFistPictureById(info.getProduction_info_id());
+									pictureInfoDTO.setProinfo(info);
+									if (PicureOne.getProduction_pictures_id() != null) {
+										pictureInfoDTO.setPropicture(PicureOne);
+										System.out.println("??????"+pictureInfoDTO);
+										System.out.println("LLLLLLL"+listPictureInfoDTO);
+									}
+									newlistPictureInfoDTO.add(pictureInfoDTO);
+								}
+								PicTypeInfoDTO PicTypeInfoDTO = new PicTypeInfoDTO();
+								PicTypeInfoDTO.setType(production_type);
+								PicTypeInfoDTO.setListPictureInfoDTO(newlistPictureInfoDTO);
+								System.out.println("wwwwww"+PicTypeInfoDTO);
+								listPicTypeInfoDTO.add(PicTypeInfoDTO);
+								System.out.println("MMMMMMMM"+listPicTypeInfoDTO);
+							} 
 						}
-						PicTypeInfoDTO PicTypeInfoDTO = new PicTypeInfoDTO();
-						PicTypeInfoDTO.setType(production_type);
-						PicTypeInfoDTO.setListPictureInfoDTO(listPictureInfoDTO);
-						listPicTypeInfoDTO.add(PicTypeInfoDTO);
-						/*
-						 * productionDTO.setListInfo(listInfo); productionDTO.setType(production_type);
-						 */
-						System.out.println("zzzzzz" + productionDTO);
-
-					} else {
-						return null;
 					}
-				}
-			}
-			/**
-			 * 分页获取单位列表
-			 */
-			productionVO.setList(listPicTypeInfoDTO);
-			System.out.println("--------------" + productionVO);
-			return productionVO;
+					productionVO.setList(listPicTypeInfoDTO);
+					System.out.println("--------------" + productionVO);
+					return productionVO;
 		} else if (showAll.equals("1")) {
 			// 查询所有类型
 			List<production_type> listproductiontype = (List<production_type>) productionManagementDao.queryForPage(
@@ -498,36 +493,47 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 	 * 查询六条平时作业
 	 */
 	@Override
-	public List<PicTypeInfoDTO> querrySixProduction() {
-		List<PicTypeInfoDTO> listPicTypeInfoDTO = new ArrayList<>();
-		List<ProductionInfoDTO> listProductionInfoDTO = new ArrayList<>();
-		PicTypeInfoDTO picTypeInfoDTO = new PicTypeInfoDTO();
+	public List<PicTypeInfoDTO> querrySixProduction(List<PicTypeInfoDTO> listPicTypeInfoDTO) {
 		List<production_type> listType = new ArrayList<>();
-		ProductionInfoDTO productionInfoDTO = new ProductionInfoDTO();
+	/*	ProductionInfoDTO productionInfoDTO = new ProductionInfoDTO();*/
+		/**
+		 *得到所有类型
+		 */
 		listType = (List<production_type>) productionManagementDao.listObject("from production_type where 1=1");
 		if (!listType.isEmpty()) {
-
 			for (production_type production_type : listType) {
+				List<PictureInfoDTO> newlistPictureInfoDTO = new ArrayList<>();
+				
 				List<production_info> listInfo = new ArrayList<>();
+				/**
+				 * 得到每个类型对应的信息集合
+				 */
 				listInfo = (List<production_info>) productionManagementDao
 						.getSixProductionInfoById(production_type.getProduction_type_id());
-				
+				System.out.println("22222222"+listInfo);
 				if (!listInfo.isEmpty()) {
+					/**
+					 * 遍历信息集合得到每条信息对应的第一张图片
+					 */
 					for (production_info production_info : listInfo) {
-						List<production_pictures> pictureFirst = new ArrayList<>();
-						pictureFirst =(List<production_pictures>) productionManagementDao.getFistPictureById(production_info.getProduction_info_id());
-						if(!pictureFirst.isEmpty()) {
-							productionInfoDTO.setListProductionPictures(pictureFirst);
-							productionInfoDTO.setProductionInfo(production_info);
-							listProductionInfoDTO.add(productionInfoDTO);
+						PictureInfoDTO pictureInfoDTO = new PictureInfoDTO();
+						production_pictures pictureFirst = new production_pictures();
+						pictureFirst =(production_pictures) productionManagementDao.getFistPictureById(production_info.getProduction_info_id());
+						pictureInfoDTO.setProinfo(production_info);
+						if(pictureFirst.getProduction_pictures_id()!=null) {
+							pictureInfoDTO.setPropicture(pictureFirst);
 						}
+						newlistPictureInfoDTO.add(pictureInfoDTO);
 					}
-					picTypeInfoDTO.setListProductionInfoDTO(listProductionInfoDTO);
+					PicTypeInfoDTO picTypeInfoDTO = new PicTypeInfoDTO();
+					picTypeInfoDTO.setListPictureInfoDTO(newlistPictureInfoDTO);
 					picTypeInfoDTO.setType(production_type);
+					listPicTypeInfoDTO.add(picTypeInfoDTO);
 				}
 			}
 		}
-		listPicTypeInfoDTO.add(picTypeInfoDTO);
+		
+		System.out.println("666666"+listPicTypeInfoDTO);
 		return listPicTypeInfoDTO;
 	}
 	//作品修改方法（仅修改作品信息）

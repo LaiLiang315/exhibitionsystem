@@ -68,7 +68,14 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	 * 作品分页VO
 	 */
 	private ProductionVO productionVO;
+	/**
+	 * 图集
+	 */
 	private List<production_pictures> production_pictures;
+	/**
+	 * 
+	 */
+	private List<PicTypeInfoDTO> listPicTypeInfoDTO;
 	/**
 	 * 上传图片
 	 * 
@@ -175,6 +182,14 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 
 	public ProductionVO getProductionVO() {
 		return productionVO;
+	}
+
+	public List<PicTypeInfoDTO> getListPicTypeInfoDTO() {
+		return listPicTypeInfoDTO;
+	}
+
+	public void setListPicTypeInfoDTO(List<PicTypeInfoDTO> listPicTypeInfoDTO) {
+		this.listPicTypeInfoDTO = listPicTypeInfoDTO;
 	}
 
 	public void setProductionVO(ProductionVO productionVO) {
@@ -522,9 +537,9 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
-		List<PicTypeInfoDTO> listPicTypeInfoDTO = productionManagementService.querrySixProduction();
+		List<PicTypeInfoDTO> PicTypeInfoDTOs = productionManagementService.querrySixProduction(listPicTypeInfoDTO);
 		try {
-			response.getWriter().write(gson.toJson(listPicTypeInfoDTO));
+			response.getWriter().write(gson.toJson(PicTypeInfoDTOs));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

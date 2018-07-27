@@ -121,7 +121,7 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	@Override
 	public List<production_info> getProductionInfoById(String trim) {
 		Session session = getSession();
-		String hql = "from production_info where production_info_isdelete ='0' and production_info_isdailywork ='1' and production_info_type= :ID";
+		String hql = "from production_info where production_info_isdelete ='0' and production_info_isdailywork ='0' and production_info_type= :ID";
 		Query query = session.createQuery(hql).setMaxResults(10);
 		query.setParameter("ID", trim);
 		List<production_info> productionInfo = (List<production_info>) query.list();
@@ -269,11 +269,14 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	 */
 	@Override
 	public List<production_info> getSixProductionInfoById(String trim) {
+		List<production_info> productionInfo = new ArrayList<>();
 		Session session = getSession();
 		String hql = "from production_info where production_info_isdelete ='0' and production_info_isdailywork ='1' and production_info_type= :ID";
 		Query query = session.createQuery(hql).setMaxResults(6);
 		query.setParameter("ID", trim);
-		List<production_info> productionInfo = (List<production_info>) query.list();
+		if (!query.list().isEmpty()) {
+		 productionInfo = (List<production_info>) query.list();
+		}
 		return productionInfo;
 	}
 	/**

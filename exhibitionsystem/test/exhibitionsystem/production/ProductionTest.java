@@ -1,5 +1,6 @@
 package exhibitionsystem.production;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.exhibition.domain.production_info;
+import com.exhibition.production.DTO.PicTypeInfoDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.DTO.ProductionThreeFormDTO;
 import com.exhibition.production.VO.ProductionVO;
@@ -87,6 +89,13 @@ public class ProductionTest {
  		Gson gson = gsonBuilder.create();
     	System.out.println("????????>>><><><"+gson.toJson(productionThreeFormDTO));
     	
+    	
+    }
+    @Test
+    public void querrySixProduction() {
+    	List<PicTypeInfoDTO> listPicTypeInfoDTO	 = new ArrayList<>();
+    	listPicTypeInfoDTO=productionManagementService.querrySixProduction(listPicTypeInfoDTO);
+    	System.out.println("AAAAAACCCCCC"+listPicTypeInfoDTO);
     	
     }
 }
