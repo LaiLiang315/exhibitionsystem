@@ -94,7 +94,7 @@ public class ProductionTest {
     @Test
     public void querrySixProduction() {
     	List<PicTypeInfoDTO> listPicTypeInfoDTO	 = new ArrayList<>();
-    	listPicTypeInfoDTO=productionManagementService.querrySixProduction(listPicTypeInfoDTO);
+    	listPicTypeInfoDTO=productionManagementService.querrySixProduction();
     	System.out.println("AAAAAACCCCCC"+listPicTypeInfoDTO);
     	
     }

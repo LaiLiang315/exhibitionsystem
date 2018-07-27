@@ -493,7 +493,8 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 	 * 查询六条平时作业
 	 */
 	@Override
-	public List<PicTypeInfoDTO> querrySixProduction(List<PicTypeInfoDTO> listPicTypeInfoDTO) {
+	public List<PicTypeInfoDTO> querrySixProduction() {
+		List<PicTypeInfoDTO> listPicTypeInfoDTO = new ArrayList<>();
 		List<production_type> listType = new ArrayList<>();
 	/*	ProductionInfoDTO productionInfoDTO = new ProductionInfoDTO();*/
 		/**

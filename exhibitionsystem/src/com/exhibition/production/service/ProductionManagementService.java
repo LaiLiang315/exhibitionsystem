@@ -110,10 +110,9 @@ public interface ProductionManagementService {
 
 	/**
 	 * 查询六条平时作业
-	 * @param listPicTypeInfoDTO 
 	 * @return
 	 */
-	public List<PicTypeInfoDTO> querrySixProduction(List<PicTypeInfoDTO> listPicTypeInfoDTO);
+	public List<PicTypeInfoDTO> querrySixProduction();
 
 	public String updateProductionInfo(production_info productionInfo);
 
