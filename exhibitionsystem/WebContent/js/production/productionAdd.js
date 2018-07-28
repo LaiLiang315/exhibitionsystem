@@ -157,6 +157,24 @@ layui.use('upload', function(){
 		        demoListView.append(tr);
 		      });
 		    }
+		    ,before: function(obj){
+		    	if($("input[name='production_info_name']").val()==""||$("input[name='production_info_name']").val()==null){
+	    			toastr.error("请填写作品名!");
+	    			throw SyntaxError();
+	    		}else if($("input[name='production_info_author']").val()==""||$("input[name='production_info_author']").val()==null){
+	    			toastr.error("请填写作者!");
+	    			throw SyntaxError();
+	    		}else if(typeId==null||typeId==""){
+	    			toastr.error("请选择作品类型!");
+	    			throw SyntaxError();
+	    		}else if($("input[name='production_info_creationtime']").val()==""||$("input[name='production_info_creationtime']").val()==null){
+	    			toastr.error("请选创作时间!");
+	    			throw SyntaxError();
+	    		}else if($("#proDiscription").val()==null||$("#proDiscription").val()==""){
+	    			toastr.error("请填写作品描述!");
+	    			throw SyntaxError();
+	    		}
+		    }
 		    ,done: function(res, index, upload){
 		      if(res.code == 0){ //上传成功
 		        var tr = demoListView.find('tr#upload-'+ index)

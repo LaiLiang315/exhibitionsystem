@@ -282,7 +282,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 					+ "'";
 			System.out.println("YYYYYYDDDDD" + productionCountHql);
 			listProductionHql = listProductionHql + " and production_info_type = '" + productionVO.getType().trim()
-					+ "'";
+					+ "' order by production_info_modifytime desc";
 			System.out.println("ZZZZZEEEEE" + listProductionHql);
 
 		}
@@ -291,7 +291,7 @@ public class ProductionManagementServiceImpl implements ProductionManagementServ
 
 		System.out.println("+++___________________" + listProductionDTO);
 		// 这里如果不加desc表示正序，如果加上desc表示倒序
-		productionCountHql = productionCountHql + " order by production_info_creationtime desc";
+		//productionCountHql = productionCountHql + " order by production_info_creationtime desc";
 		int productionCount = productionManagementDao.getCount(productionCountHql);
 		// 设置总数量
 		productionVO.setTotalRecords(productionCount);
