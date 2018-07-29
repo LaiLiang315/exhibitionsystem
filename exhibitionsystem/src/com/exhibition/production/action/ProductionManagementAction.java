@@ -26,6 +26,7 @@ import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.DTO.ProductionThreeFormDTO;
 import com.exhibition.production.VO.ProductionVO;
+import com.exhibition.production.VO.ShowAllproductionVO;
 import com.exhibition.production.service.ProductionManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -68,7 +69,16 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	 * 作品分页VO
 	 */
 	private ProductionVO productionVO;
+	
+	private ShowAllproductionVO showAllVO;
+	/**
+	 * 图集
+	 */
 	private List<production_pictures> production_pictures;
+	/**
+	 * 
+	 */
+	private List<PicTypeInfoDTO> listPicTypeInfoDTO;
 	/**
 	 * 上传图片
 	 * 
@@ -177,6 +187,14 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		return productionVO;
 	}
 
+	public List<PicTypeInfoDTO> getListPicTypeInfoDTO() {
+		return listPicTypeInfoDTO;
+	}
+
+	public void setListPicTypeInfoDTO(List<PicTypeInfoDTO> listPicTypeInfoDTO) {
+		this.listPicTypeInfoDTO = listPicTypeInfoDTO;
+	}
+
 	public void setProductionVO(ProductionVO productionVO) {
 		this.productionVO = productionVO;
 	}
@@ -229,6 +247,15 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		this.productionThreeFormDTO = productionThreeFormDTO;
 	}
 
+
+	public ShowAllproductionVO getShowAllVO() {
+		return showAllVO;
+	}
+
+	public void setShowAllVO(ShowAllproductionVO showAllVO) {
+		this.showAllVO = showAllVO;
+	}
+
 	/**
 	 * 实现request以及response结束
 	 */
@@ -256,7 +283,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	public void showPicturesVO() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
+		Gson gson = gsonBuilder.serializeNulls().create();
 		response.setContentType("text/html;charset=utf-8");
 		ProductionVO productionVO = new ProductionVO();
 		productionVO.setSearch(search);
@@ -285,7 +312,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	public String IoReadImage() throws IOException {
 		System.out.println("====ppp");
 		fileFileName = new String(fileFileName.getBytes("ISO8859-1"), "UTF-8");//解决图片中文路径乱码
-		String linkurl = "D:\\Aupload\\test\\" + fileFileName;
+		String linkurl = "C:\\Aupload\\test\\" + fileFileName;
 		FileInputStream in = new FileInputStream(linkurl);
 		ServletOutputStream out = null;
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -406,7 +433,7 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 		String result = "";
 		String res = "";
 		try {
-			String folderpath = "D:\\\\Aupload\\\\test\\\\";
+			String folderpath = "C:\\\\Aupload\\\\test\\\\";
 			if (file != null) {
 				if (file.length() <= 50 * 1024 * 1024) {
 					String scrol_id = java.util.UUID.randomUUID().toString(); // 采用时间+UUID的方式
@@ -520,11 +547,11 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 	public void querrySixProduction() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
-		Gson gson = gsonBuilder.create();
+		Gson gson = gsonBuilder.serializeNulls().create();
 		response.setContentType("text/html;charset=utf-8");
-		List<PicTypeInfoDTO> listPicTypeInfoDTO = productionManagementService.querrySixProduction();
+		List<PicTypeInfoDTO> PicTypeInfoDTOs = productionManagementService.querrySixProduction();
 		try {
-			response.getWriter().write(gson.toJson(listPicTypeInfoDTO));
+			response.getWriter().write(gson.toJson(PicTypeInfoDTOs));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -576,4 +603,81 @@ public class ProductionManagementAction extends ActionSupport implements Servlet
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 分页显示所有平时作业按类型分
+	 */
+	public void showSixMoreVO() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		ShowAllproductionVO showAllproductionVO = new ShowAllproductionVO();
+		showAllproductionVO.setPageIndex(page);
+		showAllproductionVO = productionManagementService.showSixMoreVO(showAllVO);
+		try {
+			response.getWriter().write(gson.toJson(showAllproductionVO));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * 分页显示所有毕业作业
+	 */
+	public void showTenMoreVO() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		ShowAllproductionVO showAllproductionVO = new ShowAllproductionVO();
+		showAllproductionVO.setPageIndex(page);
+		showAllproductionVO = productionManagementService.showSixMoreVO(showAllVO);
+		try {
+			response.getWriter().write(gson.toJson(showAllproductionVO));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * 分页显示所有平时作业不按类型分
+	 */
+	public void querrySixMoreVO() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		ShowAllproductionVO showAllproductionVO = new ShowAllproductionVO();
+		showAllproductionVO.setPageIndex(page);
+		showAllproductionVO.setPageSize(16);
+		showAllproductionVO = productionManagementService.querrySixMoreVO(showAllVO);
+		try {
+			response.getWriter().write(gson.toJson(showAllproductionVO));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	/**
+	 * 分页显示所有平时作业不按类型分
+	 */
+	public void querryTenMoreVO() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.serializeNulls().create();
+		response.setContentType("text/html;charset=utf-8");
+		ShowAllproductionVO showAllproductionVO = new ShowAllproductionVO();
+		showAllproductionVO.setPageIndex(page);
+		showAllproductionVO.setPageSize(16);
+		showAllproductionVO = productionManagementService.querryTenMoreVO(showAllVO);
+		try {
+			response.getWriter().write(gson.toJson(showAllproductionVO));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

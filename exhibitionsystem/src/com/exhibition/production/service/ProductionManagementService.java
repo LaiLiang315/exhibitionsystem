@@ -10,6 +10,7 @@ import com.exhibition.production.DTO.ProductionDTO;
 import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.DTO.ProductionThreeFormDTO;
 import com.exhibition.production.VO.ProductionVO;
+import com.exhibition.production.VO.ShowAllproductionVO;
 import com.google.gson.JsonElement;
 
 /**
@@ -110,6 +111,8 @@ public interface ProductionManagementService {
 
 	/**
 	 * 查询六条平时作业
+	 * 
+	 * @param listPicTypeInfoDTO
 	 * @return
 	 */
 	public List<PicTypeInfoDTO> querrySixProduction();
@@ -117,5 +120,24 @@ public interface ProductionManagementService {
 	public String updateProductionInfo(production_info productionInfo);
 
 	public String updateProductionAndPicInfo(production_info productionInfo, List<Map<String, Object>> listMap);
+
+	/**
+	 * 分页显示六条more的所有信息
+	 * 
+	 * @return
+	 */
+	public ShowAllproductionVO showSixMoreVO(ShowAllproductionVO showAllVO);
+
+	/**
+	 * 分页显示所有毕业作品
+	 * 
+	 * @param showAllVO
+	 * @return
+	 */
+	ShowAllproductionVO showTenMoreVO(ShowAllproductionVO showAllVO);
+
+	public ShowAllproductionVO querrySixMoreVO(ShowAllproductionVO showAllVO);
+
+	public ShowAllproductionVO querryTenMoreVO(ShowAllproductionVO showAllVO);
 
 }

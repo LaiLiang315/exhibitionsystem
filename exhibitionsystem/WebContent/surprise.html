@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="css/xiangce/demo.css" />
 	<link rel="stylesheet" type="text/css" href="css/xiangce/card.css" />
 	<link rel="stylesheet" type="text/css" href="css/xiangce/pattern.css" />
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
 	<script>
 	if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
 		var root = document.getElementsByTagName('html')[0];
@@ -28,46 +29,192 @@
 			<div class="pattern pattern--hidden"></div>
 			<!-- cards -->
 			<div class="wrapper">
-			
+<!-- ==========================================1展示6条作品信息====================================================== -->
+				<image class="ppor" xlink:href="/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName=e6c4936d-82bb-4f6b-bd1c-83c4ecb6bff5pshens61.jpg" clip-path="url(#clipPath1)" width="1920" height="500" ></image>
 				<div class="card">
 					<div class="card__container card__container--closed">
-						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
-							<defs>
+						<svg class="card__image"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+							<defs id="chenge">
 								<clipPath id="clipPath1">
+									<!-- r = 992 = hyp = Math.sqrt(960*960+250*250) -->
 									<circle class="clip" cx="960" cy="250" r="992"></circle>
 								</clipPath>
 							</defs>
-							<image clip-path="url(#clipPath1)" width="1920" height="500" xlink:href="/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName=e6c4936d-82bb-4f6b-bd1c-83c4ecb6bff5pshens61.jpg"></image>
+							<image class="ppap" clip-path="url(#clipPath1)" width="1920" height="500" ></image>
 						</svg>
 						<div class="card__content">
 							<i class="card__btn-close fa fa-times"></i>
 							<div class="card__caption">
-								<h2 class="card__title">作品名称</h2>
-								<p class="card__subtitle">所属类型：食品包装</p>
+								<h2 class="card__title" id="pr_name1">作品名称</h2>
+								<p class="card__subtitle" id="pr_type1">所属类型：食品包装</p>
+							</div>
+							<div class="card__copy">
+								<div class="meta">
+									<img class="meta__avatar" src='/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName=7218a593-554e-475c-b92a-f8b98beef0d7175101e06u56qg9xdgqv1v.jpg' alt="author01" />
+									<span class="meta__author" id="pr_author1">作者</span>
+									<span class="meta__date" id="pr_createtime1">06/19/2015</span>
+								</div>
+								<p class="pr_description">这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- ==========================================2展示6条作品信息====================================================== -->
+			<div class="card">
+					<div class="card__container card__container--closed">
+						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+						<defs>
+								<clipPath id="clipPath1">
+									<!-- r = 992 = hyp = Math.sqrt(960*960+250*250) -->
+									<circle class="clip" cx="960" cy="250" r="992"></circle>
+								</clipPath>
+							</defs>
+							<image class="ppap" clip-path="url(#clipPath1)" width="1920" height="500" ></image>
+						</svg>
+						<div class="card__content">
+							<i class="card__btn-close fa fa-times"></i>
+							<div class="card__caption">
+								<h2 class="card__title" id="pr_name2">作品名称</h2>
+								<p class="card__subtitle" id="pr_type2">所属类型：食品包装</p>
 							</div>
 							<div class="card__copy">
 								<div class="meta">
 									<img class="meta__avatar" src='/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName=e6c4936d-82bb-4f6b-bd1c-83c4ecb6bff520300542906611142302766585653_s.jpg' alt="author01" />
-									<span class="meta__author">作者</span>
-									<span class="meta__date">06/19/2015</span>
+									<span class="meta__author" id="pr_author2">作者</span>
+									<span class="meta__date" id="pr_createtime2">06/19/2015</span>
 								</div>
-								<p>这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话.</p>
+								<p class="pr_description">这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- ==========================================3展示6条作品信息====================================================== -->	
+			<div class="card">
+					<div class="card__container card__container--closed">
+						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+						<defs>
+								<clipPath id="clipPath1">
+									<!-- r = 992 = hyp = Math.sqrt(960*960+250*250) -->
+									<circle class="clip" cx="960" cy="250" r="992"></circle>
+								</clipPath>
+							</defs>
+							<image class="ppap" clip-path="url(#clipPath1)" width="1920" height="500" ></image>
+						</svg>
+						<div class="card__content">
+							<i class="card__btn-close fa fa-times"></i>
+							<div class="card__caption">
+								<h2 class="card__title" id="pr_name3">作品名称</h2>
+								<p class="card__subtitle" id="pr_type3">所属类型：食品包装</p>
+							</div>
+							<div class="card__copy">
+								<div class="meta">
+									<img class="meta__avatar" src='/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName=e6c4936d-82bb-4f6b-bd1c-83c4ecb6bff520300542906611142302766585653_s.jpg' alt="author01" />
+									<span class="meta__author" id="pr_author3">作者</span>
+									<span class="meta__date" id="pr_createtime3">06/19/2015</span>
+								</div>
+								<p class="pr_description">这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- ==========================================4展示6条作品信息====================================================== -->	
+			<div class="card">
+					<div class="card__container card__container--closed">
+						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+						<defs>
+								<clipPath id="clipPath1">
+									<!-- r = 992 = hyp = Math.sqrt(960*960+250*250) -->
+									<circle class="clip" cx="960" cy="250" r="992"></circle>
+								</clipPath>
+							</defs>
+							<image class="ppap" clip-path="url(#clipPath1)" width="1920" height="500" ></image>
+						</svg>
+						<div class="card__content">
+							<i class="card__btn-close fa fa-times"></i>
+							<div class="card__caption">
+								<h2 class="card__title" id="pr_name4">作品名称</h2>
+								<p class="card__subtitle" id="pr_type4">所属类型：食品包装</p>
+							</div>
+							<div class="card__copy">
+								<div class="meta">
+									<img class="meta__avatar" src='/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName=e6c4936d-82bb-4f6b-bd1c-83c4ecb6bff520300542906611142302766585653_s.jpg' alt="author01" />
+									<span class="meta__author" id="pr_author4">作者</span>
+									<span class="meta__date" id="pr_createtime4">06/19/2015</span>
+								</div>
+								<p class="pr_description">这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- ==========================================5展示6条作品信息====================================================== -->	
+			<div class="card">
+					<div class="card__container card__container--closed">
+						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+						<defs>
+								<clipPath id="clipPath1">
+									<!-- r = 992 = hyp = Math.sqrt(960*960+250*250) -->
+									<circle class="clip" cx="960" cy="250" r="992"></circle>
+								</clipPath>
+							</defs>
+							<image class="ppap" clip-path="url(#clipPath1)" width="1920" height="500" ></image>
+						</svg>
+						<div class="card__content">
+							<i class="card__btn-close fa fa-times"></i>
+							<div class="card__caption">
+								<h2 class="card__title" id="pr_name5">作品名称</h2>
+								<p class="card__subtitle" id="pr_type5">所属类型：食品包装</p>
+							</div>
+							<div class="card__copy">
+								<div class="meta">
+									<img class="meta__avatar" src='/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName=e6c4936d-82bb-4f6b-bd1c-83c4ecb6bff520300542906611142302766585653_s.jpg' alt="author01" />
+									<span class="meta__author" id="pr_author5">作者</span>
+									<span class="meta__date" id="pr_createtime5">06/19/2015</span>
+								</div>
+								<p class="pr_description">这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- ==========================================6展示6条作品信息====================================================== -->
+			<div class="card">
+					<div class="card__container card__container--closed">
+						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+						<defs>
+								<clipPath id="clipPath1">
+									<!-- r = 992 = hyp = Math.sqrt(960*960+250*250) -->
+									<circle class="clip" cx="960" cy="250" r="992"></circle>
+								</clipPath>
+							</defs>
+							<image class="ppap" clip-path="url(#clipPath1)" width="1920" height="500" ></image>
+						</svg>
+						<div class="card__content">
+							<i class="card__btn-close fa fa-times"></i>
+							<div class="card__caption">
+								<h2 class="card__title" id="pr_name6">作品名称</h2>
+								<p class="card__subtitle" id="pr_type6">所属类型：食品包装</p>
+							</div>
+							<div class="card__copy">
+								<div class="meta">
+									<img class="meta__avatar" src='/exhibitionsystem/productionManagement/productionManagement_IoReadImage?fileFileName=e6c4936d-82bb-4f6b-bd1c-83c4ecb6bff520300542906611142302766585653_s.jpg' alt="author01" />
+									<span class="meta__author" id="pr_author6">作者</span>
+									<span class="meta__date" id="pr_createtime6">06/19/2015</span>
+								</div>
+								<p class="pr_description">这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话这是一段作品描述的话.</p>
 							</div>
 						</div>
 					</div>
 				</div>
 				
-				
 			</div>
 		</div>
 	</div>		
-	
 	<script src="js/xiangce/vendors/trianglify.min.js"></script>
 	<script src="js/xiangce/vendors/TweenMax.min.js"></script>
 	<script src="js/xiangce/vendors/ScrollToPlugin.min.js"></script>
 	<script src="js/xiangce/vendors/cash.min.js"></script>
 	<script src="js/xiangce/Card-circle.js"></script>
 	<script src="js/xiangce/demo.js"></script>
+	<script src="js/zhanshi.js"></script>
 </body>
 
 </html>

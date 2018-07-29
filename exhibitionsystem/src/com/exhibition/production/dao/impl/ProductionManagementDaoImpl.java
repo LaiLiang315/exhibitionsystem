@@ -121,7 +121,7 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 	@Override
 	public List<production_info> getProductionInfoById(String trim) {
 		Session session = getSession();
-		String hql = "from production_info where production_info_isdelete ='0' and production_info_isdailywork ='1' and production_info_type= :ID";
+		String hql = "from production_info where production_info_isdelete ='0' and production_info_isdailywork ='0' and production_info_type= :ID";
 		Query query = session.createQuery(hql).setMaxResults(10);
 		query.setParameter("ID", trim);
 		List<production_info> productionInfo = (List<production_info>) query.list();
@@ -260,20 +260,21 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 		List<production_pictures> production_pictures = (List<production_pictures>) query.list();
 		return production_pictures;
 	}
-/**
- * 查询每个类型的前六条信息
- */
+
 	/**
 	 * 根据id查询平时作品信息前六条
 	 * 
 	 */
 	@Override
 	public List<production_info> getSixProductionInfoById(String trim) {
+		List<production_info> productionInfo = new ArrayList<>();
 		Session session = getSession();
 		String hql = "from production_info where production_info_isdelete ='0' and production_info_isdailywork ='1' and production_info_type= :ID";
 		Query query = session.createQuery(hql).setMaxResults(6);
 		query.setParameter("ID", trim);
-		List<production_info> productionInfo = (List<production_info>) query.list();
+		if (!query.list().isEmpty()) {
+		 productionInfo = (List<production_info>) query.list();
+		}
 		return productionInfo;
 	}
 	/**
@@ -288,5 +289,58 @@ public class ProductionManagementDaoImpl implements ProductionManagementDao {
 		query.setParameter("ID", trim);
 		productionInfo = (production_info) query.uniqueResult();
 		return productionInfo;
+	}
+	/**
+	 * 根据id查询所有平时作品信息
+	 * 
+	 */
+	@Override
+	public List<production_info> getAllProductionInfoById(String trim) {
+		List<production_info> productionInfo = new ArrayList<>();
+		Session session = getSession();
+		String hql = "from production_info where production_info_isdelete ='0' and production_info_isdailywork ='0' and production_info_type= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		if (!query.list().isEmpty()) {
+		 productionInfo = (List<production_info>) query.list();
+		}
+		return productionInfo;
+	}
+	/**
+	 * 根据id查询所有平时作品信息
+	 * 
+	 */
+	@Override
+	public List<production_info> getAllTenProductionInfoById(String trim) {
+		List<production_info> productionInfo = new ArrayList<>();
+		Session session = getSession();
+		String hql = "from production_info where production_info_isdelete ='0' and production_info_isdailywork ='1' and production_info_type= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		if (!query.list().isEmpty()) {
+		 productionInfo = (List<production_info>) query.list();
+		}
+		return productionInfo;
+	}
+	/**
+	 * 根据信息ID查询平时作品
+	 */
+	@Override
+	public production_pictures getViewPicById(String trim) {
+		production_pictures fistPicture = new production_pictures();
+		Session session = getSession();
+		String hql = "from production_pictures where  production_pictures_isdelete='1' and production_pictures_sequence='9527' and production_pictures_belong= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+			fistPicture = (production_pictures) query.uniqueResult();
+		return fistPicture;
+	}
+	@Override
+	public production_pictures getFirstPic(String productionId) {
+		Session session = getSession();
+		String hql = "from production_pictures where  production_pictures_isdelete='0' and production_pictures_belong= '"+productionId+"'";
+		Query query = session.createQuery(hql);
+		production_pictures firstPic = (production_pictures) query.list().get(0);
+		return firstPic;
 	}
 }

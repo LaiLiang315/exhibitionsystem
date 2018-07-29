@@ -13,6 +13,7 @@ import com.exhibition.domain.production_info;
 import com.exhibition.production.DTO.ProductionInfoDTO;
 import com.exhibition.production.DTO.ProductionThreeFormDTO;
 import com.exhibition.production.VO.ProductionVO;
+import com.exhibition.production.VO.ShowAllproductionVO;
 import com.exhibition.production.service.ProductionManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -86,7 +87,47 @@ public class ProductionTest {
  		gsonBuilder.setPrettyPrinting();// 格式化json数据
  		Gson gson = gsonBuilder.create();
     	System.out.println("????????>>><><><"+gson.toJson(productionThreeFormDTO));
+    }
+    /**
+     * 分页查询所有平时作业测试
+     */
+    @Test
+    public void showAllVOTest() {
+    	ShowAllproductionVO showVO = new ShowAllproductionVO();
+    	showVO.setPageIndex(3);
+    	showVO = productionManagementService.showSixMoreVO(showVO);
+    	GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		System.out.println("wwwwwwwww"+gson.toJson(showVO));
+    }
+    /**
+     * 分页查询所有毕业作品
+     */
+    @Test
+    public void showAllTenVOTest() {
+    	ShowAllproductionVO showVO = new ShowAllproductionVO();
+    	showVO.setPageIndex(3);
+    	showVO = productionManagementService.showTenMoreVO(showVO);
+    	GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		System.out.println("wwwwwwwww"+gson.toJson(showVO));
+    }
+    @Test
+    public void querrySixmoreTest() {
+    	ShowAllproductionVO showVO = new ShowAllproductionVO();
+    	showVO.setPageIndex(3);
+    	showVO = productionManagementService.querrySixMoreVO(showVO);
+    	GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		System.out.println("wwwwwwwww"+gson.toJson(showVO));	
+    }
+    @Test
+    public void querrySixProductionTest(){
     	
+    	productionManagementService.querrySixProduction();
     	
     }
 }

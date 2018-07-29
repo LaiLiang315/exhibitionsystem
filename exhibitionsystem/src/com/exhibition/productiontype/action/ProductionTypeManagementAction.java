@@ -230,8 +230,8 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 								out.write(b,0,len);
 							}
 							out.close();
-							FileUtils.copyFile(file.get(i),new File("D:\\Aupload\\test\\",RTMfileFileName));
-							String linkurl="D:\\Aupload\\test\\"+fileFileName;
+							FileUtils.copyFile(file.get(i),new File("C:\\Aupload\\test\\",RTMfileFileName));
+							String linkurl="C:\\Aupload\\test\\"+fileFileName;
 							System.out.println("上传成功,路径为"+path);
 						}else{
 							System.out.println("上传文件发生错误");
@@ -260,8 +260,8 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 								out.write(b,0,len);
 							}
 							out.close();
-							FileUtils.copyFile(file.get(i),new File("D:\\Aupload\\test\\",RTMfileFileName));
-							String linkurl="D:\\Aupload\\test\\"+fileFileName;
+							FileUtils.copyFile(file.get(i),new File("C:\\Aupload\\test\\",RTMfileFileName));
+							String linkurl="C:\\Aupload\\test\\"+fileFileName;
 							System.out.println("上传成功,路径为"+path);
 						}else{
 							System.out.println("上传文件发生错误");
@@ -393,21 +393,21 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 						filename = path+File.separator+file.get(0).getName();
 						RTMfileFileName=scrol_id+fileFileName.get(0);
 						in = new FileInputStream(file.get(0));
-						FileUtils.copyFile(file.get(0),new File("D:\\Aupload\\test\\",RTMfileFileName));
+						FileUtils.copyFile(file.get(0),new File("C:\\Aupload\\test\\",RTMfileFileName));
 						}
 						if(GOBO==2){
 						name2=scrol_id+fileFileName.get(1);	//logo
 						filename = path+File.separator+file.get(1).getName();
 						RTMfileFileName=scrol_id+fileFileName.get(1);
 						in = new FileInputStream(file.get(1));
-						FileUtils.copyFile(file.get(1),new File("D:\\Aupload\\test\\",RTMfileFileName));
+						FileUtils.copyFile(file.get(1),new File("C:\\Aupload\\test\\",RTMfileFileName));
 						}
 						if(GOBO==3){
 						name3=scrol_id+fileFileName.get(2);	//作品图	
 						filename = path+File.separator+file.get(2).getName();
 						RTMfileFileName=scrol_id+fileFileName.get(2);
 						in = new FileInputStream(file.get(2));
-						FileUtils.copyFile(file.get(2),new File("D:\\Aupload\\test\\",RTMfileFileName));
+						FileUtils.copyFile(file.get(2),new File("C:\\Aupload\\test\\",RTMfileFileName));
 						}
 						FileOutputStream out = new FileOutputStream(filename);
 						byte[]b = new byte[1024];
@@ -416,7 +416,7 @@ public class ProductionTypeManagementAction extends ActionSupport implements Ser
 							out.write(b,0,len);
 						}
 						out.close();
-						String linkurl="D:\\Aupload\\test\\"+fileFileName;
+						String linkurl="C:\\Aupload\\test\\"+fileFileName;
 						System.out.println("上传成功,路径为"+path);
 					}else{
 						System.out.println("图片文件过大，无法上传！");

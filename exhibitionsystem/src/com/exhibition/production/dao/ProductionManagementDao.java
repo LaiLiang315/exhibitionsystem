@@ -136,13 +136,35 @@ public interface ProductionManagementDao {
 	 * @param pictrueName
 	 */
 	public List<production_pictures> getSpectialPic(String pictrueName);
-/**
- * 查询前六条信息
- * @param trim
- * @return
- */
+
+	/**
+	 * 查询前六条信息
+	 * 
+	 * @param trim
+	 * @return
+	 */
 	public List<production_info> getSixProductionInfoById(String trim);
 
-   public production_info getPicById(String trim);
+	public production_info getPicById(String trim);
+
+	/**
+	 * 查询所有平时作业
+	 * 
+	 * @param trim
+	 * @return
+	 */
+	List<production_info> getAllProductionInfoById(String trim);
+
+	/**
+	 * 查询所有毕业作品
+	 * 
+	 * @param trim
+	 * @return
+	 */
+	List<production_info> getAllTenProductionInfoById(String trim);
+
+	production_pictures getViewPicById(String trim);
+
+	production_pictures getFirstPic(String productionId);
 
 }
